@@ -1,0 +1,4 @@
+enum ConnectionState {
+  connected,
+  disconnected,
+}

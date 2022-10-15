@@ -22,17 +22,21 @@ dependencies:
   flutter_native_splash: 2.2.10+1
   freezed: ^2.1.1
   get_it: ^7.2.0
-  hooked_bloc: ^1.2.0
+  hooked_bloc: 1.0.2
   injectable: ^1.5.3
   persistent_bottom_nav_bar: ^5.0.2
-
+  rxdart: ^0.27.5
+  
 dev_dependencies: 
   auto_route_generator: ^5.0.3
   build_runner: ^2.2.1
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
+  injectable_generator: ^1.5.4
 
+dependency_overrides:
+  analyzer: ^4.2.0
 
 flutter:
   uses-material-design: true
