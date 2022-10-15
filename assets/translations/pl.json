@@ -1,0 +1,9 @@
+{
+    "sign_in_page": {
+        "button_label": "Zaloguj się przez Google"
+    },
+    "offline_page": {
+        "title": "Jesteś offline",
+        "description": "Sprawdź swoje połączenie"
+    }
+}
