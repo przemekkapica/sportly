@@ -7,6 +7,7 @@ import 'package:sportly/app/app_cubit.dart';
 import 'package:sportly/core/di/di_config.dart';
 import 'package:sportly/domain/features/network/connectivity/connection_checker.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
+import 'package:sportly/presentation/theme/app_typo.dart';
 
 class App extends HookWidget {
   const App({
@@ -74,6 +75,7 @@ class _MaterialApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       localizationsDelegates: context.localizationDelegates,
+      theme: _getThemeData(),
       builder: (context, routerWidget) {
         if (routerWidget == null) {
           return const SizedBox.shrink();
@@ -84,6 +86,14 @@ class _MaterialApp extends StatelessWidget {
           child: routerWidget,
         );
       },
+    );
+  }
+
+  ThemeData _getThemeData() {
+    return ThemeData(
+      brightness: Brightness.light,
+      textTheme: AppTypo.textTheme,
+      fontFamily: 'Montserrat',
     );
   }
 }

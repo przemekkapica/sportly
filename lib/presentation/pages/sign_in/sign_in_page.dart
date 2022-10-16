@@ -10,7 +10,10 @@ class SignInPage extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Center(
-          child: Text(LocaleKeys.sign_in_page_button_label.tr()),
+          child: Text(
+            LocaleKeys.sign_in_page_button_label.tr(),
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
         ),
       ),
     );
