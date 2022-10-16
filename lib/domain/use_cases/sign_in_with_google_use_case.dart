@@ -1,15 +1,15 @@
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sportly/domain/auth/auth_repository.dart';
 
 @injectable
 class SignInWithGoogleUseCase {
   SignInWithGoogleUseCase(
-    this._googleSignIn,
+    this._authRepository,
   );
 
-  final GoogleSignIn _googleSignIn;
+  final AuthRepository _authRepository;
 
   Future<void> call() async {
-    await _googleSignIn.signIn();
+    await _authRepository.signInWithGoogle();
   }
 }

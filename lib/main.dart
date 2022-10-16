@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:sportly/presentation/app/app.dart';
@@ -8,6 +9,8 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  await Firebase.initializeApp();
 
   configureInjection();
   _initializeHookedBloc();
