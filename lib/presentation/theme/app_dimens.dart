@@ -36,4 +36,6 @@ class AppDimens {
   static const xxhuge = 160.0;
 
   static const xxxhuge = 192.0;
+
+  static const logo = 270.0;
 }

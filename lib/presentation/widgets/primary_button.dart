@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
@@ -19,6 +20,7 @@ class PrimaryButton extends StatelessWidget {
     this.color = AppColors.buttonFill,
     this.textColor = AppColors.buttonText,
     this.disabledTextColor = AppColors.disabledButtonText,
+    this.assetPath,
   }) : super(key: key);
 
   const PrimaryButton.outlined({
@@ -30,6 +32,7 @@ class PrimaryButton extends StatelessWidget {
     this.color = AppColors.outlinedButtonFill,
     this.textColor = AppColors.outlinedButtonText,
     this.disabledTextColor = AppColors.disabledButtonText,
+    this.assetPath,
   }) : super(key: key);
 
   const PrimaryButton.danger({
@@ -41,6 +44,7 @@ class PrimaryButton extends StatelessWidget {
     this.color = AppColors.dangerButtonFill,
     this.textColor = AppColors.dangerButtonText,
     this.disabledTextColor = AppColors.disabledButtonText,
+    this.assetPath,
   }) : super(key: key);
 
   final String label;
@@ -50,6 +54,7 @@ class PrimaryButton extends StatelessWidget {
   final Color? color;
   final Color? textColor;
   final Color? disabledTextColor;
+  final String? assetPath;
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +76,22 @@ class PrimaryButton extends StatelessWidget {
         ),
         overlayColor: _getOverlayColor(),
       ),
-      child: Text(
-        label,
-        style: _getTextStyle(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (assetPath != null) ...[
+            Image(
+              image: AssetImage(assetPath!),
+              width: AppDimens.xbig,
+              height: AppDimens.xbig,
+            ),
+            const Gap(AppDimens.xsm),
+          ],
+          Text(
+            label,
+            style: _getTextStyle(),
+          ),
+        ],
       ),
     );
   }

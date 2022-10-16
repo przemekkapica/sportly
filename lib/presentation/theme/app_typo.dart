@@ -39,7 +39,7 @@ class AppTypo {
     color: AppColors.primary,
   );
   static const button = TextStyle(
-    fontSize: 18,
+    fontSize: 17,
     color: AppColors.neutral,
     fontWeight: FontWeight.w600,
     // fontFamily: 'Montserrat-Light',
