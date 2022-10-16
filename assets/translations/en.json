@@ -1,0 +1,9 @@
+{
+    "sign_in_page": {
+        "button_label": "Sign in with Google"
+    },
+    "offline_page": {
+        "title": "You are offline",
+        "description": "Check your internet connection"
+    }
+}
