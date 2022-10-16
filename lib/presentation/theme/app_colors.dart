@@ -19,7 +19,7 @@ class AppColors {
 
   static const outlinedButtonFill = neutral;
   static const outlinedButtonText = primary;
-  static const outlinedButtonBorder = neutral;
+  static const outlinedButtonBorder = primary;
 
   static const disabledButtonFill = Color(0xFFBEBEBE);
   static const disabledButtonText = Color(0xFF717171);

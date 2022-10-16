@@ -1,4 +1,4 @@
-class Spacings {
+class AppDimens {
   static const zero = 0.0;
 
   static const one = 1.0;

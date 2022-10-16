@@ -92,7 +92,6 @@ class _MaterialApp extends StatelessWidget {
   ThemeData _getThemeData() {
     return ThemeData(
       brightness: Brightness.light,
-      textTheme: AppTypo.textTheme,
       fontFamily: 'Montserrat',
     );
   }
