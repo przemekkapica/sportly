@@ -5,5 +5,11 @@
     "offline_page": {
         "title": "Jesteś offline",
         "description": "Sprawdź swoje połączenie"
+    },
+    "bottom_bar": {
+        "teams": "Zespoły",
+        "chat": "Wiadomości",
+        "schedule": "Kalendarz",
+        "profile": "Profil"
     }
 }

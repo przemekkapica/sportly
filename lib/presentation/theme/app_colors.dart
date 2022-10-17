@@ -5,6 +5,7 @@ class AppColors {
   static const secondary = Color(0xFF6D7275);
   static const neutral = Color(0xFFFFFFFF);
   static const danger = Color(0xFFD10000);
+  static const background = Color(0xFFF3F3F3);
 
   static const additional1 = Color(0xFF666666);
   static const additional2 = Color(0xFFFF0000);

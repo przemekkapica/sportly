@@ -5,5 +5,11 @@
     "offline_page": {
         "title": "You are offline",
         "description": "Check your internet connection"
+    },
+    "bottom_bar": {
+        "teams": "Teams",
+        "chat": "Chat",
+        "schedule": "Schedule",
+        "profile": "Profile"
     }
 }

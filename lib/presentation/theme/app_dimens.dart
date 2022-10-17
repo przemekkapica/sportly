@@ -37,5 +37,12 @@ class AppDimens {
 
   static const xxxhuge = 192.0;
 
+  // widget specific dimens
   static const logo = 270.0;
+
+  static const horizontalLogoHeight = 110.0;
+
+  static const appBarHeight = 50.0;
+
+  static const bottomBarIconSize = 30.0;
 }
