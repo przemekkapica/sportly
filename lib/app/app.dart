@@ -7,7 +7,6 @@ import 'package:sportly/app/app_cubit.dart';
 import 'package:sportly/core/di/di_config.dart';
 import 'package:sportly/domain/features/network/connectivity/connection_checker.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
-import 'package:sportly/presentation/theme/app_typo.dart';
 
 class App extends HookWidget {
   const App({
@@ -27,7 +26,7 @@ class App extends HookWidget {
       (action) {
         action.map(
           offline: (_) {
-            mainRouter.navigate(
+            mainRouter.replace(
               const OfflinePageRoute(),
             );
           },
