@@ -1,0 +1,16 @@
+{
+    "teams": [
+        {
+            "id": "1",
+            "name": "Legia Warszawa",
+            "membersCount": 20,
+            "isAdmin": true
+        },
+        {
+            "id": "2",
+            "name": "Kosz po godzinach",
+            "membersCount": 5,
+            "isAdmin": true
+        }
+    ]
+}
