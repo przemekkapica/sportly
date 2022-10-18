@@ -8,7 +8,8 @@ class AppColors {
   static const background = Color(0xFFF3F3F3);
 
   static const additional1 = Color(0xFF666666);
-  static const additional2 = Color(0xFFFF0000);
+  static const additional2 = Color(0xFFEEEEEE);
+  static const additional3 = Color(0xFFEAEAEA);
 
   static const team1 = Color(0xFFD2F6F6);
   static const team2 = Color(0xFFE0F6D2);

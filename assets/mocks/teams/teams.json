@@ -3,14 +3,56 @@
         {
             "id": "1",
             "name": "Legia Warszawa",
-            "membersCount": 20,
-            "isAdmin": true
+            "membersCount": 47,
+            "isAdmin": true,
+            "discipline": {
+                "name": "football"
+            }
         },
         {
             "id": "2",
             "name": "Kosz po godzinach",
             "membersCount": 5,
-            "isAdmin": true
+            "isAdmin": true,
+            "discipline": {
+                "name": "basketball"
+            }
+        },
+        {
+            "id": "3",
+            "name": "Tenis sobota",
+            "membersCount": 3,
+            "isAdmin": true,
+            "discipline": {
+                "name": "tennis"
+            }
+        },
+        {
+            "id": "4",
+            "name": "Widzew Łódź",
+            "membersCount": 32,
+            "isAdmin": true,
+            "discipline": {
+                "name": "football"
+            }
+        },
+        {
+            "id": "5",
+            "name": "Szczypiory",
+            "membersCount": 14,
+            "isAdmin": true,
+            "discipline": {
+                "name": "handball"
+            }
+        },
+        {
+            "id": "6",
+            "name": "Lech Poznań",
+            "membersCount": 39,
+            "isAdmin": true,
+            "discipline": {
+                "name": "football"
+            }
         }
     ]
 }

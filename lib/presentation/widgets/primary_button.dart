@@ -63,14 +63,13 @@ class PrimaryButton extends StatelessWidget {
       style: ButtonStyle(
         alignment: Alignment.center,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        minimumSize: MaterialStateProperty.all(const Size(406, 56)),
-        padding: MaterialStateProperty.all(const EdgeInsets.all(AppDimens.xsm)),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(AppDimens.big)),
         backgroundColor: MaterialStateProperty.resolveWith(
           (s) => _isEnabled(s) ? color : _getDisabledColor(),
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.xsm),
+            borderRadius: BorderRadius.circular(AppDimens.zero),
             side: _getBorderSide(),
           ),
         ),
