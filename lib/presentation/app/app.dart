@@ -26,14 +26,14 @@ class App extends HookWidget {
       (action) {
         action.map(
           offline: (_) {
-            mainRouter.replace(
-              const OfflinePageRoute(),
-            );
+            // mainRouter.replace(
+            //   const OfflinePageRoute(),
+            // );
           },
           online: (_) {
-            mainRouter.popUntil(
-              (route) => route.settings.name != OfflinePageRoute.name,
-            );
+            // mainRouter.popUntil(
+            //   (route) => route.settings.name != OfflinePageRoute.name,
+            // );
           },
         );
       },

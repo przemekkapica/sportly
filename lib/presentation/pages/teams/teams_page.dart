@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:sportly/presentation/pages/teams/teams_page_cubit.dart';
+import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
@@ -37,6 +39,14 @@ class TeamsPage extends HookWidget {
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
                       return SportlyCard(
+                        onTap: () async {
+                          await AutoRouter.of(context).push(
+                            TeamsPageRoute(),
+                          );
+                          AutoRouter.of(context).push(
+                            TeamDetailsPageRoute(teamId: state.teams[index].id),
+                          );
+                        },
                         content: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

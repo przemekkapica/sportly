@@ -69,7 +69,7 @@ class PrimaryButton extends StatelessWidget {
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.zero),
+            borderRadius: BorderRadius.circular(AppDimens.md),
             side: _getBorderSide(),
           ),
         ),

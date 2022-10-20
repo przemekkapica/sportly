@@ -6,27 +6,32 @@ class SportlyCard extends StatelessWidget {
   const SportlyCard({
     Key? key,
     required this.content,
+    required this.onTap,
   }) : super(key: key);
 
   final Widget content;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.neutral,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(AppDimens.sm),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.neutral,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(AppDimens.sm),
+          ),
+          border: Border.all(
+            color: AppColors.additional3,
+            width: 1,
+          ),
         ),
-        border: Border.all(
-          color: AppColors.additional3,
-          width: 1,
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimens.sm),
+          child: content,
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppDimens.sm),
-        child: content,
       ),
     );
   }

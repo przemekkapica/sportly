@@ -1,9 +1,11 @@
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
+import 'package:sportly/domain/features/teams/models/team_details.f.dart';
 import 'package:sportly/domain/features/teams/teams_repository.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart';
-import 'package:sportly/infrastructure/teams/mappers/create_team_from_dto_mapper.dart';
+import 'package:sportly/infrastructure/teams/mappers/create_team_mapper.dart';
+import 'package:sportly/infrastructure/teams/mappers/team_details_from_dto_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/team_from_dto_mapper.dart';
 
 @LazySingleton(as: TeamsRepository)
@@ -12,11 +14,13 @@ class TeamsRepositoryImpl implements TeamsRepository {
     this._teamsDataSource,
     this._createTeamMapper,
     this._teamFromDtoMapper,
+    this._teamDetailsFromDtoMapper,
   );
 
   final TeamsDataSource _teamsDataSource;
   final CreateTeamMapper _createTeamMapper;
   final TeamFromDtoMapper _teamFromDtoMapper;
+  final TeamDetailsFromDtoMapper _teamDetailsFromDtoMapper;
 
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
@@ -39,6 +43,18 @@ class TeamsRepositoryImpl implements TeamsRepository {
     } catch (e) {
       // TODO: add error handling
       throw (Exception('get teams error'));
+    }
+  }
+
+  @override
+  Future<TeamDetails> getTeamDetails(String id) async {
+    try {
+      final teamDetailsDto = await _teamsDataSource.getTeamDetails(id);
+
+      return _teamDetailsFromDtoMapper(teamDetailsDto);
+    } catch (e) {
+      // TODO: add error handling
+      throw (Exception('get team details error'));
     }
   }
 }
