@@ -6,7 +6,7 @@ class SportlyCard extends StatelessWidget {
   const SportlyCard({
     Key? key,
     required this.content,
-    required this.onTap,
+    this.onTap,
   }) : super(key: key);
 
   final Widget content;

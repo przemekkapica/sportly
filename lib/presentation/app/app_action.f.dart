@@ -4,7 +4,7 @@ part 'app_action.f.freezed.dart';
 
 @freezed
 class AppAction with _$AppAction {
-  const factory AppAction.offline() = AppActionOffline;
+  const factory AppAction.offline() = _Offline;
 
-  const factory AppAction.online() = AppActionOnline;
+  const factory AppAction.online() = _Online;
 }

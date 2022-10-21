@@ -5,7 +5,7 @@ import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/theme/app_assets.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/widgets/app_logo.dart';
-import 'package:sportly/presentation/widgets/primary_button.dart';
+import 'package:sportly/presentation/widgets/sportly_button.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class SignInPage extends StatelessWidget {
             const Spacer(),
             const AppLogo(),
             const Spacer(),
-            PrimaryButton.solid(
+            SportlyButton.solid(
               label: LocaleKeys.sign_in_page_button_label.tr(),
               assetPath: AppAssets.googleIcon,
               onTap: () {},

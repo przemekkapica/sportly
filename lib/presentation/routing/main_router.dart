@@ -13,46 +13,32 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
   routes: [
     AutoRoute(
       page: HomePage,
+      initial: true,
       path: '/',
       children: [
         AutoRoute(
-          path: 'teams',
-          name: 'TeamsPageRouter',
           page: EmptyRouterPage,
+          name: 'TeamsPageRouter',
+          path: 'teams',
           children: [
             AutoRoute(
               page: TeamsPage,
               path: '',
+              initial: true,
             ),
             AutoRoute(
               page: TeamDetailsPage,
-              path: ':teamId',
+              path: 'details',
             ),
           ],
         ),
-        AutoRoute(
-          page: ChatPage,
-          path: 'chat',
-        ),
-        AutoRoute(
-          page: SchedulePage,
-          path: 'schedule',
-        ),
-        AutoRoute(
-          page: ProfilePage,
-          path: 'profile',
-        ),
-
-        // AutoRoute(
-        //   page: SignInPage,
-        //   path: 'sign-in',
-        // ),
-        // AutoRoute(
-        //   page: OfflinePage,
-        //   path: 'offline',
-        // ),
+        AutoRoute(page: ChatPage),
+        AutoRoute(page: SchedulePage),
+        AutoRoute(page: ProfilePage),
       ],
     ),
+    AutoRoute(page: SignInPage),
+    AutoRoute(page: OfflinePage),
   ],
 )
 class $MainRouter {}

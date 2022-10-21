@@ -11,3 +11,7 @@ class TeamMember with _$TeamMember {
     required bool isAdmin,
   }) = _TeamMember;
 }
+
+extension TeamMemberExtension on TeamMember {
+  String get fullName => firstName + ' ' + lastName;
+}

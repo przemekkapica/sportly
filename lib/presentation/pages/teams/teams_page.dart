@@ -8,7 +8,7 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
-import 'package:sportly/presentation/widgets/primary_button.dart';
+import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
 
 class TeamsPage extends HookWidget {
@@ -39,10 +39,7 @@ class TeamsPage extends HookWidget {
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
                       return SportlyCard(
-                        onTap: () async {
-                          await AutoRouter.of(context).push(
-                            TeamsPageRoute(),
-                          );
+                        onTap: () {
                           AutoRouter.of(context).push(
                             TeamDetailsPageRoute(teamId: state.teams[index].id),
                           );
@@ -94,12 +91,12 @@ class TeamsPage extends HookWidget {
                 Column(
                   children: [
                     const Gap(AppDimens.sm),
-                    PrimaryButton.solid(
+                    SportlyButton.solid(
                       label: 'Join a team',
                       onTap: () {},
                     ),
                     const Gap(AppDimens.xsm),
-                    PrimaryButton.outlined(
+                    SportlyButton.outlined(
                       label: 'Create a team',
                       onTap: () {},
                     ),

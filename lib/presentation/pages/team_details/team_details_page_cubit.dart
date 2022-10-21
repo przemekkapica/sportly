@@ -14,6 +14,7 @@ class TeamDetailsPageCubit extends Cubit<TeamDetailsPageState> {
   Future<void> init(String teamId) async {
     try {
       final teamDetails = await _getTeamDetailsUseCase(teamId);
+      print(teamDetails);
       emit(TeamDetailsPageState.idle(teamDetails: teamDetails));
     } catch (e) {
       emit(const TeamDetailsPageState.error());

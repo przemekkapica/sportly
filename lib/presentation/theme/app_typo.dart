@@ -20,11 +20,11 @@ class AppTypo {
   );
   static const bodyMedium = TextStyle(
     fontSize: 20,
-    color: AppColors.primary,
+    color: AppColors.secondary,
   );
   static const bodySmall = TextStyle(
     fontSize: 16,
-    color: AppColors.primary,
+    color: AppColors.secondary,
   );
   static const labelLarge = TextStyle(
     fontSize: 14,

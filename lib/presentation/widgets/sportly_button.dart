@@ -10,8 +10,8 @@ enum ButtonType {
   danger,
 }
 
-class PrimaryButton extends StatelessWidget {
-  const PrimaryButton.solid({
+class SportlyButton extends StatelessWidget {
+  const SportlyButton.solid({
     Key? key,
     required this.label,
     required this.onTap,
@@ -23,7 +23,7 @@ class PrimaryButton extends StatelessWidget {
     this.assetPath,
   }) : super(key: key);
 
-  const PrimaryButton.outlined({
+  const SportlyButton.outlined({
     Key? key,
     required this.label,
     required this.onTap,
@@ -35,7 +35,7 @@ class PrimaryButton extends StatelessWidget {
     this.assetPath,
   }) : super(key: key);
 
-  const PrimaryButton.danger({
+  const SportlyButton.danger({
     Key? key,
     required this.label,
     required this.onTap,
@@ -137,7 +137,12 @@ class PrimaryButton extends StatelessWidget {
   BorderSide _getBorderSide() {
     switch (type) {
       case ButtonType.solid:
-        return BorderSide.none;
+        return BorderSide(
+          width: AppDimens.xxxsm,
+          color: enabled
+              ? AppColors.outlinedButtonBorder
+              : AppColors.disabledButtonBorder,
+        );
       case ButtonType.outlined:
         return BorderSide(
           width: AppDimens.xxxsm,

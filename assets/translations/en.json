@@ -11,5 +11,10 @@
         "chat": "Chat",
         "schedule": "Schedule",
         "profile": "Profile"
+    },
+    "team_details": {
+        "description": "You joined this team on\n{}",
+        "members": "Members",
+        "quick_actions": "Quick actions"
     }
 }
