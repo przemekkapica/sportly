@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sportly/domain/features/teams/models/team_member.f.dart';
 import 'package:sportly/domain/use_cases/get_team_details_use_case.dart';
 import 'package:sportly/presentation/pages/team_details/team_details_page_state.f.dart';
 
@@ -14,8 +15,14 @@ class TeamDetailsPageCubit extends Cubit<TeamDetailsPageState> {
   Future<void> init(String teamId) async {
     try {
       final teamDetails = await _getTeamDetailsUseCase(teamId);
-      print(teamDetails);
-      emit(TeamDetailsPageState.idle(teamDetails: teamDetails));
+      var members = List<TeamMember>.from(teamDetails.members);
+      members.addAll(teamDetails.members);
+      members.sort((m1, m2) => m2.isAdmin ? 1 : -1);
+      emit(
+        TeamDetailsPageState.idle(
+          teamDetails: teamDetails.copyWith(members: members),
+        ),
+      );
     } catch (e) {
       emit(const TeamDetailsPageState.error());
     }
