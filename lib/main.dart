@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
-import 'package:sportly/app/app.dart';
+import 'package:sportly/presentation/app/app.dart';
 import 'package:sportly/core/di/di_config.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
 

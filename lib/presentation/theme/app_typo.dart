@@ -16,7 +16,7 @@ class AppTypo {
   );
   static const bodyLarge = TextStyle(
     fontSize: 24,
-    color: AppColors.secondary,
+    color: AppColors.primary,
   );
   static const bodyMedium = TextStyle(
     fontSize: 20,
@@ -28,20 +28,20 @@ class AppTypo {
   );
   static const labelLarge = TextStyle(
     fontSize: 14,
-    color: AppColors.primary,
+    color: AppColors.secondary,
   );
   static const labelMedium = TextStyle(
     fontSize: 12,
-    color: AppColors.primary,
+    color: AppColors.secondary,
   );
   static const labelSmall = TextStyle(
     fontSize: 10,
-    color: AppColors.primary,
+    color: AppColors.secondary,
   );
   static const button = TextStyle(
     fontSize: 17,
     color: AppColors.neutral,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w400,
     // fontFamily: 'Montserrat-Light',
   );
 }

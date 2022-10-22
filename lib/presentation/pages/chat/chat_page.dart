@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
 
@@ -8,6 +9,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: Padding(
         padding: const EdgeInsets.all(AppDimens.sm),
         child: Column(

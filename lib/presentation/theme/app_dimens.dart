@@ -45,4 +45,6 @@ class AppDimens {
   static const appBarHeight = 50.0;
 
   static const bottomBarIconSize = 30.0;
+
+  static const iconButtonSize = 28.0;
 }

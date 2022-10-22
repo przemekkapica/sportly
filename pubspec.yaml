@@ -28,6 +28,8 @@ dependencies:
   get_it: ^7.2.0
   hooked_bloc: 1.0.2
   injectable: ^1.5.3
+  json_serializable: ^6.5.2
+  path_provider: ^2.0.11
   rxdart: ^0.27.5
   salomon_bottom_bar: ^3.3.1
   
@@ -52,3 +54,4 @@ flutter:
     - assets/translations/
     - assets/images/logo/
     - assets/images/icons/
+    - assets/mocks/teams/

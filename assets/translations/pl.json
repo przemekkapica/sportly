@@ -11,5 +11,10 @@
         "chat": "Wiadomości",
         "schedule": "Kalendarz",
         "profile": "Profil"
+    },
+    "team_details": {
+        "description": "Dołączyłeś do zespołu\n{}",
+        "members": "Członkowie",
+        "quick_actions": "Szybkie akcje"
     }
 }

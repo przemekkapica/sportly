@@ -10,8 +10,8 @@ enum ButtonType {
   danger,
 }
 
-class PrimaryButton extends StatelessWidget {
-  const PrimaryButton.solid({
+class SportlyButton extends StatelessWidget {
+  const SportlyButton.solid({
     Key? key,
     required this.label,
     required this.onTap,
@@ -23,7 +23,7 @@ class PrimaryButton extends StatelessWidget {
     this.assetPath,
   }) : super(key: key);
 
-  const PrimaryButton.outlined({
+  const SportlyButton.outlined({
     Key? key,
     required this.label,
     required this.onTap,
@@ -35,7 +35,7 @@ class PrimaryButton extends StatelessWidget {
     this.assetPath,
   }) : super(key: key);
 
-  const PrimaryButton.danger({
+  const SportlyButton.danger({
     Key? key,
     required this.label,
     required this.onTap,
@@ -63,14 +63,13 @@ class PrimaryButton extends StatelessWidget {
       style: ButtonStyle(
         alignment: Alignment.center,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        minimumSize: MaterialStateProperty.all(const Size(406, 56)),
-        padding: MaterialStateProperty.all(const EdgeInsets.all(AppDimens.xsm)),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(AppDimens.big)),
         backgroundColor: MaterialStateProperty.resolveWith(
           (s) => _isEnabled(s) ? color : _getDisabledColor(),
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.xsm),
+            borderRadius: BorderRadius.circular(AppDimens.md),
             side: _getBorderSide(),
           ),
         ),
@@ -138,7 +137,12 @@ class PrimaryButton extends StatelessWidget {
   BorderSide _getBorderSide() {
     switch (type) {
       case ButtonType.solid:
-        return BorderSide.none;
+        return BorderSide(
+          width: AppDimens.xxxsm,
+          color: enabled
+              ? AppColors.outlinedButtonBorder
+              : AppColors.disabledButtonBorder,
+        );
       case ButtonType.outlined:
         return BorderSide(
           width: AppDimens.xxxsm,
