@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page.dart';
+import 'package:sportly/presentation/pages/join_team/join_team_page.dart';
 import 'package:sportly/presentation/pages/teams/teams_page_cubit.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
@@ -84,13 +85,15 @@ class TeamsPage extends HookWidget {
                     const Gap(AppDimens.sm),
                     SportlyButton.solid(
                       label: 'Join a team',
-                      onTap: () {},
+                      onTap: () => AutoRouter.of(context).push(
+                        const JoinTeamPageRoute(),
+                      ),
                     ),
                     const Gap(AppDimens.xsm),
                     SportlyButton.outlined(
                       label: 'Create a team',
                       onTap: () => AutoRouter.of(context).push(
-                        CreateTeamPageRoute(),
+                        const CreateTeamPageRoute(),
                       ),
                     ),
                   ],

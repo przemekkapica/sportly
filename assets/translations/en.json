@@ -35,5 +35,9 @@
         "description": "Generated code is valid for 48 hours",
         "button_label": "Share code",
         "message": "Code copied to clipboard"
+    },
+    "join_team": {
+        "title": "Join a team via\ninvitation code",
+        "button_label": "Join a team"
     }
 }

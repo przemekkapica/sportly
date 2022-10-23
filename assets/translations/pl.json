@@ -35,5 +35,9 @@
         "description": "Wygenerowany kod wygaśnie w przeciągu 48h",
         "button_label": "Udostępnij kod",
         "message": "Skopiowano kod do schowka"
+    },
+    "join_team": {
+        "title": "Dołącz do zespołu\nza pomocą kodu",
+        "button_label": "Dołącz"
     }
 }
