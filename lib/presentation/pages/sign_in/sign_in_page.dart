@@ -14,7 +14,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(AppDimens.sm),
+        padding: const EdgeInsets.all(AppDimens.pagePadding),
         child: Column(
           children: [
             const Spacer(),

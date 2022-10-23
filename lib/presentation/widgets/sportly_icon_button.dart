@@ -23,14 +23,14 @@ class SportlyIconButton extends StatelessWidget {
           ),
           color: AppColors.neutral,
           borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimens.xxsm),
+            Radius.circular(AppDimens.borderRadius),
           ),
         ),
         child: InkWell(
-          borderRadius: BorderRadius.circular(AppDimens.xxsm),
+          borderRadius: BorderRadius.circular(AppDimens.borderRadius),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.all(AppDimens.xsm),
+            padding: const EdgeInsets.all(AppDimens.sm),
             child: Icon(
               icon,
               size: AppDimens.iconButtonSize,

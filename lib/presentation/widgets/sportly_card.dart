@@ -6,11 +6,15 @@ class SportlyCard extends StatelessWidget {
   const SportlyCard({
     Key? key,
     required this.content,
+    this.borderColor,
+    this.padding,
     this.onTap,
   }) : super(key: key);
 
   final Widget content;
   final Function()? onTap;
+  final Color? borderColor;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +25,15 @@ class SportlyCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.neutral,
           borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimens.sm),
+            Radius.circular(AppDimens.borderRadius),
           ),
           border: Border.all(
-            color: AppColors.additional3,
+            color: borderColor ?? AppColors.additional3,
             width: 1,
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(AppDimens.sm),
+          padding: padding ?? const EdgeInsets.all(AppDimens.sm),
           child: content,
         ),
       ),

@@ -16,5 +16,24 @@
         "description": "You joined this team on\n{}",
         "members": "Members",
         "quick_actions": "Quick actions"
+    },
+    "create_team": {
+        "team_type": "Team type",
+        "professional": "Professional",
+        "amateur": "Amateur",
+        "team_name": "Team name*",
+        "team_name_error": "Team name is required",
+        "location": "Location*",
+        "location_error": "Location is required",
+        "organization_name": "Organization name",
+        "discipline": "Sport discipline*",
+        "discipline_error": "Sport discipline is required",
+        "button_label": "Create a team"
+    },
+    "share_invitation_code": {
+        "title": "Your invitation code for",
+        "description": "Generated code is valid for 48 hours",
+        "button_label": "Share code",
+        "message": "Code copied to clipboard"
     }
 }

@@ -14,6 +14,7 @@ class AppColors {
   static const team1 = Color(0xFFD2F6F6);
   static const team2 = Color(0xFFE0F6D2);
   static const team3 = Color(0xFFE0D2F6);
+  static const team4 = Color.fromARGB(255, 246, 244, 210);
 
   static const buttonFill = primary;
   static const buttonText = neutral;
