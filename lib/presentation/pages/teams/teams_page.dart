@@ -31,7 +31,7 @@ class TeamsPage extends HookWidget {
       body: state.maybeMap(
         idle: (state) {
           return Padding(
-            padding: const EdgeInsets.all(AppDimens.sm),
+            padding: const EdgeInsets.all(AppDimens.pagePadding),
             child: Column(
               children: [
                 Expanded(

@@ -29,5 +29,11 @@
         "discipline": "Dyscyplina*",
         "discipline_error": "Dyscyplina jest wymagana",
         "button_label": "Utwórz zespół"
+    },
+    "share_invitation_code": {
+        "title": "Twój kod do zaproszenia dla",
+        "description": "Wygenerowany kod wygaśnie w przeciągu 48h",
+        "button_label": "Udostępnij kod",
+        "message": "Skopiowano kod do schowka"
     }
 }

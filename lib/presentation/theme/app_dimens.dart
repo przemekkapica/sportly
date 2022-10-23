@@ -49,4 +49,6 @@ class AppDimens {
   static const iconButtonSize = 24.0;
 
   static const borderRadius = md;
+
+  static const pagePadding = sm;
 }

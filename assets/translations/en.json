@@ -29,5 +29,11 @@
         "discipline": "Sport discipline*",
         "discipline_error": "Sport discipline is required",
         "button_label": "Create a team"
+    },
+    "share_invitation_code": {
+        "title": "Your invitation code for",
+        "description": "Generated code is valid for 48 hours",
+        "button_label": "Share code",
+        "message": "Code copied to clipboard"
     }
 }

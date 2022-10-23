@@ -34,7 +34,7 @@ class CreateTeamPage extends HookWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Padding(
-        padding: const EdgeInsets.all(AppDimens.sm),
+        padding: const EdgeInsets.all(AppDimens.pagePadding),
         child: ScrollOrFitBottom(
           controller: scrollController,
           scrollableContent: [

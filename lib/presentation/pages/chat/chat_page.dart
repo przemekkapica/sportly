@@ -11,7 +11,7 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Padding(
-        padding: const EdgeInsets.all(AppDimens.sm),
+        padding: const EdgeInsets.all(AppDimens.pagePadding),
         child: Column(
           children: const [
             Text(
