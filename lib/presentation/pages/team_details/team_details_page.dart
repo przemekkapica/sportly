@@ -42,34 +42,44 @@ class TeamDetailsPage extends HookWidget {
           idle: (state) {
             return Padding(
               padding: const EdgeInsets.all(AppDimens.sm),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SportlyCard(
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
                         children: [
-                          _TeamDetailsHeader(idle: state),
+                          SportlyCard(
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _TeamDetailsHeader(idle: state),
+                                const Gap(AppDimens.big),
+                                const _QuickActionsSection(),
+                                const Gap(AppDimens.xbig),
+                                _TeamMembersSection(idle: state),
+                              ],
+                            ),
+                          ),
                           const Gap(AppDimens.big),
-                          const _QuickActionsSection(),
-                          const Gap(AppDimens.xbig),
-                          _TeamMembersSection(idle: state),
                         ],
                       ),
                     ),
-                    const Gap(AppDimens.big),
-                    SportlyButton.solid(
-                      label: 'Manage',
-                      onTap: () {},
-                    ),
-                    const Gap(AppDimens.sm),
-                    SportlyButton.danger(
-                      label: 'Leave team',
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+                  ),
+                  Column(
+                    children: [
+                      SportlyButton.solid(
+                        label: 'Manage',
+                        onTap: () {},
+                      ),
+                      const Gap(AppDimens.sm),
+                      SportlyButton.danger(
+                        label: 'Leave team',
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ],
               ),
             );
           },

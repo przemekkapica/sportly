@@ -9,6 +9,7 @@ import 'package:sportly/presentation/theme/app_typo.dart';
 import 'package:sportly/presentation/widgets/form/sportly_dropdown.dart';
 import 'package:sportly/presentation/widgets/form/sportly_radio_button.dart';
 import 'package:sportly/presentation/widgets/form/sportly_text_input.dart';
+import 'package:sportly/presentation/widgets/scroll_or_fit_bottom.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
 
@@ -28,13 +29,15 @@ class CreateTeamPage extends HookWidget {
   Widget build(BuildContext context) {
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final teamType = useState(TeamType.professional);
+    final scrollController = useScrollController();
 
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Padding(
         padding: const EdgeInsets.all(AppDimens.sm),
-        child: Column(
-          children: [
+        child: ScrollOrFitBottom(
+          controller: scrollController,
+          scrollableContent: [
             Form(
               key: formKey,
               child: Column(
@@ -94,6 +97,28 @@ class CreateTeamPage extends HookWidget {
                   ),
                   const Gap(AppDimens.md),
                   SportlyTextInput(
+                    label: LocaleKeys.create_team_team_name.tr(),
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return LocaleKeys.create_team_team_name_error.tr();
+                      }
+                      return null;
+                    },
+                  ),
+                  const Gap(AppDimens.md),
+                  SportlyTextInput(
+                    label: LocaleKeys.create_team_team_name.tr(),
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return LocaleKeys.create_team_team_name_error.tr();
+                      }
+                      return null;
+                    },
+                  ),
+                  const Gap(AppDimens.md),
+                  SportlyTextInput(
                     label: LocaleKeys.create_team_location.tr(),
                     textInputAction: TextInputAction.next,
                     validator: (value) {
@@ -130,20 +155,20 @@ class CreateTeamPage extends HookWidget {
                     }).toList(),
                   ),
                   const Gap(AppDimens.xbig),
-                  SportlyButton.solid(
-                    onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
-                      }
-                    },
-                    label: LocaleKeys.create_team_button_label.tr(),
-                  ),
                 ],
               ),
-            )
+            ),
           ],
+          bottomContent: SportlyButton.solid(
+            onTap: () {
+              if (formKey.currentState!.validate()) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Processing Data')),
+                );
+              }
+            },
+            label: LocaleKeys.create_team_button_label.tr(),
+          ),
         ),
       ),
     );
