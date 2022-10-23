@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team_member.f.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/schedule/schedule_page.dart';
@@ -14,6 +15,7 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
+import 'package:sportly/presentation/widgets/sport_discipline_icon.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
 import 'package:sportly/presentation/widgets/sportly_divider.dart';
@@ -194,20 +196,9 @@ class _TeamDetailsHeader extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: AppColors.team1.withAlpha(160),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(AppDimens.borderRadius),
-            ),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(AppDimens.xsm),
-            child: Icon(
-              Icons.sports_soccer_rounded,
-              size: 70,
-            ),
-          ),
+        const SportDisciplineIcon(
+          discipline: SportDiscipline(name: 'football'),
+          size: AppDimens.disciplineBiggerIconSize,
         ),
         const Gap(AppDimens.md),
         Expanded(

@@ -28,21 +28,21 @@
             }
         },
         {
-            "id": "4",
-            "name": "Widzew Łódź",
-            "membersCount": 32,
-            "isAdmin": true,
-            "discipline": {
-                "name": "football"
-            }
-        },
-        {
             "id": "5",
             "name": "Szczypiory",
             "membersCount": 14,
             "isAdmin": true,
             "discipline": {
                 "name": "handball"
+            }
+        },
+        {
+            "id": "4",
+            "name": "Widzew Łódź",
+            "membersCount": 32,
+            "isAdmin": true,
+            "discipline": {
+                "name": "football"
             }
         },
         {

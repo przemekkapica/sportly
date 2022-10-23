@@ -51,4 +51,8 @@ class AppDimens {
   static const borderRadius = md;
 
   static const pagePadding = sm;
+
+  static const disciplineIconSize = 50.0;
+
+  static const disciplineBiggerIconSize = 70.0;
 }
