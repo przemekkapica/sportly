@@ -46,5 +46,7 @@ class AppDimens {
 
   static const bottomBarIconSize = 30.0;
 
-  static const iconButtonSize = 28.0;
+  static const iconButtonSize = 24.0;
+
+  static const borderRadius = md;
 }

@@ -91,8 +91,8 @@ class _TeamMembersSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Members',
+        Text(
+          LocaleKeys.team_details_members.tr(),
           style: AppTypo.bodyLarge,
         ),
         const Gap(AppDimens.xxsm),
@@ -131,8 +131,8 @@ class _QuickActionsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Quick actions',
+        Text(
+          LocaleKeys.team_details_quick_actions.tr(),
           style: AppTypo.bodyLarge,
         ),
         const Gap(AppDimens.xxsm),
@@ -178,7 +178,7 @@ class _TeamDetailsHeader extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.team1.withAlpha(160),
             borderRadius: const BorderRadius.all(
-              Radius.circular(AppDimens.sm),
+              Radius.circular(AppDimens.borderRadius),
             ),
           ),
           child: const Padding(

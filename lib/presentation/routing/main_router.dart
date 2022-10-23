@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:sportly/presentation/pages/chat/chat_page.dart';
+import 'package:sportly/presentation/pages/create_team/create_team_page.dart';
 import 'package:sportly/presentation/pages/home/home_page.dart';
 import 'package:sportly/presentation/pages/offline/offline_page.dart';
 import 'package:sportly/presentation/pages/profile/profile_page.dart';
@@ -29,6 +30,10 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
             AutoRoute(
               page: TeamDetailsPage,
               path: 'details',
+            ),
+            AutoRoute(
+              page: CreateTeamPage,
+              path: 'create',
             ),
           ],
         ),

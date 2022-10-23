@@ -98,7 +98,9 @@ class TeamsPage extends HookWidget {
                     const Gap(AppDimens.xsm),
                     SportlyButton.outlined(
                       label: 'Create a team',
-                      onTap: () {},
+                      onTap: () => AutoRouter.of(context).push(
+                        CreateTeamPageRoute(),
+                      ),
                     ),
                   ],
                 ),

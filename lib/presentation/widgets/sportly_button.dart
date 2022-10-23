@@ -69,7 +69,7 @@ class SportlyButton extends StatelessWidget {
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.md),
+            borderRadius: BorderRadius.circular(AppDimens.borderRadius),
             side: _getBorderSide(),
           ),
         ),

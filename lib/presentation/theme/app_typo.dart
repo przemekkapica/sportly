@@ -20,7 +20,7 @@ class AppTypo {
   );
   static const bodyMedium = TextStyle(
     fontSize: 20,
-    color: AppColors.secondary,
+    color: AppColors.primary,
   );
   static const bodySmall = TextStyle(
     fontSize: 16,
