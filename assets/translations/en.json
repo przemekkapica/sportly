@@ -15,7 +15,9 @@
     "team_details": {
         "description": "You joined this team on\n{}",
         "members": "Members",
-        "quick_actions": "Quick actions"
+        "quick_actions": "Quick actions",
+        "manage": "Manage",
+        "leave": "Leave team"
     },
     "create_team": {
         "team_type": "Team type",

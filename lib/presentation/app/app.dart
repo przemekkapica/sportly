@@ -2,11 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sportly/presentation/app/app_action.f.dart';
 import 'package:sportly/presentation/app/app_cubit.dart';
 import 'package:sportly/core/di/di_config.dart';
 import 'package:sportly/domain/features/network/connectivity/connection_checker.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
+import 'package:sportly/presentation/widgets/sportly_loader.dart';
 
 class App extends HookWidget {
   const App({
@@ -82,7 +84,11 @@ class _MaterialApp extends StatelessWidget {
 
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: routerWidget,
+          child: LoaderOverlay(
+            useDefaultLoading: false,
+            overlayWidget: const SportlyLoader(),
+            child: routerWidget,
+          ),
         );
       },
     );

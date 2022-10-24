@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/join_team/join_team_page_action.f.dart';
 import 'package:sportly/presentation/pages/join_team/join_team_page_cubit.dart';
@@ -49,6 +50,8 @@ class JoinTeamPage extends HookWidget {
               [],
             );
           },
+          showLoader: context.loaderOverlay.show,
+          hideLoader: context.loaderOverlay.hide,
         );
       },
     );

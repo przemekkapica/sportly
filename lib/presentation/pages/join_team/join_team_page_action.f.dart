@@ -9,4 +9,8 @@ class JoinTeamPageAction with _$JoinTeamPageAction {
   const factory JoinTeamPageAction.addedToTeam() = _AddedToTeam;
 
   const factory JoinTeamPageAction.wrongCode() = _WrongCode;
+
+  const factory JoinTeamPageAction.showLoader() = _ShowLoader;
+
+  const factory JoinTeamPageAction.hideLoader() = _HideLoader;
 }
