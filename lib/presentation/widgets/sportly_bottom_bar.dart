@@ -29,7 +29,7 @@ class SportlyBottomBar extends StatelessWidget {
           ),
           title: Text(
             LocaleKeys.bottom_bar_teams.tr(),
-            style: AppTypo.labelLarge.copyWith(color: AppColors.primary),
+            style: AppTypo.bottomBar,
           ),
         ),
         SalomonBottomBarItem(
@@ -39,7 +39,7 @@ class SportlyBottomBar extends StatelessWidget {
           ),
           title: Text(
             LocaleKeys.bottom_bar_chat.tr(),
-            style: AppTypo.labelLarge.copyWith(color: AppColors.primary),
+            style: AppTypo.bottomBar,
           ),
         ),
         SalomonBottomBarItem(
@@ -49,7 +49,7 @@ class SportlyBottomBar extends StatelessWidget {
           ),
           title: Text(
             LocaleKeys.bottom_bar_schedule.tr(),
-            style: AppTypo.labelLarge.copyWith(color: AppColors.primary),
+            style: AppTypo.bottomBar,
           ),
         ),
         SalomonBottomBarItem(
@@ -59,7 +59,7 @@ class SportlyBottomBar extends StatelessWidget {
           ),
           title: Text(
             LocaleKeys.bottom_bar_profile.tr(),
-            style: AppTypo.labelLarge.copyWith(color: AppColors.primary),
+            style: AppTypo.bottomBar,
           ),
         ),
       ],

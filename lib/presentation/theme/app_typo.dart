@@ -38,6 +38,13 @@ class AppTypo {
     fontSize: 10,
     color: AppColors.secondary,
   );
+  static const bottomBar = TextStyle(
+    fontSize: 14,
+    letterSpacing: 0.3,
+    color: AppColors.primary,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Montserrat',
+  );
   static const button = TextStyle(
     fontSize: 17,
     color: AppColors.neutral,

@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page.dart';
 import 'package:sportly/presentation/pages/join_team/join_team_page.dart';
 import 'package:sportly/presentation/pages/teams/teams_page_cubit.dart';
@@ -55,20 +57,24 @@ class TeamsPage extends HookWidget {
                               size: AppDimens.disciplineIconSize,
                             ),
                             const Gap(AppDimens.md),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  state.teams[index].name,
-                                  style: AppTypo.bodyMedium,
-                                ),
-                                const Gap(AppDimens.xxsm),
-                                Text(
-                                  state.teams[index].membersCount.toString() +
-                                      ' members',
-                                  style: AppTypo.labelLarge,
-                                ),
-                              ],
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    state.teams[index].name,
+                                    style: AppTypo.bodyMedium,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                  const Gap(AppDimens.xxsm),
+                                  Text(
+                                    state.teams[index].membersCount.toString() +
+                                        LocaleKeys.teams_page_members.tr(),
+                                    style: AppTypo.labelLarge,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -84,14 +90,14 @@ class TeamsPage extends HookWidget {
                   children: [
                     const Gap(AppDimens.sm),
                     SportlyButton.solid(
-                      label: 'Join a team',
+                      label: LocaleKeys.teams_page_join.tr(),
                       onTap: () => AutoRouter.of(context).push(
                         const JoinTeamPageRoute(),
                       ),
                     ),
                     const Gap(AppDimens.xsm),
                     SportlyButton.outlined(
-                      label: 'Create a team',
+                      label: LocaleKeys.teams_page_create.tr(),
                       onTap: () => AutoRouter.of(context).push(
                         const CreateTeamPageRoute(),
                       ),

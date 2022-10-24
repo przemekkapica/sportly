@@ -19,7 +19,6 @@ class TeamDetailsPageCubit extends Cubit<TeamDetailsPageState> {
       final teamDetails = await _getTeamDetailsUseCase(teamId);
       var members = List<TeamMember>.from(teamDetails.members);
       members.addAll(teamDetails.members);
-      members.addAll(teamDetails.members);
       members.sort((m1, m2) => m2.isAdmin ? 1 : -1);
       emit(
         TeamDetailsPageState.idle(

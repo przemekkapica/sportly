@@ -12,6 +12,11 @@
         "schedule": "Kalendarz",
         "profile": "Profil"
     },
+    "teams_page": {
+        "join": "Dołącz do zespołu",
+        "create": "Stwórz zespół",
+        "members": " członków"
+    },
     "team_details": {
         "description": "Dołączyłeś do zespołu\n{}",
         "members": "Członkowie",
