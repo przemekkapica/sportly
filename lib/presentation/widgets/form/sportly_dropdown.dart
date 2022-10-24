@@ -54,7 +54,7 @@ class SportlyDropdown extends StatelessWidget {
             ),
             borderSide: BorderSide(
               color: AppColors.primary,
-              width: AppDimens.xxxsm,
+              width: AppDimens.one,
             ),
           ),
           focusedBorder: const OutlineInputBorder(
@@ -63,7 +63,7 @@ class SportlyDropdown extends StatelessWidget {
             ),
             borderSide: BorderSide(
               color: AppColors.primary,
-              width: AppDimens.xxxsm,
+              width: AppDimens.one,
             ),
           ),
           focusColor: AppColors.primary,

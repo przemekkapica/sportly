@@ -1,14 +1,9 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart';
 import 'package:sportly/infrastructure/teams/dtos/create_team_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/get_teams_dto.dart';
-import 'package:sportly/infrastructure/teams/dtos/team_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/team_details_dto.dart';
 
 @LazySingleton(as: TeamsDataSource)
@@ -40,5 +35,14 @@ class TeamsMockDataSource implements TeamsDataSource {
     final teams = TeamDetailsDto.fromJson(data);
 
     return teams;
+  }
+
+  @override
+  Future<bool> joinTeam(String code) async {
+    if (code == '123456') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

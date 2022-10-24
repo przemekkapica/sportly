@@ -20,6 +20,7 @@ import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
 import 'package:sportly/presentation/widgets/sportly_divider.dart';
 import 'package:sportly/presentation/widgets/sportly_icon_button.dart';
+import 'package:sportly/presentation/widgets/sportly_loader.dart';
 import 'package:sportly/utils/extensions/date_time_extension.dart';
 
 class TeamDetailsPage extends HookWidget {
@@ -45,51 +46,69 @@ class TeamDetailsPage extends HookWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: state.maybeMap(
-          idle: (state) {
-            return Padding(
-              padding: const EdgeInsets.all(AppDimens.pagePadding),
+        idle: (state) {
+          return _Idle(
+            state: state,
+          );
+        },
+        loading: (_) => const SportlyLoader(),
+        orElse: () => const SizedBox.shrink(),
+      ),
+    );
+  }
+}
+
+class _Idle extends StatelessWidget {
+  const _Idle({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final TeamDetailsPageStateIdle state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(AppDimens.pagePadding),
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SportlyCard(
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _TeamDetailsHeader(idle: state),
-                                const Gap(AppDimens.big),
-                                const _QuickActionsSection(),
-                                const Gap(AppDimens.xbig),
-                                _TeamMembersSection(idle: state),
-                              ],
-                            ),
-                          ),
-                          const Gap(AppDimens.big),
-                        ],
-                      ),
+                  SportlyCard(
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _TeamDetailsHeader(idle: state),
+                        const Gap(AppDimens.big),
+                        const _QuickActionsSection(),
+                        const Gap(AppDimens.xbig),
+                        _TeamMembersSection(idle: state),
+                      ],
                     ),
                   ),
-                  Column(
-                    children: [
-                      SportlyButton.solid(
-                        label: 'Manage',
-                        onTap: () {},
-                      ),
-                      const Gap(AppDimens.sm),
-                      SportlyButton.danger(
-                        label: 'Leave team',
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
+                  const Gap(AppDimens.big),
                 ],
               ),
-            );
-          },
-          orElse: () => const SizedBox.shrink()),
+            ),
+          ),
+          Column(
+            children: [
+              SportlyButton.solid(
+                label: LocaleKeys.team_details_manage.tr(),
+                onTap: () {},
+              ),
+              const Gap(AppDimens.sm),
+              SportlyButton.danger(
+                label: LocaleKeys.team_details_leave.tr(),
+                onTap: () {},
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

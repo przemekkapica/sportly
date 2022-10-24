@@ -33,7 +33,7 @@ class SportlyTextInput extends StatelessWidget {
           ),
           borderSide: BorderSide(
             color: AppColors.primary,
-            width: AppDimens.xxxsm,
+            width: AppDimens.one,
           ),
         ),
         enabledBorder: OutlineInputBorder(
