@@ -16,9 +16,15 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
 @MaterialAutoRouter(
   routes: [
     AutoRoute(
-      page: HomePage,
+      page: SignInPage,
       initial: true,
-      path: '/',
+    ),
+    AutoRoute(page: OfflinePage),
+    AutoRoute(page: AuthErrorPage),
+    AutoRoute(
+      page: HomePage,
+      // initial: true,
+      // path: '/',
       children: [
         AutoRoute(
           page: EmptyRouterPage,
@@ -53,9 +59,6 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
         AutoRoute(page: ProfilePage),
       ],
     ),
-    AutoRoute(page: SignInPage),
-    AutoRoute(page: OfflinePage),
-    AutoRoute(page: AuthErrorPage),
   ],
 )
 class $MainRouter {}

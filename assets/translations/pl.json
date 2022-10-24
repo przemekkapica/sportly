@@ -50,5 +50,9 @@
     "join_team": {
         "title": "Dołącz do zespołu\nza pomocą kodu",
         "button_label": "Dołącz"
+    },
+    "sign_out": {
+        "button_label": "Wyloguj się",
+        "error": "Wystąpił błąd w ładowaniu profilu"
     }
 }

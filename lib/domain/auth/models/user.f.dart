@@ -6,9 +6,8 @@ part 'user.f.freezed.dart';
 class User with _$User {
   const factory User({
     required String id,
-    required String? displayName,
-    required String? email,
-    String? city,
-    bool? isGeolocationEnabled,
-  }) = _UserModel;
+    required String email,
+    required String displayName,
+    required String? photoUrl,
+  }) = _User;
 }

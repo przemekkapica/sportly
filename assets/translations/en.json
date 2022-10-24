@@ -50,5 +50,9 @@
     "join_team": {
         "title": "Join your team via\ninvitation code",
         "button_label": "Join a team"
+    },
+    "sign_out": {
+        "button_label": "Sign out",
+        "error": "Cannot load user profile"
     }
 }

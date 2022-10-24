@@ -27,7 +27,7 @@ class SignInPage extends HookWidget {
       (action) {
         action.map(
           authSuccess: (_) => AutoRouter.of(context).replace(
-            const TeamsPageRoute(),
+            const HomePageRoute(),
           ),
           authError: (_) => AutoRouter.of(context).replace(
             const AuthErrorPageRoute(),
