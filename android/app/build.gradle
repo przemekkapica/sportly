@@ -21,9 +21,27 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.google.gms.google-services'
+
+def propertyFileNameMap = [
+        dev : 'key_dev.properties',
+        prod: 'key_prod.properties'
+]
+
+def propertyMap = [:]
+
+for (fileNameEntry in propertyFileNameMap.entrySet()) {
+    def keystorePropertiesFile = rootProject.file(fileNameEntry.value)
+    if (keystorePropertiesFile.exists()) {
+        def keystoreProperties = new Properties()
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+        propertyMap.put(fileNameEntry.key, keystoreProperties)
+    }
+}
 
 android {
     compileSdkVersion flutter.compileSdkVersion
@@ -42,19 +60,50 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.sportly"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        dev {
+            def keystoreProperties = propertyMap['dev']
+            if (keystoreProperties != null) {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+
+        prod {
+            def keystoreProperties = propertyMap['prod']
+            if (propertyMap['prod'] != null) {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+                storePassword keystoreProperties['storePassword']
+            }
+        }
     }
 
     buildTypes {
+        debug {
+            def keystoreProperties = propertyMap['dev']
+            if (keystoreProperties != null) {
+                signingConfig signingConfigs.dev
+            }
+        }
+
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            def keystoreProperties = propertyMap['prod']
+            if (keystoreProperties != null) {
+                signingConfig signingConfigs.prod
+            }
+
         }
     }
 }
@@ -65,4 +114,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:31.0.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.android.support:multidex:1.0.3'
 }

@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "sportly - debug",
+            "name": "Sportly - debug",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "sportly - profile",
+            "name": "Sportly - profile",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "sportly - release",
+            "name": "Sportly - release",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
