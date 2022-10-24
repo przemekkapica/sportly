@@ -20,6 +20,12 @@ also for iOS
 
 ```flutter pub run easy_localization:generate --source-dir ./assets/translations -f keys -o local_keys.g.dart -O lib/presentation/gen```
 
+### Generate firebase keystore
+
+```keytool -genkey -v -keystore sportly.keystore -keyalg RSA -keysize 2048 -validity 10000 -alias androiddebugkey -storetype JKS```
+
+```keytool -list -v -alias sportly -keystore debug.keystore```
+
 ## Running
 
 ```flutter run```

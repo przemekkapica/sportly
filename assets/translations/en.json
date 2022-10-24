@@ -2,6 +2,10 @@
     "sign_in_page": {
         "button_label": "Sign in with Google"
     },
+    "auth_error_page": {
+        "title": "An error occured while\nsigning in",
+        "description": "Restart the app and try again"
+    },
     "offline_page": {
         "title": "You are offline",
         "description": "Check your internet connection"
@@ -46,5 +50,9 @@
     "join_team": {
         "title": "Join your team via\ninvitation code",
         "button_label": "Join a team"
+    },
+    "sign_out": {
+        "button_label": "Sign out",
+        "error": "Cannot load user profile"
     }
 }

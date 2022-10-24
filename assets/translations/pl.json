@@ -2,6 +2,10 @@
     "sign_in_page": {
         "button_label": "Zaloguj się przez Google"
     },
+    "auth_error_page": {
+        "title": "Wystąpił błąd podczas logowania",
+        "description": "Zrestartuj aplikację i spróbuj ponownie"
+    },
     "offline_page": {
         "title": "Jesteś offline",
         "description": "Sprawdź swoje połączenie"
@@ -46,5 +50,9 @@
     "join_team": {
         "title": "Dołącz do zespołu\nza pomocą kodu",
         "button_label": "Dołącz"
+    },
+    "sign_out": {
+        "button_label": "Wyloguj się",
+        "error": "Wystąpił błąd w ładowaniu profilu"
     }
 }
