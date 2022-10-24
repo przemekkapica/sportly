@@ -57,4 +57,14 @@ class TeamsRepositoryImpl implements TeamsRepository {
       throw (Exception('get team details error'));
     }
   }
+
+  @override
+  Future<bool> joinTeam(String code) async {
+    try {
+      return await _teamsDataSource.joinTeam(code);
+    } catch (e) {
+      // TODO: add error handling
+      return false;
+    }
+  }
 }

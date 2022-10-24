@@ -8,4 +8,6 @@ abstract class TeamsDataSource {
   Future<GetTeamsDto> getTeams();
 
   Future<TeamDetailsDto> getTeamDetails(String id);
+
+  Future<bool> joinTeam(String code);
 }

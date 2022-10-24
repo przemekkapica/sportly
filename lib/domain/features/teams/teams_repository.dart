@@ -8,4 +8,6 @@ abstract class TeamsRepository {
   Future<List<Team>> getTeams();
 
   Future<TeamDetails> getTeamDetails(String id);
+
+  Future<bool> joinTeam(String code);
 }

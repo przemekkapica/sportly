@@ -8,9 +8,15 @@ class SportlyPinInput extends StatelessWidget {
   const SportlyPinInput({
     Key? key,
     this.length,
+    required this.errorText,
+    required this.onChanged,
+    this.onCompleted,
   }) : super(key: key);
 
   final int? length;
+  final String errorText;
+  final Function(String)? onCompleted;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +29,10 @@ class SportlyPinInput extends StatelessWidget {
       focusedPinTheme: defaultPinTheme.withColor(AppColors.primary),
       errorPinTheme: defaultPinTheme.withColor(AppColors.danger),
       submittedPinTheme: defaultPinTheme.withColor(AppColors.secondary),
+      onCompleted: onCompleted,
+      onChanged: onChanged,
+      errorText: errorText,
+      forceErrorState: errorText.isNotEmpty,
     );
   }
 }
@@ -32,9 +42,9 @@ class DefaultPinputTheme extends PinTheme {
     EdgeInsetsGeometry margin =
         const EdgeInsets.symmetric(horizontal: AppDimens.xxsm),
   }) : super(
-          width: 46,
+          width: 52,
           height: 52,
-          textStyle: AppTypo.bodyMedium,
+          textStyle: AppTypo.bodyLarge,
           margin: margin,
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.secondary.withAlpha(80)),
