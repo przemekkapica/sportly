@@ -12,6 +12,11 @@
         "schedule": "Schedule",
         "profile": "Profile"
     },
+    "teams_page": {
+        "join": "Join a team",
+        "create": "Create a team",
+        "members": " members"
+    },
     "team_details": {
         "description": "You joined this team on\n{}",
         "members": "Members",
