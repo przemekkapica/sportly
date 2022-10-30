@@ -24,7 +24,7 @@ class AppTypo {
   );
   static const bodySmall = TextStyle(
     fontSize: 16,
-    color: AppColors.secondary,
+    color: AppColors.primary,
   );
   static const labelLarge = TextStyle(
     fontSize: 14,

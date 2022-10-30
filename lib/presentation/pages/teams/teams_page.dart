@@ -5,8 +5,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
-import 'package:sportly/presentation/pages/create_team/create_team_page.dart';
-import 'package:sportly/presentation/pages/join_team/join_team_page.dart';
 import 'package:sportly/presentation/pages/teams/teams_page_cubit.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
@@ -75,6 +73,38 @@ class TeamsPage extends HookWidget {
                                     style: AppTypo.labelLarge,
                                   ),
                                 ],
+                              ),
+                            ),
+                            PopupMenuButton(
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(AppDimens.borderRadius),
+                                ),
+                              ),
+                              itemBuilder: (BuildContext context) =>
+                                  <PopupMenuEntry>[
+                                const PopupMenuItem(
+                                  child: Text(
+                                    'Manage',
+                                    style: AppTypo.bodySmall,
+                                  ),
+                                ),
+                                const PopupMenuItem(
+                                  child: Text(
+                                    'Invite people',
+                                    style: AppTypo.bodySmall,
+                                  ),
+                                ),
+                                PopupMenuItem(
+                                  child: Text(
+                                    'Leave team',
+                                    style: AppTypo.bodySmall
+                                        .copyWith(color: AppColors.danger),
+                                  ),
+                                ),
+                              ],
+                              child: const Icon(
+                                Icons.more_vert_rounded,
                               ),
                             ),
                           ],
