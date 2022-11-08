@@ -1,3 +1,4 @@
+import 'package:calendar_view/calendar_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -70,27 +71,30 @@ class _MaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerDelegate: mainRouter.delegate(),
-      routeInformationParser: mainRouter.defaultRouteParser(),
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      localizationsDelegates: context.localizationDelegates,
-      theme: _getThemeData(),
-      builder: (context, routerWidget) {
-        if (routerWidget == null) {
-          return const SizedBox.shrink();
-        }
+    return CalendarControllerProvider(
+      controller: EventController(),
+      child: MaterialApp.router(
+        routerDelegate: mainRouter.delegate(),
+        routeInformationParser: mainRouter.defaultRouteParser(),
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        localizationsDelegates: context.localizationDelegates,
+        theme: _getThemeData(),
+        builder: (context, routerWidget) {
+          if (routerWidget == null) {
+            return const SizedBox.shrink();
+          }
 
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: LoaderOverlay(
-            useDefaultLoading: false,
-            overlayWidget: const SportlyLoader(),
-            child: routerWidget,
-          ),
-        );
-      },
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: LoaderOverlay(
+              useDefaultLoading: false,
+              overlayWidget: const SportlyLoader(),
+              child: routerWidget,
+            ),
+          );
+        },
+      ),
     );
   }
 

@@ -41,6 +41,7 @@ class TeamsPage extends HookWidget {
               children: [
                 Expanded(
                   child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
                       return SportlyCard(

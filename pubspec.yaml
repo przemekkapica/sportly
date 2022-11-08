@@ -10,6 +10,7 @@ environment:
 
 dependencies:
   auto_route: ^5.0.1
+  calendar_view: ^1.0.0
   connectivity_plus: ^2.3.9
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
