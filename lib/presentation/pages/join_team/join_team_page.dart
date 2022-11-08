@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -45,9 +46,24 @@ class JoinTeamPage extends HookWidget {
           wrongCode: () {
             showSportlyDialog(
               context,
-              Text('Invalid code'),
-              Text('The code you entered is either wrong or expired'),
-              [],
+              Text(
+                'Invalid code',
+                style: AppTypo.bodyLarge,
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'The code you entered is either wrong or expired',
+                    style: AppTypo.bodySmall,
+                  ),
+                  const Gap(AppDimens.xbig),
+                  SportlyButton.solid(
+                    label: 'OK',
+                    onTap: Navigator.of(context, rootNavigator: true).pop,
+                  ),
+                ],
+              ),
             );
           },
           showLoader: context.loaderOverlay.show,
