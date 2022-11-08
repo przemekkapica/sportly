@@ -74,6 +74,7 @@ class _Idle extends StatelessWidget {
         children: [
           Expanded(
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   SportlyCard(

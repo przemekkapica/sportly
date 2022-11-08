@@ -15,6 +15,10 @@ extension DateTimeExtension on DateTime {
     return DateFormat('d.MM.yy', locale).format(this);
   }
 
+  String formatMMMMYY({String? locale, bool convertToTimezone = true}) {
+    return DateFormat('MMMM yyyy', locale).format(this);
+  }
+
   String formatDMMYYYY({String? locale, bool convertToTimezone = true}) {
     return DateFormat('d.MM.yyyy', locale).format(this);
   }
