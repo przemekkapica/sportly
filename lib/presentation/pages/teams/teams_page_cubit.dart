@@ -13,8 +13,14 @@ class TeamsPageCubit extends Cubit<TeamsPageState> {
 
   Future<void> init() async {
     try {
-      final teams = await _getTeamsUseCase();
-      emit(TeamsPageState.idle(teams: teams));
+      var teams = await _getTeamsUseCase();
+
+      teams = []; // TODO: temp
+      if (teams.isEmpty) {
+        emit(const TeamsPageState.noTeams());
+      } else {
+        emit(TeamsPageState.idle(teams: teams));
+      }
     } catch (e) {
       emit(const TeamsPageState.error());
     }

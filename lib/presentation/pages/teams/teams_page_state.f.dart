@@ -11,5 +11,7 @@ class TeamsPageState with _$TeamsPageState {
     required List<Team> teams,
   }) = TeamsPageStateIdle;
 
+  const factory TeamsPageState.noTeams() = TeamsPageStateNoTeams;
+
   const factory TeamsPageState.error() = TeamsPageStateError;
 }
