@@ -3,22 +3,25 @@ import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
 
-class SportlyDropdown extends StatelessWidget {
+class SportlyDropdown<T> extends StatelessWidget {
   const SportlyDropdown({
     Key? key,
     required this.hintText,
     required this.validator,
     required this.items,
+    required this.onChanged,
   }) : super(key: key);
 
   final String hintText;
-  final String? Function(String?)? validator;
-  final List<DropdownMenuItem<String>>? items;
+  final String? Function(T?)? validator;
+  final List<DropdownMenuItem<T>>? items;
+  final void Function(T?)? onChanged;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: DropdownButtonFormField<String>(
+      child: DropdownButtonFormField<T>(
         value: null,
         elevation: 1,
         decoration: InputDecoration(
@@ -71,12 +74,7 @@ class SportlyDropdown extends StatelessWidget {
           hintStyle: AppTypo.bodySmall,
           hintText: hintText,
         ),
-        onChanged: (String? value) {
-          // This is called when the user selects an item.
-          // setState(() {
-          //   dropdownValue = value!;
-          // });
-        },
+        onChanged: onChanged,
         validator: validator,
         items: items,
       ),

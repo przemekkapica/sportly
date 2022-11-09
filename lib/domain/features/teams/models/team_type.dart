@@ -1,0 +1,4 @@
+enum TeamType {
+  professional,
+  amateur,
+}

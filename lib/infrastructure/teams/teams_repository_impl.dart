@@ -25,7 +25,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
     try {
-      await _teamsDataSource.createTeam(_createTeamMapper.toDto(createTeam));
+      await _teamsDataSource.createTeam(_createTeamMapper(createTeam));
     } catch (e) {
       // TODO: add error handling
       throw (Exception('create team error'));

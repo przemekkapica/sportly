@@ -9,7 +9,7 @@ class CreateTeamDto {
   CreateTeamDto({
     required this.name,
     required this.discipline,
-    required this.ageGroup,
+    required this.teamType,
     required this.location,
     required this.organizationName,
   });
@@ -21,7 +21,7 @@ class CreateTeamDto {
 
   final String name;
   final SportDisciplineDto discipline;
-  final AgeGroupDto ageGroup;
+  final String teamType;
   final String location;
   final String? organizationName;
 }

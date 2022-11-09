@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sportly/domain/features/teams/models/age_group.f.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
+import 'package:sportly/domain/features/teams/models/team_type.dart';
 
 part 'create_team.f.freezed.dart';
 
@@ -8,8 +8,8 @@ part 'create_team.f.freezed.dart';
 class CreateTeam with _$CreateTeam {
   const factory CreateTeam({
     required String name,
+    required TeamType teamType,
     required SportDiscipline discipline,
-    required AgeGroup ageGroup,
     required String location,
     required String? organizationName,
   }) = _CreateTeam;

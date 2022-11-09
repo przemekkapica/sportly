@@ -11,6 +11,7 @@ class TeamsMockDataSource implements TeamsDataSource {
   @override
   Future<void> createTeam(CreateTeamDto createTeamDto) async {
     // TODO: implement createTeam
+    return Future.delayed(Duration(seconds: 2));
   }
 
   @override
