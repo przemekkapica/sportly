@@ -33,7 +33,7 @@ class AuthDataSourceImpl implements AuthDataSource {
       idToken: googleAuth.idToken,
     );
 
-    final token = await _firebaseAuth.currentUser!.getIdToken();
+    // final token = await _firebaseAuth.currentUser!.getIdToken();
 
     await _firebaseAuth.signInWithCredential(credential);
   }
