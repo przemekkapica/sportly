@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:sportly/presentation/pages/chat/chat_page.dart';
+import 'package:sportly/presentation/pages/chat_entry/chat_entry_page.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page.dart';
 import 'package:sportly/presentation/pages/home/home_page.dart';
 import 'package:sportly/presentation/pages/auth_error/auth_error_page.dart';
@@ -8,6 +9,7 @@ import 'package:sportly/presentation/pages/join_team/join_team_page.dart';
 import 'package:sportly/presentation/pages/offline/offline_page.dart';
 import 'package:sportly/presentation/pages/profile/profile_page.dart';
 import 'package:sportly/presentation/pages/schedule/schedule_page.dart';
+import 'package:sportly/presentation/pages/schedule_entry/schedule_entry_page.dart';
 import 'package:sportly/presentation/pages/share_invitation_code/share_invitaion_code_page.dart';
 import 'package:sportly/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:sportly/presentation/pages/team_details/team_details_page.dart';
@@ -28,7 +30,7 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
       children: [
         AutoRoute(
           page: EmptyRouterPage,
-          name: 'TeamsPageRouter',
+          name: 'TeamsRouter',
           path: 'teams',
           children: [
             AutoRoute(
@@ -45,8 +47,32 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
               path: 'create',
             ),
             AutoRoute(
+              page: JoinTeamPage,
+              path: 'share',
+            ),
+            AutoRoute(
               page: ShareInvitationCodePage,
               path: 'share',
+            ),
+          ],
+        ),
+        AutoRoute(
+          page: EmptyRouterPage,
+          name: 'ChatRouter',
+          path: 'chat',
+          children: [
+            AutoRoute(
+              page: ChatEntryPage,
+              path: '',
+              initial: true,
+            ),
+            AutoRoute(
+              page: ChatPage,
+              path: '',
+            ),
+            AutoRoute(
+              page: CreateTeamPage,
+              path: 'create',
             ),
             AutoRoute(
               page: JoinTeamPage,
@@ -54,8 +80,30 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
             ),
           ],
         ),
-        AutoRoute(page: ChatPage),
-        AutoRoute(page: SchedulePage),
+        AutoRoute(
+          page: EmptyRouterPage,
+          name: 'ScheduleRouter',
+          path: 'schedule',
+          children: [
+            AutoRoute(
+              page: ScheduleEntryPage,
+              path: '',
+              initial: true,
+            ),
+            AutoRoute(
+              page: SchedulePage,
+              path: '',
+            ),
+            AutoRoute(
+              page: CreateTeamPage,
+              path: 'create',
+            ),
+            AutoRoute(
+              page: JoinTeamPage,
+              path: 'share',
+            ),
+          ],
+        ),
         AutoRoute(page: ProfilePage),
       ],
     ),
