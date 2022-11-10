@@ -206,14 +206,14 @@ class _QuickActionsSection extends StatelessWidget {
             SportlyIconButton(
               icon: Icons.chat,
               onTap: () => AutoRouter.of(context).navigate(
-                const ChatPageRoute(),
+                const ChatRouter(),
               ),
             ),
             const Gap(AppDimens.sm),
             SportlyIconButton(
               icon: Icons.calendar_month_rounded,
               onTap: () => AutoRouter.of(context).navigate(
-                const SchedulePageRoute(),
+                const ScheduleRouter(),
               ),
             ),
             const Spacer(),

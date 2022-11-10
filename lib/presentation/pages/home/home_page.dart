@@ -12,9 +12,9 @@ class HomePage extends HookWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: const [
-        TeamsPageRouter(),
-        ChatPageRoute(),
-        SchedulePageRoute(),
+        TeamsRouter(),
+        ChatRouter(),
+        ScheduleRouter(),
         ProfilePageRoute(),
       ],
       builder: (context, child, animation) {

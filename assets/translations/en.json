@@ -16,10 +16,19 @@
         "schedule": "Schedule",
         "profile": "Profile"
     },
-    "teams_page": {
+    "team_selection": {
         "join": "Join a team",
         "create": "Create a team",
-        "members": " members"
+        "members": " members",
+        "menu": {
+            "manage": "Manage",
+            "invite": "Invite people",
+            "leave": "Leave team"
+        },
+        "no_teams": {
+            "title": "No teams yet?",
+            "description": "Once you join a team, you will have access to\nschedules, chat, statistics and much more!"
+        }
     },
     "team_details": {
         "description": "You joined this team on\n{}",

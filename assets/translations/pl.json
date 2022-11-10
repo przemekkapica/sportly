@@ -16,10 +16,19 @@
         "schedule": "Kalendarz",
         "profile": "Profil"
     },
-    "teams_page": {
-        "join": "Dołącz do zespołu",
+    "team_selection": {
+        "join": "Dołącz do zespłu",
         "create": "Stwórz zespół",
-        "members": " członków"
+        "members": " członków",
+        "menu": {
+            "manage": "Zarządzaj",
+            "invite": "Zaproś",
+            "leave": "Opuść zespół"
+        },
+        "no_teams": {
+            "title": "Nie jesteś jeszcze\nw zadnym zespole?",
+            "description": "Once you join a team, you will have access to\nschedules, chat, statistics and much more!"
+        }
     },
     "team_details": {
         "description": "Dołączyłeś do zespołu\n{}",
