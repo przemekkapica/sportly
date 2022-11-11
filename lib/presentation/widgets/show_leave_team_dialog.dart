@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
+import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
 import 'package:sportly/presentation/widgets/show_snackbar.dart';
@@ -49,6 +51,7 @@ Future<void> showLeaveTeamDialog(
               showSnackBar(context, 'Could not leave $teamName');
             } finally {
               Navigator.of(context, rootNavigator: true).pop();
+              AutoRouter.of(context).navigate(const TeamsRouter());
             }
           },
         ),
