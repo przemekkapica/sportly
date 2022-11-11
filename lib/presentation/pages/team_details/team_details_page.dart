@@ -5,10 +5,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
+import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_member.f.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
-import 'package:sportly/presentation/pages/schedule/schedule_page.dart';
-import 'package:sportly/presentation/pages/share_invitation_code/share_invitaion_code_page.dart';
 import 'package:sportly/presentation/pages/team_details/team_details_page_cubit.dart';
 import 'package:sportly/presentation/pages/team_details/team_details_page_state.f.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
@@ -85,7 +84,9 @@ class _Idle extends StatelessWidget {
                       children: [
                         _TeamDetailsHeader(idle: state),
                         const Gap(AppDimens.big),
-                        const _QuickActionsSection(),
+                        _QuickActionsSection(
+                          team: Team.fromDetails(state.teamDetails),
+                        ),
                         const Gap(AppDimens.xbig),
                         _TeamMembersSection(idle: state),
                       ],
@@ -187,7 +188,10 @@ class _TeamMembersSection extends StatelessWidget {
 class _QuickActionsSection extends StatelessWidget {
   const _QuickActionsSection({
     Key? key,
+    required this.team,
   }) : super(key: key);
+
+  final Team team;
 
   @override
   Widget build(BuildContext context) {
@@ -205,9 +209,11 @@ class _QuickActionsSection extends StatelessWidget {
           children: [
             SportlyIconButton(
               icon: Icons.chat,
-              onTap: () => AutoRouter.of(context).navigate(
-                const ChatRouter(),
-              ),
+              onTap: () async {
+                await AutoRouter.of(context).navigate(
+                  const ChatRouter(),
+                );
+              },
             ),
             const Gap(AppDimens.sm),
             SportlyIconButton(
