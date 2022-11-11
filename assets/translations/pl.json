@@ -63,5 +63,10 @@
     "sign_out": {
         "button_label": "Wyloguj się",
         "error": "Wystąpił błąd w ładowaniu profilu"
+    },
+    "leave_team": {
+        "message": "Czy na pewno chcesz opuścić zespół ",
+        "confirm": "Opuść zespół",
+        "cancel": "Wróć"
     }
 }

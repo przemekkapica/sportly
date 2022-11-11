@@ -12,6 +12,7 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
+import 'package:sportly/presentation/widgets/app_loader.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_loader.dart';
 
@@ -114,6 +115,10 @@ class _Avatar extends StatelessWidget {
           ? Image.network(
               state.user.photoUrl!,
               width: AppDimens.huge,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const AppLoader();
+              },
             )
           : Container(
               color: AppColors.team2.withAlpha(160),

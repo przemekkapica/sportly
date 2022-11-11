@@ -14,6 +14,7 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
+import 'package:sportly/presentation/widgets/show_leave_team_dialog.dart';
 import 'package:sportly/presentation/widgets/show_sportly_dialog.dart';
 import 'package:sportly/presentation/widgets/sport_discipline_icon.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
@@ -106,35 +107,12 @@ class _Idle extends StatelessWidget {
               const Gap(AppDimens.sm),
               SportlyButton.danger(
                 label: LocaleKeys.team_details_leave.tr(),
-                onTap: () => _showLeaveTeamDialog(context),
+                onTap: () => showLeaveTeamDialog(
+                  context,
+                  state.teamDetails.name,
+                ),
               ),
             ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _showLeaveTeamDialog(BuildContext context) {
-    return showSportlyDialog(
-      context,
-      Text(
-        'Are you sure you want to leave Legia Warszawa?',
-        style: AppTypo.bodyMedium,
-        textAlign: TextAlign.center,
-      ),
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Gap(AppDimens.big),
-          SportlyButton.solid(
-            label: 'Stay',
-            onTap: Navigator.of(context, rootNavigator: true).pop,
-          ),
-          const Gap(AppDimens.xsm),
-          SportlyButton.danger(
-            label: 'Leave team',
-            onTap: Navigator.of(context, rootNavigator: true).pop,
           ),
         ],
       ),
@@ -226,7 +204,7 @@ class _QuickActionsSection extends StatelessWidget {
             SportlyIconButton(
               icon: Icons.share,
               onTap: () => AutoRouter.of(context).push(
-                const ShareInvitationCodePageRoute(),
+                ShareInvitationCodePageRoute(team: team),
               ),
             ),
           ],

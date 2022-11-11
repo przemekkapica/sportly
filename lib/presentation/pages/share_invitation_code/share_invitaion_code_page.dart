@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/share_invitation_code/share_invitation_code_page_cubit.dart';
 import 'package:sportly/presentation/pages/share_invitation_code/share_invitation_code_page_state.f.dart';
@@ -14,7 +15,12 @@ import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
 
 class ShareInvitationCodePage extends HookWidget {
-  const ShareInvitationCodePage({Key? key}) : super(key: key);
+  const ShareInvitationCodePage({
+    Key? key,
+    required this.team,
+  }) : super(key: key);
+
+  final Team team;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +40,7 @@ class ShareInvitationCodePage extends HookWidget {
         idle: (state) => _Idle(
           cubit: cubit,
           state: state,
+          team: team,
         ),
         error: (_) => const SizedBox.shrink(),
         loading: (_) => const SizedBox.shrink(),
@@ -47,10 +54,12 @@ class _Idle extends StatelessWidget {
     Key? key,
     required this.cubit,
     required this.state,
+    required this.team,
   }) : super(key: key);
 
   final ShareInvitationPageCubit cubit;
   final ShareInvitationCodePageStateIdle state;
+  final Team team;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +81,7 @@ class _Idle extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Text(
-                'Legia Warszawa',
+                team.name,
                 style: AppTypo.bodyMedium.copyWith(
                   fontWeight: FontWeight.bold,
                 ),

@@ -63,5 +63,10 @@
     "sign_out": {
         "button_label": "Sign out",
         "error": "Cannot load user profile"
+    },
+    "leave_team": {
+        "message": "Are you sure you want to leave ",
+        "confirm": "Leave team",
+        "cancel": "Stay"
     }
 }

@@ -9,6 +9,7 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
+import 'package:sportly/presentation/widgets/show_leave_team_dialog.dart';
 import 'package:sportly/presentation/widgets/sport_discipline_icon.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
@@ -142,18 +143,33 @@ class _Idle extends StatelessWidget {
                                 LocaleKeys.team_selection_menu_manage.tr(),
                                 style: AppTypo.bodySmall,
                               ),
+                              onTap: () => AutoRouter.of(context).push(
+                                TeamDetailsPageRoute(
+                                  teamId: state.teams[index].id,
+                                ),
+                              ),
                             ),
                             PopupMenuItem(
                               child: Text(
                                 LocaleKeys.team_selection_menu_invite.tr(),
                                 style: AppTypo.bodySmall,
                               ),
+                              onTap: () => AutoRouter.of(context).push(
+                                ShareInvitationCodePageRoute(
+                                  team: state.teams[index],
+                                ),
+                              ),
                             ),
                             PopupMenuItem(
                               child: Text(
                                 LocaleKeys.team_selection_menu_leave.tr(),
-                                style: AppTypo.bodySmall
-                                    .copyWith(color: AppColors.danger),
+                                style: AppTypo.bodySmall.copyWith(
+                                  color: AppColors.danger,
+                                ),
+                              ),
+                              onTap: () => showLeaveTeamDialog(
+                                context,
+                                state.teams[index].name,
                               ),
                             ),
                           ],
