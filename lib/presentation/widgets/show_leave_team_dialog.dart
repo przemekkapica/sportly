@@ -4,12 +4,14 @@ import 'package:gap/gap.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
+import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/show_sportly_dialog.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 
 Future<void> showLeaveTeamDialog(
   BuildContext context,
   String teamName,
+  Function leaveTeam,
 ) {
   return showSportlyDialog(
     context,
@@ -39,7 +41,16 @@ Future<void> showLeaveTeamDialog(
         const Gap(AppDimens.xsm),
         SportlyButton.danger(
           label: LocaleKeys.leave_team_confirm.tr(),
-          onTap: Navigator.of(context, rootNavigator: true).pop,
+          onTap: () {
+            try {
+              leaveTeam();
+              showSnackBar(context, 'You left $teamName');
+            } catch (e) {
+              showSnackBar(context, 'Could not leave $teamName');
+            } finally {
+              Navigator.of(context, rootNavigator: true).pop();
+            }
+          },
         ),
       ],
     ),

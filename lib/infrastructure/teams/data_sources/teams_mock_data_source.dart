@@ -11,7 +11,7 @@ class TeamsMockDataSource implements TeamsDataSource {
   @override
   Future<void> createTeam(CreateTeamDto createTeamDto) async {
     // TODO: implement createTeam
-    return Future.delayed(Duration(seconds: 1));
+    return await Future.delayed(Duration(seconds: 1));
   }
 
   @override
@@ -45,5 +45,11 @@ class TeamsMockDataSource implements TeamsDataSource {
     } else {
       return false;
     }
+  }
+
+  @override
+  Future<void> leaveTeam(String id) async {
+    // TODO: implement leaveTeam
+    return await Future.delayed(Duration(seconds: 1));
   }
 }

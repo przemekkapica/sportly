@@ -9,6 +9,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       backgroundColor: AppColors.additional1,
+      duration: const Duration(seconds: 2),
       content: Text(
         message,
         style: AppTypo.labelLarge.copyWith(

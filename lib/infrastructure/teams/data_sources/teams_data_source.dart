@@ -10,4 +10,6 @@ abstract class TeamsDataSource {
   Future<TeamDetailsDto> getTeamDetails(String id);
 
   Future<bool> joinTeam(String code);
+
+  Future<void> leaveTeam(String id);
 }

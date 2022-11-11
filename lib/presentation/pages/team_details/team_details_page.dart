@@ -50,6 +50,7 @@ class TeamDetailsPage extends HookWidget {
         idle: (state) {
           return _Idle(
             state: state,
+            cubit: cubit,
           );
         },
         loading: (_) => const SportlyLoader(),
@@ -63,9 +64,11 @@ class _Idle extends StatelessWidget {
   const _Idle({
     Key? key,
     required this.state,
+    required this.cubit,
   }) : super(key: key);
 
   final TeamDetailsPageStateIdle state;
+  final TeamDetailsPageCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +113,7 @@ class _Idle extends StatelessWidget {
                 onTap: () => showLeaveTeamDialog(
                   context,
                   state.teamDetails.name,
+                  () => cubit.leaveTeam(state.teamDetails.id),
                 ),
               ),
             ],

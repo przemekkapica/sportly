@@ -51,6 +51,7 @@ class TeamSelection extends HookWidget {
       idle: (state) {
         return _Idle(
           state: state,
+          cubit: cubit,
           entryPage: entryPage,
         );
       },
@@ -65,10 +66,12 @@ class _Idle extends StatelessWidget {
   const _Idle({
     Key? key,
     required this.state,
+    required this.cubit,
     required this.entryPage,
   }) : super(key: key);
 
   final TeamSelectionStateIdle state;
+  final TeamSelectionCubit cubit;
   final EntryPage entryPage;
 
   @override
@@ -170,6 +173,7 @@ class _Idle extends StatelessWidget {
                               onTap: () => showLeaveTeamDialog(
                                 context,
                                 state.teams[index].name,
+                                () => cubit.leaveTeam(state.teams[index].id),
                               ),
                             ),
                           ],

@@ -67,4 +67,9 @@ class TeamsRepositoryImpl implements TeamsRepository {
       return false;
     }
   }
+
+  @override
+  Future<void> leaveTeam(String id) async {
+    return await _teamsDataSource.leaveTeam(id);
+  }
 }
