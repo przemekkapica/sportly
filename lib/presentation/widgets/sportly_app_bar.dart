@@ -24,7 +24,7 @@ class SportlyAppBar extends StatelessWidget with PreferredSizeWidget {
                 Icons.arrow_back,
                 color: AppColors.primary,
               ),
-              onPressed: AutoRouter.of(context).pop,
+              onPressed: AutoRouter.of(context).popTop,
             )
           : const SizedBox.shrink(),
       toolbarHeight: AppDimens.appBarHeight,

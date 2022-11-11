@@ -5,6 +5,14 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/widgets/sportly_app_bar.dart';
 import 'package:sportly/presentation/widgets/sportly_bottom_bar.dart';
 
+const mainRoutesPaths = [
+  '/',
+  '/teams',
+  '/chat',
+  '/schedule',
+  '/profile',
+];
+
 class HomePage extends HookWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -21,7 +29,11 @@ class HomePage extends HookWidget {
         final tabsRouter = AutoTabsRouter.of(context);
 
         return Scaffold(
-          appBar: const SportlyAppBar(),
+          appBar: SportlyAppBar(
+            showBackButton: !mainRoutesPaths.contains(
+              AutoRouter.of(context).currentPath,
+            ),
+          ),
           body: child,
           bottomNavigationBar: SportlyBottomBar(tabsRouter: tabsRouter),
         );
