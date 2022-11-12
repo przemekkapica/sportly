@@ -95,7 +95,7 @@ class _Idle extends StatelessWidget {
                         break;
                       case EntryPage.chat:
                         AutoRouter.of(context).push(
-                          ChatPageRoute(team: state.teams[index]),
+                          ChatPageRoute(),
                         );
                         break;
                       case EntryPage.schedule:
