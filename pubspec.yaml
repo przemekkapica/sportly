@@ -36,6 +36,7 @@ dependencies:
   loader_overlay: ^2.1.0
   path_provider: ^2.0.11
   pinput: ^2.2.16
+  retrofit: ^3.3.1
   rxdart: ^0.27.5
   salomon_bottom_bar: ^3.3.1
   uuid: ^3.0.6
@@ -48,6 +49,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   injectable_generator: ^1.5.4
+  retrofit_generator: ^4.2.0
 
 dependency_overrides:
   analyzer: ^4.2.0

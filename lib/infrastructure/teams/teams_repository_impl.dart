@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_details.f.dart';
 import 'package:sportly/domain/features/teams/teams_repository.dart';
+import 'package:sportly/infrastructure/network/token/token_body.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart';
+import 'package:sportly/infrastructure/teams/data_sources/teams_remote_data_source.dart';
 import 'package:sportly/infrastructure/teams/mappers/create_team_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/team_details_from_dto_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/team_from_dto_mapper.dart';
@@ -11,32 +14,43 @@ import 'package:sportly/infrastructure/teams/mappers/team_from_dto_mapper.dart';
 @LazySingleton(as: TeamsRepository)
 class TeamsRepositoryImpl implements TeamsRepository {
   TeamsRepositoryImpl(
+    this._teamsRemoteDataSource,
     this._teamsDataSource,
     this._createTeamMapper,
     this._teamFromDtoMapper,
     this._teamDetailsFromDtoMapper,
+    this._firebaseAuth,
   );
 
+  final TeamsRemoteDataSource _teamsRemoteDataSource;
   final TeamsDataSource _teamsDataSource;
   final CreateTeamMapper _createTeamMapper;
   final TeamFromDtoMapper _teamFromDtoMapper;
   final TeamDetailsFromDtoMapper _teamDetailsFromDtoMapper;
+  final FirebaseAuth _firebaseAuth;
 
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
-    try {
-      await _teamsDataSource.createTeam(_createTeamMapper(createTeam));
-    } catch (e) {
-      // TODO: add error handling
-      throw (Exception('create team error'));
-    }
+    // try {
+    //   await _teamsDataSource.createTeam(_createTeamMapper(createTeam));
+    // } catch (e) {
+    //   // TODO: add error handling
+    //   throw (Exception('create team error'));
+    // }
   }
 
   @override
   Future<List<Team>> getTeams() async {
     try {
-      final teamsDto = await _teamsDataSource.getTeams();
+      final token = await _firebaseAuth.currentUser?.getIdToken();
+      print(token);
+      final teamsDto = await _teamsRemoteDataSource.getTeams(
+        TokenBody(
+          idToken: token ?? '',
+        ),
+      );
 
+      print(teamsDto);
       return teamsDto.teams
           .map((teamDto) => _teamFromDtoMapper(teamDto))
           .toList();
@@ -66,6 +80,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
       // TODO: add error handling
       return false;
     }
+    return false;
   }
 
   @override

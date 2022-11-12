@@ -1,3 +1,3 @@
 class NetworkConfig {
-  static const GET_TEAMS = 'get-teams-api-path';
+  static const GET_TEAMS = '/api/GetTeam';
 }
