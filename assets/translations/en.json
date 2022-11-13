@@ -10,6 +10,10 @@
         "title": "You are offline",
         "description": "Check your internet connection"
     },
+    "error_state": {
+        "title": "Oops!",
+        "description": "Something went wrong"
+    },
     "bottom_bar": {
         "teams": "Teams",
         "chat": "Chat",

@@ -13,6 +13,8 @@ import 'package:sportly/presentation/widgets/show_leave_team_dialog.dart';
 import 'package:sportly/presentation/widgets/sport_discipline_icon.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
+import 'package:sportly/presentation/widgets/sportly_error.dart';
+import 'package:sportly/presentation/widgets/sportly_loader.dart';
 import 'package:sportly/presentation/widgets/team_selection/team_selection_cubit.dart';
 import 'package:sportly/presentation/widgets/team_selection/team_selection_state.f.dart';
 
@@ -42,7 +44,7 @@ class TeamSelection extends HookWidget {
       [],
     );
 
-    return state.maybeMap(
+    return state.map(
       noTeams: (_) {
         return _NoTeams(
           entryPage: entryPage,
@@ -55,9 +57,8 @@ class TeamSelection extends HookWidget {
           entryPage: entryPage,
         );
       },
-      orElse: () {
-        return const SizedBox.shrink();
-      },
+      error: (_) => const SportlyError(),
+      loading: (_) => const SportlyLoader(),
     );
   }
 }
@@ -95,7 +96,7 @@ class _Idle extends StatelessWidget {
                         break;
                       case EntryPage.chat:
                         AutoRouter.of(context).push(
-                          ChatPageRoute(),
+                          const ChatPageRoute(),
                         );
                         break;
                       case EntryPage.schedule:

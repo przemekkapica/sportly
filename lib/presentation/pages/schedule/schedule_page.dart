@@ -8,7 +8,8 @@ import 'package:sportly/presentation/pages/schedule/schedule_page_cubit.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
-import 'package:sportly/presentation/widgets/app_loader.dart';
+import 'package:sportly/presentation/widgets/sportly_error.dart';
+import 'package:sportly/presentation/widgets/sportly_loader.dart';
 import 'package:sportly/utils/extensions/date_time_extension.dart';
 
 class SchedulePage extends HookWidget {
@@ -36,8 +37,8 @@ class SchedulePage extends HookWidget {
     return Scaffold(
       body: state.map(
         idle: (state) => _Idle(team: team),
-        loading: (_) => const AppLoader(),
-        error: (_) {},
+        loading: (_) => const SportlyLoader(),
+        error: (_) => const SportlyError(),
       ),
     );
   }

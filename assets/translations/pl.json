@@ -10,6 +10,10 @@
         "title": "Jesteś offline",
         "description": "Sprawdź swoje połączenie"
     },
+    "error_state": {
+        "title": "Oops!",
+        "description": "Coś poszło nie tak"
+    },
     "bottom_bar": {
         "teams": "Zespoły",
         "chat": "Wiadomości",

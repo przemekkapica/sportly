@@ -13,6 +13,8 @@ import 'package:sportly/presentation/theme/app_typo.dart';
 import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
+import 'package:sportly/presentation/widgets/sportly_error.dart';
+import 'package:sportly/presentation/widgets/sportly_loader.dart';
 
 class ShareInvitationCodePage extends HookWidget {
   const ShareInvitationCodePage({
@@ -42,8 +44,8 @@ class ShareInvitationCodePage extends HookWidget {
           state: state,
           team: team,
         ),
-        error: (_) => const SizedBox.shrink(),
-        loading: (_) => const SizedBox.shrink(),
+        loading: (_) => const SportlyLoader(),
+        error: (_) => const SportlyError(),
       ),
     );
   }

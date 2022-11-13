@@ -20,6 +20,7 @@ import 'package:sportly/presentation/widgets/scroll_or_fit_bottom.dart';
 import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
+import 'package:sportly/presentation/widgets/sportly_error.dart';
 
 const List<String> disciplines = <String>[
   'Football',
@@ -47,130 +48,147 @@ class CreateTeamPage extends HookWidget {
       );
     });
 
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: state.map(
+        idle: (state) => _Idle(cubit: cubit),
+        error: (_) => const SportlyError(),
+      ),
+    );
+  }
+}
+
+class _Idle extends HookWidget {
+  const _Idle({
+    Key? key,
+    required this.cubit,
+  }) : super(key: key);
+
+  final CreateTeamPageCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final teamType = useState(TeamType.professional);
     final scrollController = useScrollController();
 
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: Padding(
-        padding: const EdgeInsets.all(AppDimens.pagePadding),
-        child: ScrollOrFitBottom(
-          controller: scrollController,
-          scrollableContent: [
-            Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  SportlyCard(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppDimens.big,
-                      horizontal: AppDimens.sm,
-                    ),
-                    borderColor: AppColors.secondary.withAlpha(80),
-                    content: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          LocaleKeys.create_team_team_type.tr(),
-                          style: AppTypo.bodySmall,
-                        ),
-                        const Gap(AppDimens.sm),
-                        Row(
-                          children: <Widget>[
-                            SportlyRadioButton(
-                              value: TeamType.professional,
-                              groupValue: teamType.value,
-                              label: LocaleKeys.create_team_professional.tr(),
-                              onChanged: (TeamType? value) {
-                                if (value != null) {
-                                  teamType.value = value;
-                                }
-                                cubit.onTeamTypeChanged(value);
-                              },
-                            ),
-                            const Gap(AppDimens.xbig),
-                            SportlyRadioButton(
-                              value: TeamType.amateur,
-                              groupValue: teamType.value,
-                              label: LocaleKeys.create_team_amateur.tr(),
-                              onChanged: (TeamType? value) {
-                                if (value != null) {
-                                  teamType.value = value;
-                                }
-                                cubit.onTeamTypeChanged(value);
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+    return Padding(
+      padding: const EdgeInsets.all(AppDimens.pagePadding),
+      child: ScrollOrFitBottom(
+        controller: scrollController,
+        scrollableContent: [
+          Form(
+            key: formKey,
+            child: Column(
+              children: [
+                SportlyCard(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppDimens.big,
+                    horizontal: AppDimens.sm,
                   ),
-                  const Gap(AppDimens.md),
-                  SportlyTextInput(
-                    label: LocaleKeys.create_team_team_name.tr(),
-                    textInputAction: TextInputAction.next,
-                    onChanged: cubit.onTeamNameChanged,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return LocaleKeys.create_team_team_name_error.tr();
-                      }
-                      return null;
-                    },
+                  borderColor: AppColors.secondary.withAlpha(80),
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        LocaleKeys.create_team_team_type.tr(),
+                        style: AppTypo.bodySmall,
+                      ),
+                      const Gap(AppDimens.sm),
+                      Row(
+                        children: <Widget>[
+                          SportlyRadioButton(
+                            value: TeamType.professional,
+                            groupValue: teamType.value,
+                            label: LocaleKeys.create_team_professional.tr(),
+                            onChanged: (TeamType? value) {
+                              if (value != null) {
+                                teamType.value = value;
+                              }
+                              cubit.onTeamTypeChanged(value);
+                            },
+                          ),
+                          const Gap(AppDimens.xbig),
+                          SportlyRadioButton(
+                            value: TeamType.amateur,
+                            groupValue: teamType.value,
+                            label: LocaleKeys.create_team_amateur.tr(),
+                            onChanged: (TeamType? value) {
+                              if (value != null) {
+                                teamType.value = value;
+                              }
+                              cubit.onTeamTypeChanged(value);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  const Gap(AppDimens.md),
-                  SportlyDropdown<SportDiscipline>(
-                    hintText: LocaleKeys.create_team_discipline.tr(),
-                    validator: (value) {
-                      if (value == null || value.name.isEmpty) {
-                        return LocaleKeys.create_team_discipline_error.tr();
-                      }
-                      return null;
-                    },
-                    items: disciplines
-                        .map<DropdownMenuItem<SportDiscipline>>((String value) {
-                      return DropdownMenuItem<SportDiscipline>(
-                        value: SportDiscipline(name: value),
-                        child: Text(
-                          value,
-                          style: AppTypo.bodySmall,
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: cubit.onSportDisciplineChanged,
-                  ),
-                  const Gap(AppDimens.md),
-                  SportlyTextInput(
-                    label: LocaleKeys.create_team_location.tr(),
-                    textInputAction: TextInputAction.next,
-                    onChanged: cubit.onLocationChanged,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return LocaleKeys.create_team_location_error.tr();
-                      }
-                      return null;
-                    },
-                  ),
-                  const Gap(AppDimens.md),
-                  SportlyTextInput(
-                    label: LocaleKeys.create_team_organization_name.tr(),
-                    textInputAction: TextInputAction.done,
-                    onChanged: cubit.onOrganizationNameChanged,
-                    validator: (_) => null,
-                  ),
-                  const Gap(AppDimens.xbig),
-                ],
-              ),
+                ),
+                const Gap(AppDimens.md),
+                SportlyTextInput(
+                  label: LocaleKeys.create_team_team_name.tr(),
+                  textInputAction: TextInputAction.next,
+                  onChanged: cubit.onTeamNameChanged,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return LocaleKeys.create_team_team_name_error.tr();
+                    }
+                    return null;
+                  },
+                ),
+                const Gap(AppDimens.md),
+                SportlyDropdown<SportDiscipline>(
+                  hintText: LocaleKeys.create_team_discipline.tr(),
+                  validator: (value) {
+                    if (value == null || value.name.isEmpty) {
+                      return LocaleKeys.create_team_discipline_error.tr();
+                    }
+                    return null;
+                  },
+                  items: disciplines
+                      .map<DropdownMenuItem<SportDiscipline>>((String value) {
+                    return DropdownMenuItem<SportDiscipline>(
+                      value: SportDiscipline(name: value),
+                      child: Text(
+                        value,
+                        style: AppTypo.bodySmall,
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: cubit.onSportDisciplineChanged,
+                ),
+                const Gap(AppDimens.md),
+                SportlyTextInput(
+                  label: LocaleKeys.create_team_location.tr(),
+                  textInputAction: TextInputAction.next,
+                  onChanged: cubit.onLocationChanged,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return LocaleKeys.create_team_location_error.tr();
+                    }
+                    return null;
+                  },
+                ),
+                const Gap(AppDimens.md),
+                SportlyTextInput(
+                  label: LocaleKeys.create_team_organization_name.tr(),
+                  textInputAction: TextInputAction.done,
+                  onChanged: cubit.onOrganizationNameChanged,
+                  validator: (_) => null,
+                ),
+                const Gap(AppDimens.xbig),
+              ],
             ),
-          ],
-          bottomContent: SportlyButton.solid(
-            onTap: () {
-              if (formKey.currentState!.validate()) {
-                cubit.submit();
-              }
-            },
-            label: LocaleKeys.create_team_button_label.tr(),
           ),
+        ],
+        bottomContent: SportlyButton.solid(
+          onTap: () {
+            if (formKey.currentState!.validate()) {
+              cubit.submit();
+            }
+          },
+          label: LocaleKeys.create_team_button_label.tr(),
         ),
       ),
     );

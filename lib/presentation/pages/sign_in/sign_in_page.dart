@@ -10,9 +10,9 @@ import 'package:sportly/presentation/pages/sign_in/sign_in_page_cubit.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_assets.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
-import 'package:sportly/presentation/widgets/app_loader.dart';
 import 'package:sportly/presentation/widgets/app_logo.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
+import 'package:sportly/presentation/widgets/sportly_loader.dart';
 
 class SignInPage extends HookWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -57,7 +57,7 @@ class SignInPage extends HookWidget {
           );
         },
         loading: (_) {
-          return const AppLoader();
+          return const SportlyLoader();
         },
       ),
     );

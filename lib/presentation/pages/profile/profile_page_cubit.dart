@@ -17,15 +17,17 @@ class ProfilePageCubit
   final SignOutUseCase _signOutUseCase;
 
   void init() {
-    final user = _getCurrentUserUseCase();
+    try {
+      final user = _getCurrentUserUseCase();
+      if (user == null) {
+        emit(const ProfilePageState.error());
 
-    if (user == null) {
+        return;
+      }
+      emit(ProfilePageState.idle(user: user));
+    } catch (e) {
       emit(const ProfilePageState.error());
-
-      return;
     }
-
-    emit(ProfilePageState.idle(user: user));
   }
 
   Future<void> signOut() async {

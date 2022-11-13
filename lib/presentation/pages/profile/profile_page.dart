@@ -12,8 +12,8 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
-import 'package:sportly/presentation/widgets/app_loader.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
+import 'package:sportly/presentation/widgets/sportly_error.dart';
 import 'package:sportly/presentation/widgets/sportly_loader.dart';
 
 class ProfilePage extends HookWidget {
@@ -41,14 +41,13 @@ class ProfilePage extends HookWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: state.maybeMap(
+      body: state.map(
         idle: (state) => _Idle(
           state: state,
           cubit: cubit,
         ),
         loading: (_) => const SportlyLoader(),
-        error: (_) => const _Error(),
-        orElse: () => const SizedBox.shrink(),
+        error: (_) => const SportlyError(),
       ),
     );
   }
@@ -117,7 +116,7 @@ class _Avatar extends StatelessWidget {
               width: AppDimens.huge,
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) return child;
-                return const AppLoader();
+                return const SportlyLoader();
               },
             )
           : Container(

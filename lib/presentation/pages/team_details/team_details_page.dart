@@ -15,11 +15,11 @@ import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
 import 'package:sportly/presentation/widgets/show_leave_team_dialog.dart';
-import 'package:sportly/presentation/widgets/show_sportly_dialog.dart';
 import 'package:sportly/presentation/widgets/sport_discipline_icon.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
 import 'package:sportly/presentation/widgets/sportly_divider.dart';
+import 'package:sportly/presentation/widgets/sportly_error.dart';
 import 'package:sportly/presentation/widgets/sportly_icon_button.dart';
 import 'package:sportly/presentation/widgets/sportly_loader.dart';
 import 'package:sportly/utils/extensions/date_time_extension.dart';
@@ -46,7 +46,7 @@ class TeamDetailsPage extends HookWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: state.maybeMap(
+      body: state.map(
         idle: (state) {
           return _Idle(
             state: state,
@@ -54,7 +54,7 @@ class TeamDetailsPage extends HookWidget {
           );
         },
         loading: (_) => const SportlyLoader(),
-        orElse: () => const SizedBox.shrink(),
+        error: (_) => const SportlyError(),
       ),
     );
   }
