@@ -4,7 +4,6 @@ import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_details.f.dart';
 import 'package:sportly/domain/features/teams/teams_repository.dart';
-import 'package:sportly/infrastructure/network/token/token_body.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_remote_data_source.dart';
 import 'package:sportly/infrastructure/teams/mappers/create_team_mapper.dart';
@@ -19,7 +18,6 @@ class TeamsRepositoryImpl implements TeamsRepository {
     this._createTeamMapper,
     this._teamFromDtoMapper,
     this._teamDetailsFromDtoMapper,
-    this._firebaseAuth,
   );
 
   final TeamsRemoteDataSource _teamsRemoteDataSource;
@@ -27,7 +25,6 @@ class TeamsRepositoryImpl implements TeamsRepository {
   final CreateTeamMapper _createTeamMapper;
   final TeamFromDtoMapper _teamFromDtoMapper;
   final TeamDetailsFromDtoMapper _teamDetailsFromDtoMapper;
-  final FirebaseAuth _firebaseAuth;
 
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
@@ -42,15 +39,8 @@ class TeamsRepositoryImpl implements TeamsRepository {
   @override
   Future<List<Team>> getTeams() async {
     try {
-      final token = await _firebaseAuth.currentUser?.getIdToken();
-      print(token);
-      final teamsDto = await _teamsRemoteDataSource.getTeams(
-        TokenBody(
-          idToken: token ?? '',
-        ),
-      );
+      final teamsDto = await _teamsRemoteDataSource.getTeams();
 
-      print(teamsDto);
       return teamsDto.teams
           .map((teamDto) => _teamFromDtoMapper(teamDto))
           .toList();

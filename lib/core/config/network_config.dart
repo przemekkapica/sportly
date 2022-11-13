@@ -1,3 +1,3 @@
 class NetworkConfig {
-  static const GET_TEAMS = '/api/GetTeam';
+  static const GET_TEAMS = '/api/GetTeams';
 }

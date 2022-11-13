@@ -6,4 +6,6 @@ abstract class AuthDataSource {
   Future<void> signOut();
 
   GoogleSignInAccount? getCurrentUser();
+
+  Future<String?> getIdToken();
 }

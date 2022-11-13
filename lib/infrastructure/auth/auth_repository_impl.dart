@@ -32,4 +32,10 @@ class AuthRepositoryImpl implements AuthRepository {
 
     return _userFromGoogleAccountMapper(account);
   }
+
+  @override
+  Future<String> getIdToken() async {
+    // TODO: rethink
+    return await _authDataSource.getIdToken() ?? '';
+  }
 }
