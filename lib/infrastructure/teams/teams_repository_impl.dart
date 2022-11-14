@@ -27,18 +27,18 @@ class TeamsRepositoryImpl implements TeamsRepository {
 
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
-    // try {
-    //   await _teamsDataSource.createTeam(_createTeamMapper(createTeam));
-    // } catch (e) {
-    //   // TODO: add error handling
-    //   throw (Exception('create team error'));
-    // }
+    try {
+      await _teamsDataSource.createTeam(_createTeamMapper(createTeam));
+    } catch (e) {
+      // TODO: add error handling
+      throw (Exception('create team error'));
+    }
   }
 
   @override
   Future<List<Team>> getTeams() async {
     try {
-      final teamsDto = await _teamsRemoteDataSource.getTeams();
+      final teamsDto = await _teamsDataSource.getTeams();
 
       return teamsDto.teams
           .map((teamDto) => _teamFromDtoMapper(teamDto))
