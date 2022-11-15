@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:sportly/presentation/pages/chat/chat_page.dart';
 import 'package:sportly/presentation/pages/chat_entry/chat_entry_page.dart';
+import 'package:sportly/presentation/pages/create_event/create_event_page.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page.dart';
+import 'package:sportly/presentation/pages/events_list/events_list_page.dart';
 import 'package:sportly/presentation/pages/home/home_page.dart';
 import 'package:sportly/presentation/pages/auth_error/auth_error_page.dart';
 import 'package:sportly/presentation/pages/join_team/join_team_page.dart';
@@ -44,11 +46,11 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
             ),
             AutoRoute(
               page: CreateTeamPage,
-              path: 'create',
+              path: 'create-team',
             ),
             AutoRoute(
               page: JoinTeamPage,
-              path: 'join',
+              path: 'join-team',
             ),
             AutoRoute(
               page: ShareInvitationCodePage,
@@ -72,11 +74,11 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
             ),
             AutoRoute(
               page: CreateTeamPage,
-              path: 'create',
+              path: 'create-team',
             ),
             AutoRoute(
               page: JoinTeamPage,
-              path: 'join',
+              path: 'join-team',
             ),
           ],
         ),
@@ -96,11 +98,19 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
             ),
             AutoRoute(
               page: CreateTeamPage,
-              path: 'create',
+              path: 'create-team',
             ),
             AutoRoute(
               page: JoinTeamPage,
-              path: 'join',
+              path: 'join-team',
+            ),
+            AutoRoute(
+              page: CreateEventPage,
+              path: 'create-event',
+            ),
+            AutoRoute(
+              page: EventsListPage,
+              path: 'events-list',
             ),
           ],
         ),

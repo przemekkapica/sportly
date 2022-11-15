@@ -192,7 +192,7 @@ class _QuickActionsSection extends StatelessWidget {
             SportlyIconButton(
               icon: Icons.chat,
               onTap: () async {
-                await AutoRouter.of(context).navigate(
+                await context.router.navigate(
                   const ChatRouter(),
                 );
               },
@@ -200,14 +200,14 @@ class _QuickActionsSection extends StatelessWidget {
             const Gap(AppDimens.sm),
             SportlyIconButton(
               icon: Icons.calendar_month_rounded,
-              onTap: () => AutoRouter.of(context).navigate(
+              onTap: () => context.router.navigate(
                 const ScheduleRouter(),
               ),
             ),
             const Spacer(),
             SportlyIconButton(
               icon: Icons.share,
-              onTap: () => AutoRouter.of(context).push(
+              onTap: () => context.router.push(
                 ShareInvitationCodePageRoute(team: team),
               ),
             ),

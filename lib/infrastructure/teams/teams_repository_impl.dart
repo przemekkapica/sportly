@@ -39,7 +39,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
   Future<List<Team>> getTeams() async {
     try {
       final teamsDto = await _teamsDataSource.getTeams();
-
+      print(teamsDto);
       return teamsDto.teams
           .map((teamDto) => _teamFromDtoMapper(teamDto))
           .toList();

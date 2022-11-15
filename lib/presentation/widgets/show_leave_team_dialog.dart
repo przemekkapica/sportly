@@ -51,7 +51,7 @@ Future<void> showLeaveTeamDialog(
               showSnackBar(context, 'Could not leave $teamName');
             } finally {
               Navigator.of(context, rootNavigator: true).pop();
-              AutoRouter.of(context).navigate(const TeamsRouter());
+              context.router.navigate(const TeamsRouter());
             }
           },
         ),

@@ -26,10 +26,10 @@ class SignInPage extends HookWidget {
       cubit,
       (action) {
         action.map(
-          authSuccess: (_) => AutoRouter.of(context).replace(
+          authSuccess: (_) => context.router.replace(
             const HomePageRoute(),
           ),
-          authError: (_) => AutoRouter.of(context).replace(
+          authError: (_) => context.router.replace(
             const AuthErrorPageRoute(),
           ),
         );

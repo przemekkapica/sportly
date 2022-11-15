@@ -1,10 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
+import 'package:sportly/presentation/pages/create_event/create_event_page.dart';
 import 'package:sportly/presentation/pages/schedule/schedule_page_cubit.dart';
+import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
@@ -208,8 +211,11 @@ class _Idle extends StatelessWidget {
         );
       },
       onCellTap: (events, date) {
-        // Implement callback when user taps on a cell.
-        print(events);
+        if (events.isEmpty) {
+          context.router.push(const CreateEventPageRoute());
+        } else {
+          context.router.push(const EventsListPageRoute());
+        }
       },
     );
   }
