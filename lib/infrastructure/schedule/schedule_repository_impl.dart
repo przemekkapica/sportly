@@ -19,7 +19,7 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   }
 
   @override
-  Future<List<Event>> getEvents(int month) async {
+  Future<List<Event>> getEvents(String teamId, int month) async {
     return [
       Event(
         date: DateTime(2022, 11, 10, 9, 30),

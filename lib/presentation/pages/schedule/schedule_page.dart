@@ -30,7 +30,7 @@ class SchedulePage extends HookWidget {
 
     useEffect(
       () {
-        cubit.init();
+        cubit.init(team.id);
       },
       [],
     );

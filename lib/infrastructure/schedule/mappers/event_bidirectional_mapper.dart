@@ -20,9 +20,9 @@ class EventBidirectionalMapper
   @override
   EventDto toDto(Event data) {
     return EventDto(
-      date: 'data.',
-      title: 'date.title',
-      description: ' date.de',
+      date: data.date.toIso8601String(),
+      title: data.title,
+      description: data.description,
     );
   }
 }

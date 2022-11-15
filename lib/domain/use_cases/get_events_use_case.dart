@@ -8,5 +8,6 @@ class GetEventsUseCase {
 
   final ScheduleRepository _scheduleRepository;
 
-  Future<List<Event>> call(int month) => _scheduleRepository.getEvents(month);
+  Future<List<Event>> call(String teamId, int month) =>
+      _scheduleRepository.getEvents(teamId, month);
 }
