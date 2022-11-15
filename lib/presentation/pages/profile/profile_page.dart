@@ -33,7 +33,7 @@ class ProfilePage extends HookWidget {
       (action) {
         action.whenOrNull(
           signOut: () {
-            AutoRouter.of(context).replace(const SignInPageRoute());
+            context.router.replace(const SignInPageRoute());
           },
         );
       },

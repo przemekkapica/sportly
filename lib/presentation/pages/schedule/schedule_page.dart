@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -5,6 +6,8 @@ import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/presentation/pages/schedule/schedule_page_cubit.dart';
+import 'package:sportly/presentation/pages/schedule/schedule_page_state.f.dart';
+import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
@@ -27,91 +30,43 @@ class SchedulePage extends HookWidget {
 
     useEffect(
       () {
-        cubit.init();
+        cubit.init(team.id);
       },
       [],
     );
 
-    _initMockEvents(context);
-
     return Scaffold(
       body: state.map(
-        idle: (state) => _Idle(team: team),
+        idle: (state) => _Idle(
+          cubit: cubit,
+          state: state,
+          team: team,
+        ),
         loading: (_) => const SportlyLoader(),
         error: (_) => const SportlyError(),
       ),
     );
   }
-
-  void _initMockEvents(BuildContext context) {
-    var event1 = CalendarEventData(
-      date: DateTime(2022, 11, 10, 9, 30),
-      title: 'Meeting',
-      color: AppColors.primary,
-    );
-    var event2 = CalendarEventData(
-      date: DateTime(2022, 11, 10),
-      title: 'Training',
-      color: AppColors.primary,
-    );
-    var event3 = CalendarEventData(
-      date: DateTime(2022, 11, 10),
-      title: 'Match',
-      color: AppColors.danger,
-    );
-    var event4 = CalendarEventData(
-      date: DateTime(2022, 11, 10),
-      title: 'Meeting',
-      color: AppColors.primary,
-    );
-
-    CalendarControllerProvider.of(context).controller.add(event1);
-    CalendarControllerProvider.of(context).controller.add(event2);
-    CalendarControllerProvider.of(context).controller.add(event3);
-    CalendarControllerProvider.of(context).controller.add(event4);
-    CalendarControllerProvider.of(context).controller.add(event1);
-    CalendarControllerProvider.of(context).controller.add(event2);
-    CalendarControllerProvider.of(context).controller.add(event3);
-    CalendarControllerProvider.of(context).controller.add(event4);
-
-    event1 = CalendarEventData(
-      date: DateTime(2022, 11, 14, 9, 30),
-      title: 'Meeting',
-      color: AppColors.primary,
-    );
-    event2 = CalendarEventData(
-      date: DateTime(2022, 12, 1),
-      title: 'Training',
-      color: AppColors.team1,
-    );
-    event3 = CalendarEventData(
-      date: DateTime(2022, 11, 16),
-      title: 'Long match name',
-      color: AppColors.danger,
-    );
-    event4 = CalendarEventData(
-      date: DateTime(2022, 11, 20),
-      title: 'Meeting',
-      color: AppColors.primary,
-    );
-
-    CalendarControllerProvider.of(context).controller.add(event1);
-    CalendarControllerProvider.of(context).controller.add(event2);
-    CalendarControllerProvider.of(context).controller.add(event3);
-    CalendarControllerProvider.of(context).controller.add(event4);
-  }
 }
 
-class _Idle extends StatelessWidget {
+class _Idle extends HookWidget {
   const _Idle({
     Key? key,
+    required this.cubit,
+    required this.state,
     required this.team,
   }) : super(key: key);
 
+  final SchedulePageCubit cubit;
+  final SchedulePageStateIdle state;
   final Team team;
 
   @override
   Widget build(BuildContext context) {
+    for (var event in state.events) {
+      CalendarControllerProvider.of(context).controller.add(event);
+    }
+
     return MonthView(
       headerBuilder: (date) {
         return Container(
@@ -176,7 +131,7 @@ class _Idle extends StatelessWidget {
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     color: isInMonth
-                                        ? event.color
+                                        ? AppColors.primary
                                         : AppColors.secondary,
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(AppDimens.xxxsm),
@@ -207,9 +162,12 @@ class _Idle extends StatelessWidget {
           ),
         );
       },
-      onCellTap: (events, date) {
-        // Implement callback when user taps on a cell.
-        print(events);
+      onCellTap: (calendarEvents, date) {
+        if (calendarEvents.isEmpty) {
+          context.router.push(const CreateEventPageRoute());
+        } else {
+          context.router.push(EventsListPageRoute(events: calendarEvents));
+        }
       },
     );
   }

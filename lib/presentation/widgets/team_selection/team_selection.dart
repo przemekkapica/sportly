@@ -90,17 +90,17 @@ class _Idle extends StatelessWidget {
                   onTap: () {
                     switch (entryPage) {
                       case EntryPage.teams:
-                        AutoRouter.of(context).push(
+                        context.router.push(
                           TeamDetailsPageRoute(teamId: state.teams[index].id),
                         );
                         break;
                       case EntryPage.chat:
-                        AutoRouter.of(context).push(
+                        context.router.push(
                           const ChatPageRoute(),
                         );
                         break;
                       case EntryPage.schedule:
-                        AutoRouter.of(context).push(
+                        context.router.push(
                           SchedulePageRoute(team: state.teams[index]),
                         );
                         break;
@@ -147,7 +147,7 @@ class _Idle extends StatelessWidget {
                                 LocaleKeys.team_selection_menu_manage.tr(),
                                 style: AppTypo.bodySmall,
                               ),
-                              onTap: () => AutoRouter.of(context).push(
+                              onTap: () => context.router.push(
                                 TeamDetailsPageRoute(
                                   teamId: state.teams[index].id,
                                 ),
@@ -158,7 +158,7 @@ class _Idle extends StatelessWidget {
                                 LocaleKeys.team_selection_menu_invite.tr(),
                                 style: AppTypo.bodySmall,
                               ),
-                              onTap: () => AutoRouter.of(context).push(
+                              onTap: () => context.router.push(
                                 ShareInvitationCodePageRoute(
                                   team: state.teams[index],
                                 ),
@@ -198,14 +198,14 @@ class _Idle extends StatelessWidget {
                 const Gap(AppDimens.sm),
                 SportlyButton.solid(
                   label: LocaleKeys.team_selection_join.tr(),
-                  onTap: () => AutoRouter.of(context).push(
+                  onTap: () => context.router.push(
                     const JoinTeamPageRoute(),
                   ),
                 ),
                 const Gap(AppDimens.xsm),
                 SportlyButton.outlined(
                   label: LocaleKeys.team_selection_create.tr(),
-                  onTap: () => AutoRouter.of(context).push(
+                  onTap: () => context.router.push(
                     const CreateTeamPageRoute(),
                   ),
                 ),
@@ -247,14 +247,14 @@ class _NoTeams extends StatelessWidget {
             const Gap(AppDimens.huge),
             SportlyButton.solid(
               label: LocaleKeys.team_selection_join.tr(),
-              onTap: () => AutoRouter.of(context).push(
+              onTap: () => context.router.push(
                 const JoinTeamPageRoute(),
               ),
             ),
             const Gap(AppDimens.xsm),
             SportlyButton.outlined(
               label: LocaleKeys.team_selection_create.tr(),
-              onTap: () => AutoRouter.of(context).push(
+              onTap: () => context.router.push(
                 const CreateTeamPageRoute(),
               ),
             ),

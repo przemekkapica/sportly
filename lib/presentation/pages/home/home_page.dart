@@ -31,7 +31,7 @@ class HomePage extends HookWidget {
         return Scaffold(
           appBar: SportlyAppBar(
             showBackButton: !mainRoutesPaths.contains(
-              AutoRouter.of(context).currentPath,
+              context.router.currentPath,
             ),
           ),
           body: child,
