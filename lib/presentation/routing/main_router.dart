@@ -72,14 +72,6 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
               page: ChatPage,
               path: 'page',
             ),
-            AutoRoute(
-              page: CreateTeamPage,
-              path: 'create-team',
-            ),
-            AutoRoute(
-              page: JoinTeamPage,
-              path: 'join-team',
-            ),
           ],
         ),
         AutoRoute(
@@ -95,14 +87,6 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
             AutoRoute(
               page: SchedulePage,
               path: 'page',
-            ),
-            AutoRoute(
-              page: CreateTeamPage,
-              path: 'create-team',
-            ),
-            AutoRoute(
-              page: JoinTeamPage,
-              path: 'join-team',
             ),
             AutoRoute(
               page: CreateEventPage,

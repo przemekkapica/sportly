@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
+import 'package:sportly/presentation/pages/join_team/join_team_page.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
@@ -247,16 +248,32 @@ class _NoTeams extends StatelessWidget {
             const Gap(AppDimens.huge),
             SportlyButton.solid(
               label: LocaleKeys.team_selection_join.tr(),
-              onTap: () => context.router.push(
-                const JoinTeamPageRoute(),
-              ),
+              onTap: () {
+                if (entryPage == EntryPage.teams) {
+                  context.router.push(
+                    const JoinTeamPageRoute(),
+                  );
+                } else {
+                  context.router.navigate(
+                    const TeamsRouter(children: [JoinTeamPageRoute()]),
+                  );
+                }
+              },
             ),
             const Gap(AppDimens.xsm),
             SportlyButton.outlined(
               label: LocaleKeys.team_selection_create.tr(),
-              onTap: () => context.router.push(
-                const CreateTeamPageRoute(),
-              ),
+              onTap: () {
+                if (entryPage == EntryPage.teams) {
+                  context.router.push(
+                    const CreateTeamPageRoute(),
+                  );
+                } else {
+                  context.router.navigate(
+                    const TeamsRouter(children: [CreateTeamPageRoute()]),
+                  );
+                }
+              },
             ),
           ],
         ),
