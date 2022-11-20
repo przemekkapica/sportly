@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team_type.dart';
+import 'package:sportly/domain/features/teams/models/update_team.f.dart';
 import 'package:sportly/domain/use_cases/get_team_details_use_case.dart';
 import 'package:sportly/domain/use_cases/update_team_use_case.dart';
 import 'package:sportly/presentation/pages/team_management/team_management_page_action.f.dart';
@@ -19,6 +20,8 @@ class TeamManagementPageCubit
   final UpdateTeamUseCase _updateTeamUseCase;
   final GetTeamDetailsUseCase _getTeamDetailsUseCase;
 
+  late final String _teamId;
+
   String? _teamName;
   SportDiscipline? _sportDiscipline;
   String? _location;
@@ -26,8 +29,9 @@ class TeamManagementPageCubit
   TeamType? _teamType = TeamType.professional;
 
   Future<void> init(String teamId) async {
+    _teamId = teamId;
     try {
-      final teamDetails = await _getTeamDetailsUseCase(teamId);
+      final teamDetails = await _getTeamDetailsUseCase(_teamId);
 
       _teamName = teamDetails.name;
       _sportDiscipline = teamDetails.discipline;
@@ -68,12 +72,11 @@ class TeamManagementPageCubit
         _sportDiscipline != null) {
       try {
         await _updateTeamUseCase(
-          CreateTeam(
-            discipline: _sportDiscipline!,
-            location: _location!,
+          _teamId,
+          UpdateTeam(
             name: _teamName!,
+            location: _location!,
             organizationName: _organizationName,
-            teamType: _teamType!,
           ),
         );
         dispatch(const TeamManagementPageAction.success());

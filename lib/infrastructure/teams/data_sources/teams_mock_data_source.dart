@@ -5,6 +5,7 @@ import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart
 import 'package:sportly/infrastructure/teams/dtos/create_team_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/get_teams_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/team_details_dto.dart';
+import 'package:sportly/infrastructure/teams/dtos/update_team_dto.dart';
 
 @LazySingleton(as: TeamsDataSource)
 class TeamsMockDataSource implements TeamsDataSource {
@@ -50,6 +51,12 @@ class TeamsMockDataSource implements TeamsDataSource {
   @override
   Future<void> leaveTeam(String id) async {
     // TODO: implement leaveTeam
+    return await Future.delayed(Duration(seconds: 1));
+  }
+
+  @override
+  Future<void> updateTeam(String id, UpdateTeamDto updateTeamDto) async {
+    // TODO: implement updateTeam
     return await Future.delayed(Duration(seconds: 1));
   }
 }

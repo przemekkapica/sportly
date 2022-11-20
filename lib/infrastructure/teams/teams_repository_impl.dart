@@ -2,12 +2,14 @@ import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_details.f.dart';
+import 'package:sportly/domain/features/teams/models/update_team.f.dart';
 import 'package:sportly/domain/features/teams/teams_repository.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_remote_data_source.dart';
 import 'package:sportly/infrastructure/teams/mappers/create_team_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/team_details_from_dto_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/team_from_dto_mapper.dart';
+import 'package:sportly/infrastructure/teams/mappers/update_team_mapper.dart';
 
 @LazySingleton(as: TeamsRepository)
 class TeamsRepositoryImpl implements TeamsRepository {
@@ -17,6 +19,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
     this._createTeamMapper,
     this._teamFromDtoMapper,
     this._teamDetailsFromDtoMapper,
+    this._updateTeamMapper,
   );
 
   final TeamsRemoteDataSource _teamsRemoteDataSource;
@@ -24,6 +27,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
   final CreateTeamMapper _createTeamMapper;
   final TeamFromDtoMapper _teamFromDtoMapper;
   final TeamDetailsFromDtoMapper _teamDetailsFromDtoMapper;
+  final UpdateTeamMapper _updateTeamMapper;
 
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
@@ -75,5 +79,13 @@ class TeamsRepositoryImpl implements TeamsRepository {
   @override
   Future<void> leaveTeam(String id) async {
     return await _teamsDataSource.leaveTeam(id);
+  }
+
+  @override
+  Future<void> updateTeam(String id, UpdateTeam updateTeam) async {
+    return await _teamsDataSource.updateTeam(
+      id,
+      _updateTeamMapper(updateTeam),
+    );
   }
 }
