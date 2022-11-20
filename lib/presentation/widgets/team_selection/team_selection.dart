@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
+import 'package:sportly/presentation/pages/team_management/team_management_page.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
@@ -143,10 +144,10 @@ class _Idle extends StatelessWidget {
                           ),
                           if (state.teams[index].isAdmin) ...[
                             const Gap(AppDimens.xbig),
-                            Icon(
+                            const Icon(
                               Icons.star,
-                              color: Colors.amber.shade400,
-                              size: 18,
+                              color: AppColors.adminStar,
+                              size: AppDimens.userRoleIndicatorSize,
                             ),
                           ]
                         ],
@@ -219,17 +220,13 @@ class _PopupMenuButton extends StatelessWidget {
             onTap: () {
               if (entryPage == EntryPage.teams) {
                 context.router.push(
-                  TeamDetailsPageRoute(
-                    teamId: state.teams[index].id,
-                  ),
+                  TeamManagementPageRoute(teamId: state.teams[index].id),
                 );
               } else {
                 context.router.navigate(
                   TeamsRouter(
                     children: [
-                      TeamDetailsPageRoute(
-                        teamId: state.teams[index].id,
-                      ),
+                      TeamManagementPageRoute(teamId: state.teams[index].id),
                     ],
                   ),
                 );

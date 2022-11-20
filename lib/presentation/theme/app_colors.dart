@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 class AppColors {
   static const primary = Color(0xFF000000);
   static const secondary = Color(0xFF6D7275);
@@ -15,6 +17,8 @@ class AppColors {
   static const team2 = Color(0xFFE0F6D2);
   static const team3 = Color(0xFFE0D2F6);
   static const team4 = Color.fromARGB(255, 246, 244, 210);
+
+  static const adminStar = Colors.amber;
 
   static const buttonFill = primary;
   static const buttonText = neutral;

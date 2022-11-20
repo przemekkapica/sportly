@@ -10,18 +10,21 @@ class SportlyTextInput extends StatelessWidget {
     required this.textInputAction,
     required this.validator,
     required this.onChanged,
+    this.initialValue,
   }) : super(key: key);
 
   final String label;
   final TextInputAction textInputAction;
   final String? Function(String?)? validator;
   final Function(String)? onChanged;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       style: AppTypo.bodySmall.copyWith(color: AppColors.primary),
       cursorColor: AppColors.secondary,
+      initialValue: initialValue,
       onChanged: onChanged,
       decoration: InputDecoration(
         fillColor: AppColors.neutral,
