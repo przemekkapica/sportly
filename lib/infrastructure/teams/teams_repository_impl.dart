@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_details.f.dart';
@@ -87,5 +88,17 @@ class TeamsRepositoryImpl implements TeamsRepository {
       id,
       _updateTeamMapper(updateTeam),
     );
+  }
+
+  @override
+  Future<void> updateTeamMemberRole(String teamId, String userId, Role role) {
+    // TODO: implement changeMemberRole
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> removeTeamMember(String teamId, String userId) {
+    // TODO: implement removeTeamMember
+    throw UnimplementedError();
   }
 }
