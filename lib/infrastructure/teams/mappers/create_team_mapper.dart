@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/mapper/data_mapper.dart';
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
+import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/infrastructure/teams/dtos/create_team_dto.dart';
 import 'package:sportly/infrastructure/teams/mappers/sport_discipline_mapper.dart';
 
@@ -18,7 +19,7 @@ class CreateTeamMapper extends DataMapper<CreateTeam, CreateTeamDto> {
       name: data.name,
       discipline: _sportDisciplineMapper.toDto(data.discipline),
       location: data.location,
-      teamType: data.teamType.toString(),
+      teamType: data.teamType.value,
       organizationName: data.organizationName,
     );
   }

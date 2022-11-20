@@ -2,6 +2,7 @@
     "id": "1",
     "name": "Legia Warszawa",
     "membersCount": 5,
+    "teamType": "Professional",
     "isAdmin": true,
     "discipline": {
         "name": "football"

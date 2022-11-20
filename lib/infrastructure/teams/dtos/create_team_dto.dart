@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:sportly/infrastructure/teams/dtos/age_group_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/sport_discipline_dto.dart';
 
 part 'create_team_dto.g.dart';

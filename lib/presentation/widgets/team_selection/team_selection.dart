@@ -5,7 +5,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
-import 'package:sportly/presentation/pages/join_team/join_team_page.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
@@ -134,55 +133,24 @@ class _Idle extends StatelessWidget {
                           ],
                         ),
                       ),
-                      if (entryPage == EntryPage.teams)
-                        PopupMenuButton(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(AppDimens.borderRadius),
-                            ),
+                      Column(
+                        children: [
+                          _PopupMenuButton(
+                            state: state,
+                            entryPage: entryPage,
+                            cubit: cubit,
+                            index: index,
                           ),
-                          itemBuilder: (BuildContext context) =>
-                              <PopupMenuEntry>[
-                            PopupMenuItem(
-                              child: Text(
-                                LocaleKeys.team_selection_menu_manage.tr(),
-                                style: AppTypo.bodySmall,
-                              ),
-                              onTap: () => context.router.push(
-                                TeamDetailsPageRoute(
-                                  teamId: state.teams[index].id,
-                                ),
-                              ),
+                          if (state.teams[index].isAdmin) ...[
+                            const Gap(AppDimens.xbig),
+                            Icon(
+                              Icons.star,
+                              color: Colors.amber.shade400,
+                              size: 18,
                             ),
-                            PopupMenuItem(
-                              child: Text(
-                                LocaleKeys.team_selection_menu_invite.tr(),
-                                style: AppTypo.bodySmall,
-                              ),
-                              onTap: () => context.router.push(
-                                ShareInvitationCodePageRoute(
-                                  team: state.teams[index],
-                                ),
-                              ),
-                            ),
-                            PopupMenuItem(
-                              child: Text(
-                                LocaleKeys.team_selection_menu_leave.tr(),
-                                style: AppTypo.bodySmall.copyWith(
-                                  color: AppColors.danger,
-                                ),
-                              ),
-                              onTap: () => showLeaveTeamDialog(
-                                context,
-                                state.teams[index].name,
-                                () => cubit.leaveTeam(state.teams[index].id),
-                              ),
-                            ),
-                          ],
-                          child: const Icon(
-                            Icons.more_vert_rounded,
-                          ),
-                        ),
+                          ]
+                        ],
+                      ),
                     ],
                   ),
                 );
@@ -214,6 +182,101 @@ class _Idle extends StatelessWidget {
             ),
           ]
         ],
+      ),
+    );
+  }
+}
+
+class _PopupMenuButton extends StatelessWidget {
+  const _PopupMenuButton({
+    Key? key,
+    required this.state,
+    required this.entryPage,
+    required this.cubit,
+    required this.index,
+  }) : super(key: key);
+
+  final TeamSelectionStateIdle state;
+  final EntryPage entryPage;
+  final TeamSelectionCubit cubit;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(AppDimens.borderRadius),
+        ),
+      ),
+      itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+        if (state.teams[index].isAdmin)
+          PopupMenuItem(
+            child: Text(
+              LocaleKeys.team_selection_menu_manage.tr(),
+              style: AppTypo.bodySmall,
+            ),
+            onTap: () {
+              if (entryPage == EntryPage.teams) {
+                context.router.push(
+                  TeamDetailsPageRoute(
+                    teamId: state.teams[index].id,
+                  ),
+                );
+              } else {
+                context.router.navigate(
+                  TeamsRouter(
+                    children: [
+                      TeamDetailsPageRoute(
+                        teamId: state.teams[index].id,
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+          ),
+        PopupMenuItem(
+          child: Text(
+            LocaleKeys.team_selection_menu_invite.tr(),
+            style: AppTypo.bodySmall,
+          ),
+          onTap: () {
+            if (entryPage == EntryPage.teams) {
+              context.router.push(
+                ShareInvitationCodePageRoute(
+                  team: state.teams[index],
+                ),
+              );
+            } else {
+              context.router.navigate(
+                TeamsRouter(
+                  children: [
+                    ShareInvitationCodePageRoute(
+                      team: state.teams[index],
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+        ),
+        PopupMenuItem(
+          child: Text(
+            LocaleKeys.team_selection_menu_leave.tr(),
+            style: AppTypo.bodySmall.copyWith(
+              color: AppColors.danger,
+            ),
+          ),
+          onTap: () => showLeaveTeamDialog(
+            context,
+            state.teams[index].name,
+            () => cubit.leaveTeam(state.teams[index].id),
+          ),
+        ),
+      ],
+      child: const Icon(
+        Icons.more_vert_rounded,
       ),
     );
   }

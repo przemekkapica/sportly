@@ -9,6 +9,7 @@ class TeamDetailsDto {
   TeamDetailsDto({
     required this.id,
     required this.name,
+    required this.teamType,
     required this.membersCount,
     required this.isAdmin,
     required this.discipline,
@@ -23,6 +24,7 @@ class TeamDetailsDto {
 
   final String id;
   final String name;
+  final String teamType;
   final int membersCount;
   final bool isAdmin;
   final SportDisciplineDto discipline;
