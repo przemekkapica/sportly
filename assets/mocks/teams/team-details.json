@@ -1,6 +1,6 @@
 {
     "id": "1",
-    "name": "Legia Warszawa",
+    "name": "Legia",
     "membersCount": 5,
     "teamType": "Professional",
     "isAdmin": true,
@@ -8,6 +8,8 @@
         "name": "football"
     },
     "joinedDate": "2022-10-20T16:46:28+00:00",
+    "location": "Warszawa",
+    "organizationName": "Legia Warszawa",
     "members": [
         {
             "id": "1",

@@ -26,6 +26,8 @@ class TeamDetailsFromDtoMapper extends DataMapper<TeamDetailsDto, TeamDetails> {
       isAdmin: data.isAdmin,
       discipline: _sportDisciplineMapper.fromDto(data.discipline),
       joinedDate: DateTime.parse(data.joinedDate),
+      location: data.location,
+      organizationName: data.organizationName,
       members: data.members
           .map((member) => _teamMemberMapper.fromDto(member))
           .toList(),

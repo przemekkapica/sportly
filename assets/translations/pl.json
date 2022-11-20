@@ -54,6 +54,19 @@
         "discipline_error": "Dyscyplina jest wymagana",
         "button_label": "Utwórz zespół"
     },
+    "team_management": {
+        "team_name": "Nazwa zespołu*",
+        "team_name_error": "Nazwa zespołu jest wymagana",
+        "location": "Lokalizacja*",
+        "location_error": "Lokalizacja jest wymagana",
+        "organization_name": "Nazwa organizacji",
+        "button_label": "Uaktualnij",
+        "members": "Członkowie",
+        "make_admin": "Nadaj uprawnienia\nadmina",
+        "make_assistant": "Nadaj uprawnienia\nasystenta",
+        "make_member": "Nadaj uprawnienia\nczłonka",
+        "remove": "Usuń z zespołu"
+    },
     "share_invitation_code": {
         "title": "Twój kod do zaproszenia dla",
         "description": "Wygenerowany kod wygaśnie w przeciągu 48h",

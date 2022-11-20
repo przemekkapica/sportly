@@ -54,6 +54,19 @@
         "discipline_error": "Sport discipline is required",
         "button_label": "Create a team"
     },
+    "team_management": {
+        "team_name": "Team name*",
+        "team_name_error": "Team name is required",
+        "location": "Location*",
+        "location_error": "Location is required",
+        "organization_name": "Organization name",
+        "button_label": "Update",
+        "members": "Members",
+        "make_admin": "Make admin",
+        "make_assistant": "Make assistant",
+        "make_member": "Make member",
+        "remove": "Remove"
+    },
     "share_invitation_code": {
         "title": "Your invitation code for",
         "description": "Generated code is valid for 48 hours",

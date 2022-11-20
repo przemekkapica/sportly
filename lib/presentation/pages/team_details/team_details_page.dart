@@ -105,7 +105,9 @@ class _Idle extends StatelessWidget {
             children: [
               SportlyButton.solid(
                 label: LocaleKeys.team_details_manage.tr(),
-                onTap: () {},
+                onTap: () => context.router.push(
+                  TeamManagementPageRoute(teamId: state.teamDetails.id),
+                ),
               ),
               const Gap(AppDimens.sm),
               SportlyButton.danger(
@@ -150,11 +152,22 @@ class _TeamMembersSection extends StatelessWidget {
           itemBuilder: (context, index) {
             final member = idle.teamDetails.members[index];
 
-            return Text(
-              member.fullName,
-              style: AppTypo.bodySmall.copyWith(
-                color: member.isAdmin ? AppColors.primary : AppColors.secondary,
-              ),
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  member.fullName,
+                  style: AppTypo.bodySmall,
+                ),
+                if (member.isAdmin) ...[
+                  const Gap(AppDimens.xxxsm),
+                  const Icon(
+                    Icons.star,
+                    color: AppColors.adminStar,
+                    size: AppDimens.userRoleIndicatorSize,
+                  ),
+                ]
+              ],
             );
           },
           separatorBuilder: (context, index) {
@@ -231,8 +244,8 @@ class _TeamDetailsHeader extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SportDisciplineIcon(
-          discipline: SportDiscipline(name: 'football'),
+        SportDisciplineIcon(
+          discipline: SportDiscipline(name: idle.teamDetails.discipline.name),
           size: AppDimens.disciplineBiggerIconSize,
         ),
         const Gap(AppDimens.md),
@@ -250,10 +263,10 @@ class _TeamDetailsHeader extends StatelessWidget {
               Text(
                 LocaleKeys.team_details_description.tr(
                   args: [
-                    idle.teamDetails.joinedDate.formatDMMYYYY().toString()
+                    idle.teamDetails.joinedDate.formatMMMMDDYYYY().toString()
                   ],
                 ),
-                style: AppTypo.bodySmall,
+                style: AppTypo.bodySmall.copyWith(color: AppColors.secondary),
               ),
             ],
           ),

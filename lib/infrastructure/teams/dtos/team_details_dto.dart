@@ -13,6 +13,8 @@ class TeamDetailsDto {
     required this.membersCount,
     required this.isAdmin,
     required this.discipline,
+    required this.location,
+    required this.organizationName,
     required this.joinedDate,
     required this.members,
   });
@@ -28,6 +30,8 @@ class TeamDetailsDto {
   final int membersCount;
   final bool isAdmin;
   final SportDisciplineDto discipline;
+  final String? location;
+  final String? organizationName;
   final String joinedDate;
   final List<TeamMemberDto> members;
 }

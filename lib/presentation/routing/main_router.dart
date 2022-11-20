@@ -15,6 +15,7 @@ import 'package:sportly/presentation/pages/schedule_entry/schedule_entry_page.da
 import 'package:sportly/presentation/pages/share_invitation_code/share_invitaion_code_page.dart';
 import 'package:sportly/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:sportly/presentation/pages/team_details/team_details_page.dart';
+import 'package:sportly/presentation/pages/team_management/team_management_page.dart';
 import 'package:sportly/presentation/pages/teams/teams_page.dart';
 
 @MaterialAutoRouter(
@@ -55,6 +56,10 @@ import 'package:sportly/presentation/pages/teams/teams_page.dart';
             AutoRoute(
               page: ShareInvitationCodePage,
               path: 'share',
+            ),
+            AutoRoute(
+              page: TeamManagementPage,
+              path: 'manage',
             ),
           ],
         ),

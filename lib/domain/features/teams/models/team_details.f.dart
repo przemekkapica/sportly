@@ -14,6 +14,8 @@ class TeamDetails with _$TeamDetails {
     required int membersCount,
     required bool isAdmin,
     required SportDiscipline discipline,
+    required String? location,
+    required String? organizationName,
     required DateTime joinedDate,
     required List<TeamMember> members,
   }) = _TeamDetails;
