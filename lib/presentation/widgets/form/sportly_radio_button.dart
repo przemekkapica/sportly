@@ -16,35 +16,38 @@ class SportlyRadioButton<T> extends StatelessWidget {
   final String label;
   final T value;
   final T? groupValue;
-  final Function(T?)? onChanged;
+  final Function(T?) onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Theme(
-          data: ThemeData(
-            unselectedWidgetColor: AppColors.additional1,
-          ),
-          child: SizedBox(
-            height: 20,
-            width: 20,
-            child: Radio<T>(
-              value: value,
-              groupValue: groupValue,
-              activeColor: AppColors.additional1,
-              overlayColor: MaterialStateProperty.all(AppColors.secondary),
-              fillColor: MaterialStateProperty.all(AppColors.primary),
-              onChanged: onChanged,
+    return InkWell(
+      onTap: () => onChanged(value),
+      child: Row(
+        children: [
+          Theme(
+            data: ThemeData(
+              unselectedWidgetColor: AppColors.additional1,
+            ),
+            child: SizedBox(
+              height: 20,
+              width: 20,
+              child: Radio<T>(
+                value: value,
+                groupValue: groupValue,
+                activeColor: AppColors.additional1,
+                overlayColor: MaterialStateProperty.all(AppColors.secondary),
+                fillColor: MaterialStateProperty.all(AppColors.primary),
+                onChanged: onChanged,
+              ),
             ),
           ),
-        ),
-        const Gap(AppDimens.xsm),
-        Text(
-          label,
-          style: AppTypo.labelLarge,
-        ),
-      ],
+          const Gap(AppDimens.xsm),
+          Text(
+            label,
+            style: AppTypo.labelLarge.copyWith(color: AppColors.primary),
+          ),
+        ],
+      ),
     );
   }
 }

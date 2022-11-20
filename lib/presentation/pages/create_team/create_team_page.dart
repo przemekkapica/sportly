@@ -10,6 +10,7 @@ import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page_action.f.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page_cubit.dart';
+import 'package:sportly/presentation/pages/create_team/create_team_page_state.f.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
@@ -42,7 +43,11 @@ class CreateTeamPage extends HookWidget {
         showLoader: context.loaderOverlay.show,
         hideLoader: context.loaderOverlay.hide,
         success: () {
-          showSnackBar(context, 'Team created successfully');
+          showSnackBar(
+            context,
+            'Team created successfully',
+            SnackbarPurpose.success,
+          );
           context.router.pop();
         },
       );
@@ -51,7 +56,10 @@ class CreateTeamPage extends HookWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: state.map(
-        idle: (state) => _Idle(cubit: cubit),
+        idle: (state) => _Idle(
+          cubit: cubit,
+          state: state,
+        ),
         error: (_) => const SportlyError(),
       ),
     );
@@ -62,9 +70,11 @@ class _Idle extends HookWidget {
   const _Idle({
     Key? key,
     required this.cubit,
+    required this.state,
   }) : super(key: key);
 
   final CreateTeamPageCubit cubit;
+  final CreateTeamPageStateIdle state;
 
   @override
   Widget build(BuildContext context) {
@@ -163,12 +173,7 @@ class _Idle extends HookWidget {
                   label: LocaleKeys.create_team_location.tr(),
                   textInputAction: TextInputAction.next,
                   onChanged: cubit.onLocationChanged,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return LocaleKeys.create_team_location_error.tr();
-                    }
-                    return null;
-                  },
+                  validator: (_) => null,
                 ),
                 const Gap(AppDimens.md),
                 SportlyTextInput(
@@ -183,6 +188,7 @@ class _Idle extends HookWidget {
           ),
         ],
         bottomContent: SportlyButton.solid(
+          enabled: state.submitButtonEnabled,
           onTap: () {
             if (formKey.currentState!.validate()) {
               cubit.submit();

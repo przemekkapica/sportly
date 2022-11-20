@@ -21,6 +21,6 @@ class CreateTeamDto {
   final String name;
   final SportDisciplineDto discipline;
   final String teamType;
-  final String location;
+  final String? location;
   final String? organizationName;
 }

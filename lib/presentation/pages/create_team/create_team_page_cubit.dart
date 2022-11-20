@@ -6,13 +6,14 @@ import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/domain/use_cases/create_team_use_case.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page_action.f.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page_state.f.dart';
+import 'package:sportly/utils/extensions/string_extension.dart';
 
 @injectable
 class CreateTeamPageCubit
     extends ActionCubit<CreateTeamPageState, CreateTeamPageAction> {
   CreateTeamPageCubit(
     this._createTeamUseCase,
-  ) : super(const CreateTeamPageState.idle());
+  ) : super(const CreateTeamPageState.idle(submitButtonEnabled: false));
 
   final CreateTeamUseCase _createTeamUseCase;
 
@@ -22,12 +23,16 @@ class CreateTeamPageCubit
   String? _organizationName;
   TeamType? _teamType = TeamType.professional;
 
+  bool _submitButtonEnabled = false;
+
   onTeamNameChanged(String? value) {
     _teamName = value;
+    _checkIfButtonEnabledAndEmit();
   }
 
   onSportDisciplineChanged(SportDiscipline? value) {
     _sportDiscipline = value;
+    _checkIfButtonEnabledAndEmit();
   }
 
   onLocationChanged(String? value) {
@@ -42,17 +47,23 @@ class CreateTeamPageCubit
     _teamType = value;
   }
 
+  void _checkIfButtonEnabledAndEmit() {
+    if (_teamName.nullOrEmpty || _sportDiscipline == null) {
+      _submitButtonEnabled = false;
+    } else {
+      _submitButtonEnabled = true;
+    }
+    emit(CreateTeamPageState.idle(submitButtonEnabled: _submitButtonEnabled));
+  }
+
   Future<void> submit() async {
-    dispatch(const CreateTeamPageAction.showLoader());
-    if (_teamName != null &&
-        _teamType != null &&
-        _location != null &&
-        _sportDiscipline != null) {
+    if (_teamName != null && _teamType != null && _sportDiscipline != null) {
+      dispatch(const CreateTeamPageAction.showLoader());
       try {
         await _createTeamUseCase(
           CreateTeam(
             discipline: _sportDiscipline!,
-            location: _location!,
+            location: _location,
             name: _teamName!,
             organizationName: _organizationName,
             teamType: _teamType!,

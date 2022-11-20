@@ -22,6 +22,7 @@ class SportlyDropdown<T> extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: DropdownButtonFormField<T>(
+        dropdownColor: AppColors.neutral,
         value: null,
         elevation: 1,
         decoration: InputDecoration(

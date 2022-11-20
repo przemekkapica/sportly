@@ -108,6 +108,7 @@ class _Idle extends StatelessWidget {
                   showSnackBar(
                     context,
                     LocaleKeys.share_invitation_code_message.tr(),
+                    SnackbarPurpose.info,
                   );
                 },
               ),

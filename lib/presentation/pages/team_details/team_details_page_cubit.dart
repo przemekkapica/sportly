@@ -17,8 +17,6 @@ class TeamDetailsPageCubit extends Cubit<TeamDetailsPageState> {
 
   Future<void> init(String teamId) async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
-
       final teamDetails = await _getTeamDetailsUseCase(teamId);
       var members = List<TeamMember>.from(teamDetails.members);
 

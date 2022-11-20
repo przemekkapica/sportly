@@ -46,9 +46,17 @@ Future<void> showLeaveTeamDialog(
           onTap: () {
             try {
               leaveTeam();
-              showSnackBar(context, 'You left $teamName');
+              showSnackBar(
+                context,
+                'You left $teamName',
+                SnackbarPurpose.info,
+              );
             } catch (e) {
-              showSnackBar(context, 'Could not leave $teamName');
+              showSnackBar(
+                context,
+                'Could not leave $teamName',
+                SnackbarPurpose.error,
+              );
             } finally {
               Navigator.of(context, rootNavigator: true).pop();
               context.router.navigate(const TeamsRouter());

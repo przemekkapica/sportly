@@ -40,7 +40,11 @@ class JoinTeamPage extends HookWidget {
         action.whenOrNull(
           alreadyInTeam: () {},
           addedToTeam: () {
-            showSnackBar(context, 'You have been added to the new team');
+            showSnackBar(
+              context,
+              'You have been added to the new team',
+              SnackbarPurpose.success,
+            );
             Navigator.of(context).pop();
           },
           wrongCode: () {

@@ -4,7 +4,9 @@ part 'create_team_page_state.f.freezed.dart';
 
 @freezed
 class CreateTeamPageState with _$CreateTeamPageState {
-  const factory CreateTeamPageState.idle() = CreateTeamPageStateIdle;
+  const factory CreateTeamPageState.idle({
+    required bool submitButtonEnabled,
+  }) = CreateTeamPageStateIdle;
 
   const factory CreateTeamPageState.error() = CreateTeamPageStateError;
 }

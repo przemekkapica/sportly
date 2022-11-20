@@ -10,7 +10,7 @@ class CreateTeam with _$CreateTeam {
     required String name,
     required TeamType teamType,
     required SportDiscipline discipline,
-    required String location,
+    required String? location,
     required String? organizationName,
   }) = _CreateTeam;
 }

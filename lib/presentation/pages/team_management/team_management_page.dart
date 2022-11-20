@@ -6,7 +6,6 @@ import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sportly/domain/features/teams/models/team_member.f.dart';
-import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/team_management/team_management_page_action.f.dart';
 import 'package:sportly/presentation/pages/team_management/team_management_page_cubit.dart';
@@ -14,9 +13,7 @@ import 'package:sportly/presentation/pages/team_management/team_management_page_
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
-import 'package:sportly/presentation/widgets/form/sportly_radio_button.dart';
 import 'package:sportly/presentation/widgets/form/sportly_text_input.dart';
-import 'package:sportly/presentation/widgets/scroll_or_fit_bottom.dart';
 import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
@@ -42,7 +39,11 @@ class TeamManagementPage extends HookWidget {
         showLoader: context.loaderOverlay.show,
         hideLoader: context.loaderOverlay.hide,
         success: () {
-          showSnackBar(context, 'Team updated successfully');
+          showSnackBar(
+            context,
+            'Team updated successfully',
+            SnackbarPurpose.success,
+          );
           context.router.pop();
         },
       );
@@ -112,12 +113,7 @@ class _Idle extends HookWidget {
                     initialValue: state.teamDetails.location,
                     textInputAction: TextInputAction.next,
                     onChanged: cubit.onLocationChanged,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return LocaleKeys.team_management_location_error.tr();
-                      }
-                      return null;
-                    },
+                    validator: (_) => null,
                   ),
                   const Gap(AppDimens.md),
                   SportlyTextInput(
@@ -132,6 +128,7 @@ class _Idle extends HookWidget {
               ),
             ),
             SportlyButton.solid(
+              enabled: state.submitButtonEnabled,
               onTap: () {
                 if (formKey.currentState!.validate()) {
                   cubit.submit();

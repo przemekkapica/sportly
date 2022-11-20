@@ -10,6 +10,7 @@ class TeamManagementPageState with _$TeamManagementPageState {
 
   const factory TeamManagementPageState.idle({
     required TeamDetails teamDetails,
+    required bool submitButtonEnabled,
   }) = TeamManagementPageStateIdle;
 
   const factory TeamManagementPageState.error() = TeamManagementPageStateError;
