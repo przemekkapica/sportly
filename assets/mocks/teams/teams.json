@@ -5,14 +5,14 @@
             "name": "Legia Warszawa",
             "teamType": "Professional",
             "membersCount": 47,
-            "isAdmin": true,
+            "isAdmin": false,
             "discipline": {
                 "name": "football"
             }
         },
         {
             "id": "2",
-            "name": "Kosz po godzinach",
+            "name": "Basket masters",
             "teamType": "Amateur",
             "membersCount": 5,
             "isAdmin": false,
@@ -22,7 +22,7 @@
         },
         {
             "id": "3",
-            "name": "Tenis sobota",
+            "name": "Tennis noobz",
             "teamType": "Amateur",
             "membersCount": 3,
             "isAdmin": true,
@@ -32,7 +32,7 @@
         },
         {
             "id": "5",
-            "name": "Handball pro team",
+            "name": "Handball pros",
             "teamType": "Professional",
             "membersCount": 14,
             "isAdmin": false,
@@ -42,20 +42,10 @@
         },
         {
             "id": "4",
-            "name": "Widzew Łódź",
+            "name": "Soccer sunday league",
             "teamType": "Professional",
             "membersCount": 32,
             "isAdmin": false,
-            "discipline": {
-                "name": "football"
-            }
-        },
-        {
-            "id": "6",
-            "name": "Kopacze",
-            "teamType": "Amateur",
-            "membersCount": 39,
-            "isAdmin": true,
             "discipline": {
                 "name": "football"
             }
