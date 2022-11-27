@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/role.dart';
+import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_details.f.dart';
@@ -8,6 +9,7 @@ import 'package:sportly/domain/features/teams/teams_repository.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_remote_data_source.dart';
 import 'package:sportly/infrastructure/teams/mappers/create_team_mapper.dart';
+import 'package:sportly/infrastructure/teams/mappers/sport_discipline_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/team_details_from_dto_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/team_from_dto_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/update_team_mapper.dart';
@@ -21,6 +23,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
     this._teamFromDtoMapper,
     this._teamDetailsFromDtoMapper,
     this._updateTeamMapper,
+    this._sportDisciplineMapper,
   );
 
   final TeamsRemoteDataSource _teamsRemoteDataSource;
@@ -29,11 +32,12 @@ class TeamsRepositoryImpl implements TeamsRepository {
   final TeamFromDtoMapper _teamFromDtoMapper;
   final TeamDetailsFromDtoMapper _teamDetailsFromDtoMapper;
   final UpdateTeamMapper _updateTeamMapper;
+  final SportDisciplineMapper _sportDisciplineMapper;
 
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
     try {
-      await _teamsDataSource.createTeam(_createTeamMapper(createTeam));
+      await _teamsRemoteDataSource.createTeam(_createTeamMapper(createTeam));
     } catch (e) {
       // TODO: add error handling
       throw (Exception('create team error'));
@@ -43,13 +47,14 @@ class TeamsRepositoryImpl implements TeamsRepository {
   @override
   Future<List<Team>> getTeams() async {
     try {
-      final teamsDto = await _teamsDataSource.getTeams();
+      final teamsDto = await _teamsRemoteDataSource.getTeams();
       print(teamsDto);
       return teamsDto.teams
           .map((teamDto) => _teamFromDtoMapper(teamDto))
           .toList();
     } catch (e) {
       // TODO: add error handling
+      print(e);
       throw (Exception('get teams error'));
     }
   }
@@ -100,5 +105,14 @@ class TeamsRepositoryImpl implements TeamsRepository {
   Future<void> removeTeamMember(String teamId, String userId) {
     // TODO: implement removeTeamMember
     throw UnimplementedError();
+  }
+
+  @override
+  Future<List<SportDiscipline>> getDisciplines() async {
+    final disciplinesDto = await _teamsRemoteDataSource.getDisciplines();
+
+    return disciplinesDto.disciplines
+        .map((dto) => _sportDisciplineMapper.fromDto(dto))
+        .toList();
   }
 }

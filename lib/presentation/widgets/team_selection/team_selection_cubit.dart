@@ -18,7 +18,6 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
     try {
       var teams = await _getTeamsUseCase();
 
-      // teams = []; // TODO: temp
       if (teams.isEmpty) {
         emit(const TeamSelectionState.noTeams());
       } else {

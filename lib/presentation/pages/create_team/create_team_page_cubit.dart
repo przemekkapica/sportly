@@ -4,6 +4,7 @@ import 'package:sportly/domain/features/teams/models/create_team.f.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/domain/use_cases/create_team_use_case.dart';
+import 'package:sportly/domain/use_cases/get_disciplines_use_case.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page_action.f.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page_state.f.dart';
 import 'package:sportly/utils/extensions/string_extension.dart';
@@ -13,9 +14,13 @@ class CreateTeamPageCubit
     extends ActionCubit<CreateTeamPageState, CreateTeamPageAction> {
   CreateTeamPageCubit(
     this._createTeamUseCase,
-  ) : super(const CreateTeamPageState.idle(submitButtonEnabled: false));
+    this._getDisciplinesUseCase,
+  ) : super(const CreateTeamPageState.loading());
 
   final CreateTeamUseCase _createTeamUseCase;
+  final GetDisciplinesUseCase _getDisciplinesUseCase;
+
+  late List<SportDiscipline> _disciplines;
 
   String? _teamName;
   SportDiscipline? _sportDiscipline;
@@ -24,6 +29,21 @@ class CreateTeamPageCubit
   TeamType? _teamType = TeamType.professional;
 
   bool _submitButtonEnabled = false;
+
+  Future<void> init() async {
+    try {
+      _disciplines = await _getDisciplinesUseCase();
+
+      emit(
+        CreateTeamPageState.idle(
+          disciplines: _disciplines,
+          submitButtonEnabled: false,
+        ),
+      );
+    } catch (e) {
+      emit(const CreateTeamPageState.error());
+    }
+  }
 
   onTeamNameChanged(String? value) {
     _teamName = value;
@@ -53,7 +73,12 @@ class CreateTeamPageCubit
     } else {
       _submitButtonEnabled = true;
     }
-    emit(CreateTeamPageState.idle(submitButtonEnabled: _submitButtonEnabled));
+    emit(
+      CreateTeamPageState.idle(
+        disciplines: _disciplines,
+        submitButtonEnabled: _submitButtonEnabled,
+      ),
+    );
   }
 
   Future<void> submit() async {
