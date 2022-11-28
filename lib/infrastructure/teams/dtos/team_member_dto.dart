@@ -8,7 +8,7 @@ class TeamMemberDto {
     required this.id,
     required this.firstName,
     required this.lastName,
-    required this.isAdmin,
+    required this.role,
   });
 
   factory TeamMemberDto.fromJson(Map<String, dynamic> json) =>
@@ -19,5 +19,5 @@ class TeamMemberDto {
   final int id;
   final String firstName;
   final String lastName;
-  final bool isAdmin;
+  final String role;
 }

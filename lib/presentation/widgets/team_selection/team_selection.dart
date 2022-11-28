@@ -42,7 +42,6 @@ class TeamSelection extends HookWidget {
       () {
         cubit.init();
       },
-      [],
     );
 
     return state.map(

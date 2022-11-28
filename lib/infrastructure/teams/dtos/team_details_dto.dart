@@ -11,7 +11,7 @@ class TeamDetailsDto {
     required this.name,
     required this.teamType,
     required this.membersCount,
-    required this.isAdmin,
+    required this.role,
     required this.discipline,
     required this.location,
     required this.organizationName,
@@ -28,7 +28,7 @@ class TeamDetailsDto {
   final String name;
   final String teamType;
   final int membersCount;
-  final bool isAdmin;
+  final String role;
   final SportDisciplineDto discipline;
   final String? location;
   final String? organizationName;

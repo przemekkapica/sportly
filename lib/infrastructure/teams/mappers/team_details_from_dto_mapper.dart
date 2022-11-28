@@ -24,7 +24,7 @@ class TeamDetailsFromDtoMapper extends DataMapper<TeamDetailsDto, TeamDetails> {
       name: data.name,
       type: teamTypeFromString(data.teamType),
       membersCount: data.membersCount,
-      role: roleFromString(data.isAdmin ? 'Admin' : 'Player'),
+      role: roleFromString(data.role),
       discipline: _sportDisciplineMapper.fromDto(data.discipline),
       joinedDate: DateTime.parse(data.joinedDate),
       location: data.location,

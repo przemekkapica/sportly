@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 
 part 'team_member.f.freezed.dart';
 
@@ -8,7 +9,7 @@ class TeamMember with _$TeamMember {
     required int id,
     required String firstName,
     required String lastName,
-    required bool isAdmin,
+    required Role role,
   }) = _TeamMember;
 }
 

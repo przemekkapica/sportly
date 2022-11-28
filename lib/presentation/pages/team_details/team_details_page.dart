@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_member.f.dart';
@@ -159,7 +160,7 @@ class _TeamMembersSection extends StatelessWidget {
                   member.fullName,
                   style: AppTypo.bodySmall,
                 ),
-                if (member.isAdmin) ...[
+                if (member.role.isAdmin) ...[
                   const Gap(AppDimens.xxxsm),
                   const Icon(
                     Icons.star,

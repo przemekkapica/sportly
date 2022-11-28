@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/team_member.f.dart';
 import 'package:sportly/domain/use_cases/get_team_details_use_case.dart';
 import 'package:sportly/domain/use_cases/leave_team_use_case.dart';
@@ -20,7 +21,7 @@ class TeamDetailsPageCubit extends Cubit<TeamDetailsPageState> {
       final teamDetails = await _getTeamDetailsUseCase(teamId);
       var members = List<TeamMember>.from(teamDetails.members);
 
-      members.sort((m1, m2) => m2.isAdmin ? 1 : -1);
+      members.sort((m1, m2) => m2.role.isAdmin ? 1 : -1);
 
       emit(
         TeamDetailsPageState.idle(

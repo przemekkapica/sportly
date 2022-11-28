@@ -42,7 +42,7 @@ class CreateTeamPage extends HookWidget {
             'Team created successfully',
             SnackbarPurpose.success,
           );
-          context.router.pop();
+          context.router.pop(true);
         },
       );
     });
