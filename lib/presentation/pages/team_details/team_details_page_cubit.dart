@@ -15,7 +15,7 @@ class TeamDetailsPageCubit extends Cubit<TeamDetailsPageState> {
   final GetTeamDetailsUseCase _getTeamDetailsUseCase;
   final LeaveTeamUseCase _leaveTeamUseCase;
 
-  Future<void> init(String teamId) async {
+  Future<void> init(int teamId) async {
     try {
       final teamDetails = await _getTeamDetailsUseCase(teamId);
       var members = List<TeamMember>.from(teamDetails.members);
@@ -32,7 +32,7 @@ class TeamDetailsPageCubit extends Cubit<TeamDetailsPageState> {
     }
   }
 
-  Future<void> leaveTeam(String id) async {
+  Future<void> leaveTeam(int id) async {
     return await this._leaveTeamUseCase(id);
   }
 }

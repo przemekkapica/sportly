@@ -1,43 +1,50 @@
 enum Role {
-  amateurMember,
-  amateurAdmin,
-  member,
-  assistant,
+  player,
   admin,
+  proPlayer,
+  assistant,
+  proAdmin,
   unknown,
 }
 
 extension RoleExtension on Role {
   String get value {
     switch (this) {
-      case Role.amateurMember:
-        return 'AmateurMember';
-      case Role.amateurAdmin:
-        return 'AmateurAdmin';
-      case Role.member:
-        return 'Member';
-      case Role.assistant:
-        return 'Assistant';
+      case Role.player:
+        return 'Player';
       case Role.admin:
         return 'Admin';
+      case Role.proPlayer:
+        return 'ProPlayer';
+      case Role.assistant:
+        return 'Assistant';
+      case Role.proAdmin:
+        return 'ProAdmin';
       case Role.unknown:
         return 'Unknown';
     }
   }
+
+  bool get isAdminOrAssistant =>
+      this == Role.admin || this == Role.proAdmin || this == Role.assistant;
+
+  bool get isAdmin => this == Role.admin || this == Role.proAdmin;
+
+  bool get isAssistant => this == Role.assistant;
 }
 
-Role teamTypeFromString(String value) {
+Role roleFromString(String value) {
   switch (value) {
-    case 'AmateurMember':
-      return Role.amateurMember;
-    case 'AmateurAdmin':
-      return Role.amateurAdmin;
-    case 'Member':
-      return Role.member;
-    case 'Assistant':
-      return Role.assistant;
+    case 'Player':
+      return Role.player;
     case 'Admin':
       return Role.admin;
+    case 'ProPlayer':
+      return Role.proPlayer;
+    case 'Assistant':
+      return Role.assistant;
+    case 'ProAdmin':
+      return Role.proAdmin;
     default:
       return Role.unknown;
   }

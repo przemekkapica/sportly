@@ -16,7 +16,7 @@ class TeamMemberDto {
 
   Map<String, dynamic> toJson() => _$TeamMemberDtoToJson(this);
 
-  final String id;
+  final int id;
   final String firstName;
   final String lastName;
   final bool isAdmin;

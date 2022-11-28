@@ -28,7 +28,7 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
     }
   }
 
-  Future<void> leaveTeam(String id) async {
+  Future<void> leaveTeam(int id) async {
     return await this._leaveTeamUseCase(id);
   }
 }

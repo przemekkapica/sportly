@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/mapper/data_mapper.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/team_details.f.dart';
 import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/infrastructure/teams/dtos/team_details_dto.dart';
@@ -23,7 +24,7 @@ class TeamDetailsFromDtoMapper extends DataMapper<TeamDetailsDto, TeamDetails> {
       name: data.name,
       type: teamTypeFromString(data.teamType),
       membersCount: data.membersCount,
-      isAdmin: data.isAdmin,
+      role: roleFromString(data.isAdmin ? 'Admin' : 'Player'),
       discipline: _sportDisciplineMapper.fromDto(data.discipline),
       joinedDate: DateTime.parse(data.joinedDate),
       location: data.location,

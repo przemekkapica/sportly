@@ -14,7 +14,7 @@ class SchedulePageCubit extends Cubit<SchedulePageState> {
   final EventBidirectionalMapper _eventBidirectionalMapper;
   final GetEventsUseCase _getEventsUseCase;
 
-  void init(String teamId) async {
+  void init(int teamId) async {
     final events = await _getEventsUseCase(teamId, 11);
 
     emit(

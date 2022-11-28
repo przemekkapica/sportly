@@ -28,7 +28,7 @@ class TeamsMockDataSource implements TeamsDataSource {
   }
 
   @override
-  Future<TeamDetailsDto> getTeamDetails(String id) async {
+  Future<TeamDetailsDto> getTeamDetails(int id) async {
     final contents =
         await rootBundle.loadString('assets/mocks/teams/team-details.json');
 
@@ -49,13 +49,13 @@ class TeamsMockDataSource implements TeamsDataSource {
   }
 
   @override
-  Future<void> leaveTeam(String id) async {
+  Future<void> leaveTeam(int id) async {
     // TODO: implement leaveTeam
     return await Future.delayed(Duration(seconds: 1));
   }
 
   @override
-  Future<void> updateTeam(String id, UpdateTeamDto updateTeamDto) async {
+  Future<void> updateTeam(int id, UpdateTeamDto updateTeamDto) async {
     // TODO: implement updateTeam
     return await Future.delayed(Duration(seconds: 1));
   }

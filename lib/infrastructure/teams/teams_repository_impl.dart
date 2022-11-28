@@ -39,6 +39,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
     try {
       await _teamsRemoteDataSource.createTeam(_createTeamMapper(createTeam));
     } catch (e) {
+      print(e);
       // TODO: add error handling
       throw (Exception('create team error'));
     }
@@ -48,7 +49,6 @@ class TeamsRepositoryImpl implements TeamsRepository {
   Future<List<Team>> getTeams() async {
     try {
       final teamsDto = await _teamsRemoteDataSource.getTeams();
-      print(teamsDto);
       return teamsDto.teams
           .map((teamDto) => _teamFromDtoMapper(teamDto))
           .toList();
@@ -60,13 +60,14 @@ class TeamsRepositoryImpl implements TeamsRepository {
   }
 
   @override
-  Future<TeamDetails> getTeamDetails(String id) async {
+  Future<TeamDetails> getTeamDetails(int id) async {
     try {
-      final teamDetailsDto = await _teamsDataSource.getTeamDetails(id);
-
+      final teamDetailsDto = await _teamsRemoteDataSource.getTeamDetails(id);
+      print(teamDetailsDto);
       return _teamDetailsFromDtoMapper(teamDetailsDto);
     } catch (e) {
       // TODO: add error handling
+      print(e);
       throw (Exception('get team details error'));
     }
   }
@@ -83,12 +84,12 @@ class TeamsRepositoryImpl implements TeamsRepository {
   }
 
   @override
-  Future<void> leaveTeam(String id) async {
+  Future<void> leaveTeam(int id) async {
     return await _teamsDataSource.leaveTeam(id);
   }
 
   @override
-  Future<void> updateTeam(String id, UpdateTeam updateTeam) async {
+  Future<void> updateTeam(int id, UpdateTeam updateTeam) async {
     return await _teamsDataSource.updateTeam(
       id,
       _updateTeamMapper(updateTeam),
@@ -96,13 +97,13 @@ class TeamsRepositoryImpl implements TeamsRepository {
   }
 
   @override
-  Future<void> updateTeamMemberRole(String teamId, String userId, Role role) {
+  Future<void> updateTeamMemberRole(int teamId, String userId, Role role) {
     // TODO: implement changeMemberRole
     throw UnimplementedError();
   }
 
   @override
-  Future<void> removeTeamMember(String teamId, String userId) {
+  Future<void> removeTeamMember(int teamId, String userId) {
     // TODO: implement removeTeamMember
     throw UnimplementedError();
   }

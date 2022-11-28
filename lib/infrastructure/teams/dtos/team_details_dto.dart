@@ -24,7 +24,7 @@ class TeamDetailsDto {
 
   Map<String, dynamic> toJson() => _$TeamDetailsDtoToJson(this);
 
-  final String id;
+  final int id;
   final String name;
   final String teamType;
   final int membersCount;

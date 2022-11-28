@@ -27,7 +27,7 @@ class TeamManagementPageCubit
   final UpdateTeamMemberRoleUseCase _updateTeamMemberRoleUseCase;
   final RemoveTeamMemberUseCase _removeTeamMemberUseCase;
 
-  late final String _teamId;
+  late final int _teamId;
   late final TeamDetails _teamDetails;
 
   String? _teamName;
@@ -37,7 +37,7 @@ class TeamManagementPageCubit
   TeamType? _teamType = TeamType.professional;
   bool _submitButtonEnabled = false;
 
-  Future<void> init(String teamId) async {
+  Future<void> init(int teamId) async {
     _teamId = teamId;
     try {
       _teamDetails = await _getTeamDetailsUseCase(_teamId);

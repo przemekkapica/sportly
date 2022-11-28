@@ -4,4 +4,6 @@ class NetworkConfig {
   static const CREATE_TEAM = '/team/CreateTeam';
 
   static const GET_DISCIPLINES = '/team/GetDisciplines';
+
+  static const GET_TEAM_DETAILS = '/team/GetTeamDetails/{teamId}';
 }

@@ -8,7 +8,7 @@ class UpdateTeamUseCase {
 
   final TeamsRepository _teamsRepository;
 
-  Future<void> call(String id, UpdateTeam updateTeam) async {
+  Future<void> call(int id, UpdateTeam updateTeam) async {
     return await _teamsRepository.updateTeam(id, updateTeam);
   }
 }

@@ -5,7 +5,7 @@ part 'team_member.f.freezed.dart';
 @freezed
 class TeamMember with _$TeamMember {
   const factory TeamMember({
-    required String id,
+    required int id,
     required String firstName,
     required String lastName,
     required bool isAdmin,

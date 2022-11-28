@@ -30,7 +30,7 @@ class TeamDetailsPage extends HookWidget {
     required this.teamId,
   }) : super(key: key);
 
-  final String teamId;
+  final int teamId;
 
   @override
   Widget build(BuildContext context) {

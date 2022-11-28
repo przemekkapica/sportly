@@ -10,17 +10,17 @@ abstract class TeamsRepository {
 
   Future<List<Team>> getTeams();
 
-  Future<TeamDetails> getTeamDetails(String id);
+  Future<TeamDetails> getTeamDetails(int id);
 
   Future<bool> joinTeam(String code);
 
-  Future<void> leaveTeam(String id);
+  Future<void> leaveTeam(int id);
 
-  Future<void> updateTeam(String id, UpdateTeam updateTeam);
+  Future<void> updateTeam(int id, UpdateTeam updateTeam);
 
-  Future<void> removeTeamMember(String teamId, String userId);
+  Future<void> removeTeamMember(int teamId, String userId);
 
-  Future<void> updateTeamMemberRole(String teamId, String userId, Role role);
+  Future<void> updateTeamMemberRole(int teamId, String userId, Role role);
 
   Future<List<SportDiscipline>> getDisciplines();
 }

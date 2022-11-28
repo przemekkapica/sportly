@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
-import 'package:sportly/presentation/pages/team_management/team_management_page.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
@@ -142,7 +142,7 @@ class _Idle extends StatelessWidget {
                             cubit: cubit,
                             index: index,
                           ),
-                          if (state.teams[index].isAdmin) ...[
+                          if (state.teams[index].role.isAdmin) ...[
                             const Gap(AppDimens.xbig),
                             const Icon(
                               Icons.star,
@@ -211,7 +211,7 @@ class _PopupMenuButton extends StatelessWidget {
         ),
       ),
       itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-        if (state.teams[index].isAdmin)
+        if (state.teams[index].role.isAdmin)
           PopupMenuItem(
             child: Text(
               LocaleKeys.team_selection_menu_manage.tr(),
