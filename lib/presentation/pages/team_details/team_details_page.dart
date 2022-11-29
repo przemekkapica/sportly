@@ -104,13 +104,15 @@ class _Idle extends StatelessWidget {
           ),
           Column(
             children: [
-              SportlyButton.solid(
-                label: LocaleKeys.team_details_manage.tr(),
-                onTap: () => context.router.push(
-                  TeamManagementPageRoute(teamId: state.teamDetails.id),
+              if (state.teamDetails.role.isAdmin) ...[
+                SportlyButton.solid(
+                  label: LocaleKeys.team_details_manage.tr(),
+                  onTap: () => context.router.push(
+                    TeamManagementPageRoute(teamId: state.teamDetails.id),
+                  ),
                 ),
-              ),
-              const Gap(AppDimens.sm),
+                const Gap(AppDimens.sm),
+              ],
               SportlyButton.danger(
                 label: LocaleKeys.team_details_leave.tr(),
                 onTap: () => showLeaveTeamDialog(

@@ -67,7 +67,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
   Future<TeamDetails> getTeamDetails(int id) async {
     try {
       final teamDetailsDto = await _teamsRemoteDataSource.getTeamDetails(id);
-      print(teamDetailsDto);
+
       return _teamDetailsFromDtoMapper(teamDetailsDto);
     } catch (e) {
       // TODO: add error handling
