@@ -9,5 +9,5 @@ class NetworkConfig {
 
   static const GET_INVITATION_CODE = '/team/GetTeamCode/{teamId}';
 
-  static const JOIN_TEAM = '/team/JoinTeam/{invitationCode}';
+  static const JOIN_TEAM = '/team/JoinTeam';
 }

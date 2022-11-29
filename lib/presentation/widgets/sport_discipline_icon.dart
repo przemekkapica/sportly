@@ -46,6 +46,11 @@ Icon getIcon(SportDiscipline discipline, double size) {
       Icons.sports_handball_rounded,
       size: size,
     );
+  } else if (discipline.name == 'Volleyball') {
+    return Icon(
+      Icons.sports_volleyball_rounded,
+      size: size,
+    );
   } else if (discipline.name == 'Tennis') {
     return Icon(
       Icons.sports_tennis_rounded,
@@ -72,8 +77,10 @@ Color getColor(SportDiscipline discipline) {
   } else if (discipline.name == 'Handball') {
     return AppColors.team3.withAlpha(160);
   } else if (discipline.name == 'Jogging') {
-    return AppColors.team4.withAlpha(160);
+    return AppColors.team5.withAlpha(160);
   } else if (discipline.name == 'Tennis') {
+    return AppColors.team4.withAlpha(160);
+  } else if (discipline.name == 'Volleyball') {
     return AppColors.team4.withAlpha(160);
   } else {
     return AppColors.team1.withAlpha(160);

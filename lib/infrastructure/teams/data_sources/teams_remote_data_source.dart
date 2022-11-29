@@ -5,6 +5,7 @@ import 'package:sportly/core/config/network_config.dart';
 import 'package:sportly/infrastructure/teams/dtos/create_team_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/get_disciplines_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/get_teams_dto.dart';
+import 'package:sportly/infrastructure/teams/dtos/get_invitation_code_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/invitation_code_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/team_details_dto.dart';
 
@@ -29,8 +30,8 @@ abstract class TeamsRemoteDataSource {
   Future<TeamDetailsDto> getTeamDetails(@Path() int teamId);
 
   @GET(NetworkConfig.GET_INVITATION_CODE)
-  Future<InvitationCodeDto> getInvitationCode(@Path() int teamId);
+  Future<GetInvitationCodeDto> getInvitationCode(@Path() int teamId);
 
   @POST(NetworkConfig.JOIN_TEAM)
-  Future<void> joinTeam(@Path() String invitationCode);
+  Future<void> joinTeam(@Body() InvitationCodeDto invitationCodeDto);
 }

@@ -6,5 +6,6 @@ part 'invitation_code.f.freezed.dart';
 class InvitationCode with _$InvitationCode {
   const factory InvitationCode({
     required String code,
+    required DateTime expiryDate,
   }) = _InvitationCode;
 }

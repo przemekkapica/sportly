@@ -10,6 +10,7 @@ import 'package:sportly/domain/features/teams/teams_repository.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_remote_data_source.dart';
 import 'package:sportly/infrastructure/teams/mappers/create_team_mapper.dart';
+import 'package:sportly/infrastructure/teams/mappers/get_invitation_code_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/invitation_code_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/sport_discipline_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/team_details_from_dto_mapper.dart';
@@ -26,6 +27,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
     this._teamDetailsFromDtoMapper,
     this._updateTeamMapper,
     this._sportDisciplineMapper,
+    this._getInvitationCodeMapper,
     this._invitationCodeMapper,
   );
 
@@ -36,8 +38,8 @@ class TeamsRepositoryImpl implements TeamsRepository {
   final TeamDetailsFromDtoMapper _teamDetailsFromDtoMapper;
   final UpdateTeamMapper _updateTeamMapper;
   final SportDisciplineMapper _sportDisciplineMapper;
+  final GetInvitationCodeMapper _getInvitationCodeMapper;
   final InvitationCodeMapper _invitationCodeMapper;
-
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
     try {
@@ -79,7 +81,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
   @override
   Future<void> joinTeam(String code) async {
     try {
-      return await _teamsRemoteDataSource.joinTeam(code);
+      return await _teamsRemoteDataSource.joinTeam(_invitationCodeMapper(code));
     } catch (e) {
       // TODO: add error handling
     }
@@ -123,6 +125,6 @@ class TeamsRepositoryImpl implements TeamsRepository {
   Future<InvitationCode> getInvitationCode(int teamId) async {
     final dto = await _teamsRemoteDataSource.getInvitationCode(teamId);
 
-    return _invitationCodeMapper.fromDto(dto);
+    return _getInvitationCodeMapper(dto);
   }
 }
