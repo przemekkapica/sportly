@@ -27,6 +27,8 @@ abstract class TeamsRepository {
 
   Future<List<SportDiscipline>> getDisciplines();
 
+  Future<void> deleteTeam(int teamId);
+
   // Stream methods
   Stream<List<Team>> get teamsStream;
 

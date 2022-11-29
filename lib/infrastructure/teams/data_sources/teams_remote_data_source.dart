@@ -34,4 +34,7 @@ abstract class TeamsRemoteDataSource {
 
   @POST(NetworkConfig.JOIN_TEAM)
   Future<void> joinTeam(@Body() InvitationCodeDto invitationCodeDto);
+
+  @DELETE(NetworkConfig.DELETE_TEAM)
+  Future<void> deleteTeam(@Path() int teamId);
 }

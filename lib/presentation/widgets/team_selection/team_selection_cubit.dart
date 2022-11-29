@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
+import 'package:sportly/domain/use_cases/delete_team_use_case.dart';
+import 'package:sportly/domain/use_cases/fetch_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/get_teams_stream_use_case.dart';
 import 'package:sportly/domain/use_cases/get_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/leave_team_use_case.dart';
@@ -18,6 +20,8 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
     this._getTeamsStreamUseCase,
     this._startCheckingGetTeams,
     this._stopCheckingGetTeamsUseCase,
+    this._deleteTeamUseCase,
+    this._fetchTeamsUseCase,
   ) : super(const TeamSelectionState.loading()) {
     _getTeamsSubscription = _getTeamsStreamUseCase().listen(_onGetTeamsChanged);
   }
@@ -27,6 +31,8 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
   final StartCheckingGetTeamsUseCase _startCheckingGetTeams;
   final StopCheckingGetTeamsUseCase _stopCheckingGetTeamsUseCase;
   final GetTeamsStreamUseCase _getTeamsStreamUseCase;
+  final DeleteTeamUseCase _deleteTeamUseCase;
+  final FetchTeamsUseCase _fetchTeamsUseCase;
 
   late final StreamSubscription _getTeamsSubscription;
 
@@ -56,6 +62,15 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
 
   void stopCheckingGetTeams() {
     _stopCheckingGetTeamsUseCase();
+  }
+
+  Future<void> deleteTeam(int teamId) async {
+    try {
+      await _deleteTeamUseCase(teamId);
+      _fetchTeamsUseCase();
+    } catch (e) {
+      print(e);
+    }
   }
 
   void _emitIdle(List<Team> teams) {

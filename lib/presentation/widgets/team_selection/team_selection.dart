@@ -94,7 +94,12 @@ class _Idle extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
-                return SportlyCard(
+                return GestureDetector(
+                  onDoubleTap: () {
+                    if (entryPage == EntryPage.teams) {
+                      cubit.deleteTeam(state.teams[index].id);
+                    }
+                  },
                   onTap: () {
                     switch (entryPage) {
                       case EntryPage.teams:
@@ -114,52 +119,54 @@ class _Idle extends StatelessWidget {
                         break;
                     }
                   },
-                  content: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SportDisciplineIcon(
-                        discipline: state.teams[index].discipline,
-                        size: AppDimens.disciplineIconSize,
-                      ),
-                      const Gap(AppDimens.md),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  child: SportlyCard(
+                    content: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SportDisciplineIcon(
+                          discipline: state.teams[index].discipline,
+                          size: AppDimens.disciplineIconSize,
+                        ),
+                        const Gap(AppDimens.md),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                state.teams[index].name,
+                                style: AppTypo.bodyMedium,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                              const Gap(AppDimens.xxsm),
+                              Text(
+                                state.teams[index].membersCount.toString() +
+                                    LocaleKeys.team_selection_members.tr(),
+                                style: AppTypo.labelLarge,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
                           children: [
-                            Text(
-                              state.teams[index].name,
-                              style: AppTypo.bodyMedium,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
+                            _PopupMenuButton(
+                              state: state,
+                              entryPage: entryPage,
+                              cubit: cubit,
+                              index: index,
                             ),
-                            const Gap(AppDimens.xxsm),
-                            Text(
-                              state.teams[index].membersCount.toString() +
-                                  LocaleKeys.team_selection_members.tr(),
-                              style: AppTypo.labelLarge,
-                            ),
+                            if (state.teams[index].role.isAdmin) ...[
+                              const Gap(AppDimens.xbig),
+                              const Icon(
+                                Icons.star,
+                                color: AppColors.adminStar,
+                                size: AppDimens.userRoleIndicatorSize,
+                              ),
+                            ]
                           ],
                         ),
-                      ),
-                      Column(
-                        children: [
-                          _PopupMenuButton(
-                            state: state,
-                            entryPage: entryPage,
-                            cubit: cubit,
-                            index: index,
-                          ),
-                          if (state.teams[index].role.isAdmin) ...[
-                            const Gap(AppDimens.xbig),
-                            const Icon(
-                              Icons.star,
-                              color: AppColors.adminStar,
-                              size: AppDimens.userRoleIndicatorSize,
-                            ),
-                          ]
-                        ],
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },

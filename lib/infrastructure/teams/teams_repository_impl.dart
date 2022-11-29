@@ -132,6 +132,11 @@ class TeamsRepositoryImpl implements TeamsRepository {
     return _getInvitationCodeMapper(dto);
   }
 
+  @override
+  Future<void> deleteTeam(int teamId) async {
+    return await _teamsRemoteDataSource.deleteTeam(teamId);
+  }
+
   // Stream methods
   @override
   Future<void> startCheckingTeams(Duration checkingPeriod) async {
