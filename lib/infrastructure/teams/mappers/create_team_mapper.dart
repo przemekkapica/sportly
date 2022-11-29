@@ -16,7 +16,7 @@ class CreateTeamMapper extends DataMapper<CreateTeam, CreateTeamDto> {
   @override
   CreateTeamDto call(CreateTeam data) {
     return CreateTeamDto(
-      name: data.name,
+      teamName: data.name,
       discipline: _sportDisciplineMapper.toDto(data.discipline),
       location: data.location,
       teamType: data.teamType.value,

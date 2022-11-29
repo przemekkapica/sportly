@@ -2,12 +2,12 @@ import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/teams_repository.dart';
 
 @injectable
-class JoinTeamUseCase {
-  JoinTeamUseCase(this._teamsRepository);
+class StopCheckingGetTeamsUseCase {
+  StopCheckingGetTeamsUseCase(this._teamsRepository);
 
   final TeamsRepository _teamsRepository;
 
-  Future<void> call(String code) async {
-    return await _teamsRepository.joinTeam(code);
+  void call() {
+    return _teamsRepository.stopCheckingTeams();
   }
 }

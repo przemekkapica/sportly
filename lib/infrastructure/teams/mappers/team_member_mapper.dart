@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/mapper/bidirectional_mapper.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/team_member.f.dart';
 import 'package:sportly/infrastructure/teams/dtos/team_member_dto.dart';
 
@@ -11,7 +12,7 @@ class TeamMemberMapper
     return TeamMember(
       id: dto.id,
       firstName: dto.firstName,
-      isAdmin: dto.isAdmin,
+      role: roleFromString(dto.role),
       lastName: dto.lastName,
     );
   }
@@ -21,7 +22,7 @@ class TeamMemberMapper
     return TeamMemberDto(
       id: data.id,
       firstName: data.firstName,
-      isAdmin: data.isAdmin,
+      role: data.role.value,
       lastName: data.lastName,
     );
   }

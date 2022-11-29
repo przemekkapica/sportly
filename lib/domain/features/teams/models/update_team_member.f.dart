@@ -5,7 +5,7 @@ part 'update_team_member.f.freezed.dart';
 @freezed
 class UpdateTeamMember with _$UpdateTeamMember {
   const factory UpdateTeamMember({
-    required String id,
+    required int id,
     required bool isAdmin,
   }) = _UpdateTeamMember;
 }

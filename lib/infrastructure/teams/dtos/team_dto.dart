@@ -7,10 +7,10 @@ part 'team_dto.g.dart';
 class TeamDto {
   TeamDto({
     required this.id,
-    required this.name,
-    required this.teamType,
+    required this.teamName,
+    required this.type,
     required this.membersCount,
-    required this.isAdmin,
+    required this.role,
     required this.discipline,
   });
 
@@ -19,10 +19,10 @@ class TeamDto {
 
   Map<String, dynamic> toJson() => _$TeamDtoToJson(this);
 
-  final String id;
-  final String name;
-  final String teamType;
+  final int id;
+  final String teamName;
+  final String type;
   final int membersCount;
-  final bool isAdmin;
+  final String role;
   final SportDisciplineDto discipline;
 }

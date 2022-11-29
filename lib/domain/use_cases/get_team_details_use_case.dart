@@ -8,7 +8,7 @@ class GetTeamDetailsUseCase {
 
   final TeamsRepository _teamsRepository;
 
-  Future<TeamDetails> call(String id) async {
+  Future<TeamDetails> call(int id) async {
     return await _teamsRepository.getTeamDetails(id);
   }
 }

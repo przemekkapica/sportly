@@ -31,24 +31,34 @@ class SportDisciplineIcon extends StatelessWidget {
 }
 
 Icon getIcon(SportDiscipline discipline, double size) {
-  if (discipline.name == 'football') {
+  if (discipline.name == 'Football') {
     return Icon(
       Icons.sports_soccer_rounded,
       size: size,
     );
-  } else if (discipline.name == 'basketball') {
+  } else if (discipline.name == 'Basketball') {
     return Icon(
       Icons.sports_basketball_rounded,
       size: size,
     );
-  } else if (discipline.name == 'handball') {
+  } else if (discipline.name == 'Handball') {
     return Icon(
       Icons.sports_handball_rounded,
       size: size,
     );
-  } else if (discipline.name == 'tennis') {
+  } else if (discipline.name == 'Volleyball') {
+    return Icon(
+      Icons.sports_volleyball_rounded,
+      size: size,
+    );
+  } else if (discipline.name == 'Tennis') {
     return Icon(
       Icons.sports_tennis_rounded,
+      size: size,
+    );
+  } else if (discipline.name == 'Jogging') {
+    return Icon(
+      Icons.directions_run_outlined,
       size: size,
     );
   } else {
@@ -60,13 +70,17 @@ Icon getIcon(SportDiscipline discipline, double size) {
 }
 
 Color getColor(SportDiscipline discipline) {
-  if (discipline.name == 'football') {
+  if (discipline.name == 'Football') {
     return AppColors.team1.withAlpha(160);
-  } else if (discipline.name == 'basketball') {
+  } else if (discipline.name == 'Basketball') {
     return AppColors.team2.withAlpha(160);
-  } else if (discipline.name == 'handball') {
+  } else if (discipline.name == 'Handball') {
     return AppColors.team3.withAlpha(160);
-  } else if (discipline.name == 'tennis') {
+  } else if (discipline.name == 'Jogging') {
+    return AppColors.team5.withAlpha(160);
+  } else if (discipline.name == 'Tennis') {
+    return AppColors.team4.withAlpha(160);
+  } else if (discipline.name == 'Volleyball') {
     return AppColors.team4.withAlpha(160);
   } else {
     return AppColors.team1.withAlpha(160);

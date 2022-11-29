@@ -7,7 +7,7 @@ class LeaveTeamUseCase {
 
   final TeamsRepository _teamsRepository;
 
-  Future<void> call(String id) async {
+  Future<void> call(int id) async {
     return await _teamsRepository.leaveTeam(id);
   }
 }

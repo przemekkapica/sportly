@@ -31,7 +31,7 @@ class ShareInvitationCodePage extends HookWidget {
 
     useEffect(
       () {
-        cubit.init();
+        cubit.init(team.id);
       },
       [],
     );

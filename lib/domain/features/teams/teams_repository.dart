@@ -1,5 +1,7 @@
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
+import 'package:sportly/domain/features/teams/models/invitation_code.f.dart';
 import 'package:sportly/domain/features/teams/models/role.dart';
+import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_details.f.dart';
 import 'package:sportly/domain/features/teams/models/update_team.f.dart';
@@ -9,15 +11,32 @@ abstract class TeamsRepository {
 
   Future<List<Team>> getTeams();
 
-  Future<TeamDetails> getTeamDetails(String id);
+  Future<TeamDetails> getTeamDetails(int id);
 
-  Future<bool> joinTeam(String code);
+  Future<InvitationCode> getInvitationCode(int teamId);
 
-  Future<void> leaveTeam(String id);
+  Future<void> joinTeam(String code);
 
-  Future<void> updateTeam(String id, UpdateTeam updateTeam);
+  Future<void> leaveTeam(int id);
 
-  Future<void> removeTeamMember(String teamId, String userId);
+  Future<void> updateTeam(int id, UpdateTeam updateTeam);
 
-  Future<void> updateTeamMemberRole(String teamId, String userId, Role role);
+  Future<void> removeTeamMember(int teamId, String userId);
+
+  Future<void> updateTeamMemberRole(int teamId, String userId, Role role);
+
+  Future<List<SportDiscipline>> getDisciplines();
+
+  Future<void> deleteTeam(int teamId);
+
+  // Stream methods
+  Stream<List<Team>> get teamsStream;
+
+  Future<void> fetchTeams();
+
+  Future<void> startCheckingTeams(Duration checkingPeriod);
+
+  void stopCheckingTeams();
+
+  List<Team> get currentTeams;
 }

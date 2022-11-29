@@ -22,13 +22,7 @@ import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
 import 'package:sportly/presentation/widgets/sportly_error.dart';
-
-const List<String> disciplines = <String>[
-  'Football',
-  'Basketball',
-  'Tennis',
-  'Handball'
-];
+import 'package:sportly/presentation/widgets/sportly_loader.dart';
 
 class CreateTeamPage extends HookWidget {
   const CreateTeamPage({Key? key}) : super(key: key);
@@ -48,10 +42,17 @@ class CreateTeamPage extends HookWidget {
             'Team created successfully',
             SnackbarPurpose.success,
           );
-          context.router.pop();
+          context.router.pop(true);
         },
       );
     });
+
+    useEffect(
+      () {
+        cubit.init();
+      },
+      [],
+    );
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -61,6 +62,7 @@ class CreateTeamPage extends HookWidget {
           state: state,
         ),
         error: (_) => const SportlyError(),
+        loading: (_) => const SportlyLoader(),
       ),
     );
   }
@@ -156,12 +158,11 @@ class _Idle extends HookWidget {
                     }
                     return null;
                   },
-                  items: disciplines
-                      .map<DropdownMenuItem<SportDiscipline>>((String value) {
+                  items: state.disciplines.map((discipline) {
                     return DropdownMenuItem<SportDiscipline>(
-                      value: SportDiscipline(name: value),
+                      value: discipline,
                       child: Text(
-                        value,
+                        discipline.name,
                         style: AppTypo.bodySmall,
                       ),
                     );

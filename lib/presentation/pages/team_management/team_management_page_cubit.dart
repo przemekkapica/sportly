@@ -6,7 +6,7 @@ import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/domain/features/teams/models/update_team.f.dart';
 import 'package:sportly/domain/use_cases/get_team_details_use_case.dart';
 import 'package:sportly/domain/use_cases/remove_team_member_use_case.dart';
-import 'package:sportly/domain/use_cases/update_team_member_role.dart';
+import 'package:sportly/domain/use_cases/update_team_member_role_use_case.dart';
 import 'package:sportly/domain/use_cases/update_team_use_case.dart';
 import 'package:sportly/presentation/pages/team_management/team_management_page_action.f.dart';
 import 'package:sportly/presentation/pages/team_management/team_management_page_state.f.dart';
@@ -27,7 +27,7 @@ class TeamManagementPageCubit
   final UpdateTeamMemberRoleUseCase _updateTeamMemberRoleUseCase;
   final RemoveTeamMemberUseCase _removeTeamMemberUseCase;
 
-  late final String _teamId;
+  late final int _teamId;
   late final TeamDetails _teamDetails;
 
   String? _teamName;
@@ -37,7 +37,7 @@ class TeamManagementPageCubit
   TeamType? _teamType = TeamType.professional;
   bool _submitButtonEnabled = false;
 
-  Future<void> init(String teamId) async {
+  Future<void> init(int teamId) async {
     _teamId = teamId;
     try {
       _teamDetails = await _getTeamDetailsUseCase(_teamId);

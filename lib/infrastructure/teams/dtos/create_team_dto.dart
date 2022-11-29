@@ -6,7 +6,7 @@ part 'create_team_dto.g.dart';
 @JsonSerializable()
 class CreateTeamDto {
   CreateTeamDto({
-    required this.name,
+    required this.teamName,
     required this.discipline,
     required this.teamType,
     required this.location,
@@ -18,7 +18,7 @@ class CreateTeamDto {
 
   Map<String, dynamic> toJson() => _$CreateTeamDtoToJson(this);
 
-  final String name;
+  final String teamName;
   final SportDisciplineDto discipline;
   final String teamType;
   final String? location;

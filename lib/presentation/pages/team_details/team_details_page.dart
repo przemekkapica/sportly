@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_member.f.dart';
@@ -30,7 +31,7 @@ class TeamDetailsPage extends HookWidget {
     required this.teamId,
   }) : super(key: key);
 
-  final String teamId;
+  final int teamId;
 
   @override
   Widget build(BuildContext context) {
@@ -103,13 +104,15 @@ class _Idle extends StatelessWidget {
           ),
           Column(
             children: [
-              SportlyButton.solid(
-                label: LocaleKeys.team_details_manage.tr(),
-                onTap: () => context.router.push(
-                  TeamManagementPageRoute(teamId: state.teamDetails.id),
+              if (state.teamDetails.role.isAdmin) ...[
+                SportlyButton.solid(
+                  label: LocaleKeys.team_details_manage.tr(),
+                  onTap: () => context.router.push(
+                    TeamManagementPageRoute(teamId: state.teamDetails.id),
+                  ),
                 ),
-              ),
-              const Gap(AppDimens.sm),
+                const Gap(AppDimens.sm),
+              ],
               SportlyButton.danger(
                 label: LocaleKeys.team_details_leave.tr(),
                 onTap: () => showLeaveTeamDialog(
@@ -159,7 +162,7 @@ class _TeamMembersSection extends StatelessWidget {
                   member.fullName,
                   style: AppTypo.bodySmall,
                 ),
-                if (member.isAdmin) ...[
+                if (member.role.isAdmin) ...[
                   const Gap(AppDimens.xxxsm),
                   const Icon(
                     Icons.star,
