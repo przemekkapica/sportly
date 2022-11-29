@@ -44,6 +44,14 @@ class TeamSelection extends HookWidget {
       },
     );
 
+    useOnAppLifecycleStateChange((previous, current) {
+      if (current == AppLifecycleState.resumed) {
+        cubit.startCheckingGetTeams();
+      } else {
+        cubit.stopCheckingGetTeams();
+      }
+    });
+
     return state.map(
       noTeams: (_) {
         return _NoTeams(

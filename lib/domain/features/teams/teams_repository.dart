@@ -26,4 +26,15 @@ abstract class TeamsRepository {
   Future<void> updateTeamMemberRole(int teamId, String userId, Role role);
 
   Future<List<SportDiscipline>> getDisciplines();
+
+  // Stream methods
+  Stream<List<Team>> get teamsStream;
+
+  Future<void> fetchTeams();
+
+  Future<void> startCheckingTeams(Duration checkingPeriod);
+
+  void stopCheckingTeams();
+
+  List<Team> get currentTeams;
 }

@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:injectable/injectable.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:sportly/domain/features/teams/models/invitation_code.f.dart';
 import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
@@ -40,6 +43,11 @@ class TeamsRepositoryImpl implements TeamsRepository {
   final SportDisciplineMapper _sportDisciplineMapper;
   final GetInvitationCodeMapper _getInvitationCodeMapper;
   final InvitationCodeMapper _invitationCodeMapper;
+
+  final BehaviorSubject<List<Team>> _teamsBroadcaster = BehaviorSubject();
+  Timer? _timer;
+  bool alreadyStartedCheckingTeams = false;
+
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
     try {
@@ -80,11 +88,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
 
   @override
   Future<void> joinTeam(String code) async {
-    try {
-      return await _teamsRemoteDataSource.joinTeam(_invitationCodeMapper(code));
-    } catch (e) {
-      // TODO: add error handling
-    }
+    return await _teamsRemoteDataSource.joinTeam(_invitationCodeMapper(code));
   }
 
   @override
@@ -127,4 +131,39 @@ class TeamsRepositoryImpl implements TeamsRepository {
 
     return _getInvitationCodeMapper(dto);
   }
+
+  // Stream methods
+  @override
+  Future<void> startCheckingTeams(Duration checkingPeriod) async {
+    if (alreadyStartedCheckingTeams) {
+      return;
+    }
+    alreadyStartedCheckingTeams = true;
+    _timer?.cancel();
+    await fetchTeams();
+    _timer = Timer.periodic(checkingPeriod, (_) => fetchTeams());
+  }
+
+  @override
+  void stopCheckingTeams() {
+    alreadyStartedCheckingTeams = false;
+    _timer?.cancel();
+  }
+
+  @override
+  Future<void> fetchTeams() async {
+    try {
+      final teams = await this.getTeams();
+
+      _teamsBroadcaster.add(teams);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  Stream<List<Team>> get teamsStream => _teamsBroadcaster.stream;
+
+  @override
+  List<Team> get currentTeams => _teamsBroadcaster.value;
 }

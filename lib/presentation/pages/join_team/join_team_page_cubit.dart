@@ -1,5 +1,6 @@
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sportly/domain/use_cases/fetch_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/join_team_use_case.dart';
 import 'package:sportly/presentation/pages/join_team/join_team_page_action.f.dart';
 import 'package:sportly/presentation/pages/join_team/join_team_page_state.f.dart';
@@ -9,9 +10,11 @@ class JoinTeamPageCubit
     extends ActionCubit<JoinTeamPageState, JoinTeamPageAction> {
   JoinTeamPageCubit(
     this._joinTeamUseCase,
+    this._fetchTeamsUseCase,
   ) : super(const JoinTeamPageState.loading());
 
   final JoinTeamUseCase _joinTeamUseCase;
+  final FetchTeamsUseCase _fetchTeamsUseCase;
 
   bool _canSubmit = false;
   String _code = '';
@@ -45,6 +48,7 @@ class JoinTeamPageCubit
 
       await _joinTeamUseCase(_code);
       dispatch(const JoinTeamPageAction.addedToTeam());
+      _fetchTeamsUseCase();
     } catch (e) {
       dispatch(const JoinTeamPageAction.wrongCode());
       // emit(const JoinTeamPageState.loading());
