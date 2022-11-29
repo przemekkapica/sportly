@@ -1,4 +1,5 @@
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
+import 'package:sportly/domain/features/teams/models/invitation_code.f.dart';
 import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
@@ -12,7 +13,9 @@ abstract class TeamsRepository {
 
   Future<TeamDetails> getTeamDetails(int id);
 
-  Future<bool> joinTeam(String code);
+  Future<InvitationCode> getInvitationCode(int teamId);
+
+  Future<void> joinTeam(String code);
 
   Future<void> leaveTeam(int id);
 

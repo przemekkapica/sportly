@@ -7,7 +7,7 @@ class JoinTeamUseCase {
 
   final TeamsRepository _teamsRepository;
 
-  Future<bool> call(String code) async {
+  Future<void> call(String code) async {
     return await _teamsRepository.joinTeam(code);
   }
 }

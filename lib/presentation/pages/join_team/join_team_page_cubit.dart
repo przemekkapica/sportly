@@ -42,16 +42,12 @@ class JoinTeamPageCubit
   void submit() async {
     try {
       dispatch(const JoinTeamPageAction.showLoader());
-      await Future.delayed(const Duration(seconds: 1));
 
-      final result = await _joinTeamUseCase(_code);
-      if (result) {
-        dispatch(const JoinTeamPageAction.addedToTeam());
-      } else {
-        dispatch(const JoinTeamPageAction.wrongCode());
-      }
+      await _joinTeamUseCase(_code);
+      dispatch(const JoinTeamPageAction.addedToTeam());
     } catch (e) {
-      emit(const JoinTeamPageState.loading());
+      dispatch(const JoinTeamPageAction.wrongCode());
+      // emit(const JoinTeamPageState.loading());
     } finally {
       dispatch(const JoinTeamPageAction.hideLoader());
     }

@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:sportly/domain/features/teams/models/invitation_code.f.dart';
 import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
@@ -9,6 +10,7 @@ import 'package:sportly/domain/features/teams/teams_repository.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_remote_data_source.dart';
 import 'package:sportly/infrastructure/teams/mappers/create_team_mapper.dart';
+import 'package:sportly/infrastructure/teams/mappers/invitation_code_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/sport_discipline_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/team_details_from_dto_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/team_from_dto_mapper.dart';
@@ -24,6 +26,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
     this._teamDetailsFromDtoMapper,
     this._updateTeamMapper,
     this._sportDisciplineMapper,
+    this._invitationCodeMapper,
   );
 
   final TeamsRemoteDataSource _teamsRemoteDataSource;
@@ -33,6 +36,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
   final TeamDetailsFromDtoMapper _teamDetailsFromDtoMapper;
   final UpdateTeamMapper _updateTeamMapper;
   final SportDisciplineMapper _sportDisciplineMapper;
+  final InvitationCodeMapper _invitationCodeMapper;
 
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
@@ -73,14 +77,12 @@ class TeamsRepositoryImpl implements TeamsRepository {
   }
 
   @override
-  Future<bool> joinTeam(String code) async {
+  Future<void> joinTeam(String code) async {
     try {
-      return await _teamsDataSource.joinTeam(code);
+      return await _teamsRemoteDataSource.joinTeam(code);
     } catch (e) {
       // TODO: add error handling
-      return false;
     }
-    return false;
   }
 
   @override
@@ -115,5 +117,12 @@ class TeamsRepositoryImpl implements TeamsRepository {
     return disciplinesDto.disciplines
         .map((dto) => _sportDisciplineMapper.fromDto(dto))
         .toList();
+  }
+
+  @override
+  Future<InvitationCode> getInvitationCode(int teamId) async {
+    final dto = await _teamsRemoteDataSource.getInvitationCode(teamId);
+
+    return _invitationCodeMapper.fromDto(dto);
   }
 }
