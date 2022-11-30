@@ -38,6 +38,10 @@ class AppTypo {
     fontSize: 10,
     color: AppColors.secondary,
   );
+  static const badge = TextStyle(
+    fontSize: 8,
+    color: AppColors.neutral,
+  );
   static const bottomBar = TextStyle(
     fontSize: 14,
     letterSpacing: 0.3,

@@ -10,6 +10,7 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
+import 'package:sportly/presentation/widgets/admin_badge.dart';
 import 'package:sportly/presentation/widgets/show_leave_team_dialog.dart';
 import 'package:sportly/presentation/widgets/sport_discipline_icon.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
@@ -148,6 +149,7 @@ class _Idle extends StatelessWidget {
                           ),
                         ),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             _PopupMenuButton(
                               state: state,
@@ -157,11 +159,7 @@ class _Idle extends StatelessWidget {
                             ),
                             if (state.teams[index].role.isAdmin) ...[
                               const Gap(AppDimens.xbig),
-                              const Icon(
-                                Icons.star,
-                                color: AppColors.adminStar,
-                                size: AppDimens.userRoleIndicatorSize,
-                              ),
+                              const AdminBadge()
                             ]
                           ],
                         ),

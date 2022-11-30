@@ -1,5 +1,6 @@
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team_details.f.dart';
 import 'package:sportly/domain/features/teams/models/team_type.dart';

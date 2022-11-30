@@ -14,6 +14,7 @@ import 'package:sportly/presentation/pages/team_management/team_management_page_
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
+import 'package:sportly/presentation/widgets/admin_badge.dart';
 import 'package:sportly/presentation/widgets/form/sportly_text_input.dart';
 import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
@@ -163,12 +164,8 @@ class _Idle extends HookWidget {
                             style: AppTypo.bodySmall,
                           ),
                           if (member.role.isAdmin) ...[
-                            const Gap(AppDimens.xxxsm),
-                            const Icon(
-                              Icons.star,
-                              color: AppColors.adminStar,
-                              size: AppDimens.userRoleIndicatorSize,
-                            ),
+                            const Gap(AppDimens.xxsm),
+                            const AdminBadge(),
                           ],
                           const Spacer(),
                           PopupMenuButton(
