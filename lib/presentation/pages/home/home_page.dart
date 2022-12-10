@@ -5,7 +5,7 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/widgets/sportly_app_bar.dart';
 import 'package:sportly/presentation/widgets/sportly_bottom_bar.dart';
 
-const mainRoutesPaths = [
+const _mainRoutesPaths = [
   '/',
   '/teams',
   '/chat',
@@ -30,7 +30,7 @@ class HomePage extends HookWidget {
 
         return Scaffold(
           appBar: SportlyAppBar(
-            showBackButton: !mainRoutesPaths.contains(
+            showBackButton: !_mainRoutesPaths.contains(
               context.router.currentPath,
             ),
           ),

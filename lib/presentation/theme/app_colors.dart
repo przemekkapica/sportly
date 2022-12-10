@@ -6,7 +6,7 @@ class AppColors {
   static const neutral = Color(0xFFFFFFFF);
   static const succeess = Colors.green;
   static const danger = Color(0xFFD10000);
-  static const background = Color(0xFFF3F3F3);
+  static const background = Color(0xFFF5F5F5);
 
   static const adminStar = Colors.amber;
 
