@@ -164,7 +164,9 @@ class _Idle extends HookWidget {
       },
       onCellTap: (calendarEvents, date) {
         if (calendarEvents.isEmpty) {
-          context.router.push(const CreateEventPageRoute());
+          context.router.push(
+            CreateEventPageRoute(teamId: team.id, date: date),
+          );
         } else {
           context.router.push(EventsListPageRoute(events: calendarEvents));
         }

@@ -3,7 +3,7 @@ import 'package:sportly/infrastructure/schedule/dtos/create_event_dto.dart';
 import 'package:sportly/infrastructure/schedule/dtos/get_events_dto.dart';
 
 @injectable
-class MockScheduleDataSource {
+class ScheduleDataSource {
   @override
   Future<void> createEvent(CreateEventDto event) {
     // TODO: implement createEvent

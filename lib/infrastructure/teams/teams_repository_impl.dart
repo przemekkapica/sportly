@@ -140,13 +140,13 @@ class TeamsRepositoryImpl implements TeamsRepository {
   // Stream methods
   @override
   Future<void> startCheckingTeams(Duration checkingPeriod) async {
-    if (alreadyStartedCheckingTeams) {
-      return;
-    }
-    alreadyStartedCheckingTeams = true;
-    _timer?.cancel();
-    await fetchTeams();
-    _timer = Timer.periodic(checkingPeriod, (_) => fetchTeams());
+    // if (alreadyStartedCheckingTeams) {
+    //   return;
+    // }
+    // alreadyStartedCheckingTeams = true;
+    // _timer?.cancel();
+    // await fetchTeams();
+    // _timer = Timer.periodic(checkingPeriod, (_) => fetchTeams());
   }
 
   @override
