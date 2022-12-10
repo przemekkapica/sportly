@@ -1,11 +1,7 @@
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/schedule/models/create_event.f.dart';
-import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
-import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/domain/use_cases/create_event_use_case.dart';
-import 'package:sportly/domain/use_cases/fetch_teams_use_case.dart';
-import 'package:sportly/domain/use_cases/get_disciplines_use_case.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_action.f.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_state.f.dart';
 import 'package:sportly/utils/extensions/string_extension.dart';
@@ -19,19 +15,28 @@ class CreateEventPageCubit
 
   final CreateEventUseCase _createEventUseCase;
 
-  late final _teamId;
+  late final int _teamId;
+  late DateTime _dateTime;
 
-  DateTime? _date;
   String? _title;
   String? _description;
 
   bool _submitButtonEnabled = false;
 
   Future<void> init(int teamId, DateTime date) async {
-    _date = date;
+    _dateTime = date;
     _teamId = teamId;
 
-    emit(const CreateEventPageState.idle(submitButtonEnabled: false));
+    _emitIdle();
+  }
+
+  void _emitIdle() {
+    emit(
+      CreateEventPageState.idle(
+        selectedDate: _dateTime,
+        submitButtonEnabled: _submitButtonEnabled,
+      ),
+    );
   }
 
   onTitleChanged(String? value) {
@@ -44,27 +49,28 @@ class CreateEventPageCubit
     _checkIfButtonEnabledAndEmit();
   }
 
+  onDateChanged(DateTime dateTime) {
+    _dateTime = dateTime;
+    _emitIdle();
+  }
+
   void _checkIfButtonEnabledAndEmit() {
-    if (_title.nullOrEmpty || _date == null) {
+    if (_title.nullOrEmpty) {
       _submitButtonEnabled = false;
     } else {
       _submitButtonEnabled = true;
     }
-    emit(
-      CreateEventPageState.idle(
-        submitButtonEnabled: _submitButtonEnabled,
-      ),
-    );
+    _emitIdle();
   }
 
   Future<void> submit() async {
-    if (!_title.nullOrEmpty && _date != null) {
+    if (!_title.nullOrEmpty) {
       dispatch(const CreateEventPageAction.showLoader());
       try {
         await _createEventUseCase(
           _teamId,
           CreateEvent(
-            date: _date!,
+            date: _dateTime,
             title: _title!,
             description: _description,
           ),

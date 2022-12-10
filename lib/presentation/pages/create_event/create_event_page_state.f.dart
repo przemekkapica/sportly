@@ -7,6 +7,7 @@ class CreateEventPageState with _$CreateEventPageState {
   const factory CreateEventPageState.loading() = CreateEventPageStateLoading;
 
   const factory CreateEventPageState.idle({
+    required DateTime selectedDate,
     required bool submitButtonEnabled,
   }) = CreateEventPageStateIdle;
 

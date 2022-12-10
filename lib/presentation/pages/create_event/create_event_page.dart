@@ -10,13 +10,16 @@ import 'package:sportly/presentation/pages/create_event/create_event_page_action
 import 'package:sportly/presentation/pages/create_event/create_event_page_cubit.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_state.f.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
+import 'package:sportly/presentation/theme/app_typo.dart';
 import 'package:sportly/presentation/widgets/form/sportly_text_input.dart';
 import 'package:sportly/presentation/widgets/scroll_or_fit_bottom.dart';
 import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_error.dart';
 import 'package:sportly/presentation/widgets/sportly_loader.dart';
+import 'package:sportly/utils/extensions/date_time_extension.dart';
 import 'package:sportly/utils/extensions/string_extension.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CreateEventPage extends HookWidget {
   const CreateEventPage({
@@ -62,6 +65,7 @@ class CreateEventPage extends HookWidget {
         idle: (state) => _Idle(
           cubit: cubit,
           state: state,
+          initialDate: date,
         ),
       ),
     );
@@ -73,10 +77,12 @@ class _Idle extends HookWidget {
     Key? key,
     required this.cubit,
     required this.state,
+    required this.initialDate,
   }) : super(key: key);
 
   final CreateEventPageCubit cubit;
   final CreateEventPageStateIdle state;
+  final DateTime initialDate;
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +98,23 @@ class _Idle extends HookWidget {
             key: formKey,
             child: Column(
               children: [
+                TextButton(
+                  onPressed: () {
+                    DatePicker.showDateTimePicker(
+                      context,
+                      showTitleActions: true,
+                      onConfirm: cubit.onDateChanged,
+                      currentTime: initialDate,
+                    );
+                  },
+                  child: Text(
+                    state.selectedDate.formatCreateEvent(),
+                    style: AppTypo.bodySmall,
+                  ),
+                ),
                 const Gap(AppDimens.md),
                 SportlyTextInput(
-                  label: 'title*',
+                  label: 'Title*',
                   textInputAction: TextInputAction.next,
                   onChanged: cubit.onTitleChanged,
                   validator: (value) {
@@ -106,7 +126,7 @@ class _Idle extends HookWidget {
                 ),
                 const Gap(AppDimens.md),
                 SportlyTextInput(
-                  label: 'description',
+                  label: 'Description',
                   textInputAction: TextInputAction.done,
                   onChanged: cubit.onDescriptionChanged,
                   validator: (_) => null,
@@ -127,5 +147,83 @@ class _Idle extends HookWidget {
         ),
       ),
     );
+  }
+}
+
+class CustomPicker extends CommonPickerModel {
+  CustomPicker({
+    DateTime? currentTime,
+    LocaleType? locale,
+  }) : super(locale: locale) {
+    this.currentTime = currentTime ?? DateTime.now();
+    this.setLeftIndex(this.currentTime.hour);
+    this.setMiddleIndex(this.currentTime.minute);
+    this.setRightIndex(this.currentTime.second);
+  }
+
+  String digits(int value, int length) {
+    return '$value'.padLeft(length, "0");
+  }
+
+  @override
+  String? leftStringAtIndex(int index) {
+    if (index >= 0 && index < 24) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String? middleStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String? rightStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String leftDivider() {
+    return "|";
+  }
+
+  @override
+  String rightDivider() {
+    return "|";
+  }
+
+  @override
+  List<int> layoutProportions() {
+    return [1, 2, 1];
+  }
+
+  @override
+  DateTime finalTime() {
+    return currentTime.isUtc
+        ? DateTime.utc(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex())
+        : DateTime(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex(),
+          );
   }
 }
