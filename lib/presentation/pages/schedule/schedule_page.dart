@@ -36,6 +36,20 @@ class SchedulePage extends HookWidget {
     );
 
     return Scaffold(
+      floatingActionButton: state.when(
+        loading: () => const SizedBox.shrink(),
+        idle: (_) => FloatingActionButton(
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.neutral,
+          child: const Icon(Icons.add_rounded),
+          onPressed: () {
+            context.router.push(
+              CreateEventPageRoute(teamId: team.id, date: DateTime.now()),
+            );
+          },
+        ),
+        error: () => const SizedBox.shrink(),
+      ),
       body: state.map(
         idle: (state) => _Idle(
           cubit: cubit,
