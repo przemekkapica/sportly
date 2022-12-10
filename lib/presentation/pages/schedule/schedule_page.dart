@@ -182,7 +182,12 @@ class _Idle extends HookWidget {
             CreateEventPageRoute(teamId: team.id, date: date),
           );
         } else {
-          context.router.push(EventsListPageRoute(events: calendarEvents));
+          context.router.push(
+            EventsListPageRoute(
+              teamId: team.id,
+              date: date,
+            ),
+          );
         }
       },
     );

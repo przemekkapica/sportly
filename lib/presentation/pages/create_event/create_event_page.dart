@@ -61,6 +61,7 @@ class CreateEventPage extends HookWidget {
     );
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: state.map(
         error: (_) => const SportlyError(),
         loading: (_) => const SportlyLoader(),
