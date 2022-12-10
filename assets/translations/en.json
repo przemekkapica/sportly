@@ -85,5 +85,11 @@
         "message": "Are you sure you want to leave ",
         "confirm": "Leave team",
         "cancel": "Stay"
+    },
+    "create_event": {
+        "title": "Title*",
+        "description": "Description",
+        "button_label": "Create event",
+        "success": "Event created"
     }
 }

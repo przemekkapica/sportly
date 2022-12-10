@@ -9,12 +9,14 @@ import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_action.f.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_cubit.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_state.f.dart';
+import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
 import 'package:sportly/presentation/widgets/form/sportly_text_input.dart';
 import 'package:sportly/presentation/widgets/scroll_or_fit_bottom.dart';
 import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
+import 'package:sportly/presentation/widgets/sportly_card.dart';
 import 'package:sportly/presentation/widgets/sportly_error.dart';
 import 'package:sportly/presentation/widgets/sportly_loader.dart';
 import 'package:sportly/utils/extensions/date_time_extension.dart';
@@ -43,7 +45,7 @@ class CreateEventPage extends HookWidget {
         success: () {
           showSnackBar(
             context,
-            'Event created successfully',
+            LocaleKeys.create_event_success.tr(),
             SnackbarPurpose.success,
           );
           context.router.pop(true);
@@ -98,8 +100,8 @@ class _Idle extends HookWidget {
             key: formKey,
             child: Column(
               children: [
-                TextButton(
-                  onPressed: () {
+                InkWell(
+                  onTap: () {
                     DatePicker.showDateTimePicker(
                       context,
                       showTitleActions: true,
@@ -107,14 +109,40 @@ class _Idle extends HookWidget {
                       currentTime: initialDate,
                     );
                   },
-                  child: Text(
-                    state.selectedDate.formatCreateEvent(),
-                    style: AppTypo.bodySmall,
+                  child: SportlyCard(
+                    padding: const EdgeInsets.all(AppDimens.md),
+                    borderColor: AppColors.secondary.withAlpha(80),
+                    content: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Icon(Icons.calendar_today_rounded),
+                            const Gap(AppDimens.xsm),
+                            Text(
+                              state.selectedDate.formatEEEEMMMdd(),
+                              style: AppTypo.bodySmall,
+                            ),
+                          ],
+                        ),
+                        const Gap(AppDimens.sm),
+                        Row(
+                          children: [
+                            const Icon(Icons.access_time_rounded),
+                            const Gap(AppDimens.xsm),
+                            Text(
+                              state.selectedDate.formatHHMM(),
+                              style: AppTypo.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const Gap(AppDimens.md),
                 SportlyTextInput(
-                  label: 'Title*',
+                  label: LocaleKeys.create_event_title.tr(),
                   textInputAction: TextInputAction.next,
                   onChanged: cubit.onTitleChanged,
                   validator: (value) {
@@ -126,7 +154,7 @@ class _Idle extends HookWidget {
                 ),
                 const Gap(AppDimens.md),
                 SportlyTextInput(
-                  label: 'Description',
+                  label: LocaleKeys.create_event_description.tr(),
                   textInputAction: TextInputAction.done,
                   onChanged: cubit.onDescriptionChanged,
                   validator: (_) => null,
@@ -143,87 +171,9 @@ class _Idle extends HookWidget {
               cubit.submit();
             }
           },
-          label: 'Create event',
+          label: LocaleKeys.create_event_button_label.tr(),
         ),
       ),
     );
-  }
-}
-
-class CustomPicker extends CommonPickerModel {
-  CustomPicker({
-    DateTime? currentTime,
-    LocaleType? locale,
-  }) : super(locale: locale) {
-    this.currentTime = currentTime ?? DateTime.now();
-    this.setLeftIndex(this.currentTime.hour);
-    this.setMiddleIndex(this.currentTime.minute);
-    this.setRightIndex(this.currentTime.second);
-  }
-
-  String digits(int value, int length) {
-    return '$value'.padLeft(length, "0");
-  }
-
-  @override
-  String? leftStringAtIndex(int index) {
-    if (index >= 0 && index < 24) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String? middleStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String? rightStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String leftDivider() {
-    return "|";
-  }
-
-  @override
-  String rightDivider() {
-    return "|";
-  }
-
-  @override
-  List<int> layoutProportions() {
-    return [1, 2, 1];
-  }
-
-  @override
-  DateTime finalTime() {
-    return currentTime.isUtc
-        ? DateTime.utc(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(),
-            this.currentRightIndex())
-        : DateTime(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(),
-            this.currentRightIndex(),
-          );
   }
 }
