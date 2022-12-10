@@ -36,6 +36,20 @@ class SchedulePage extends HookWidget {
     );
 
     return Scaffold(
+      floatingActionButton: state.when(
+        loading: () => const SizedBox.shrink(),
+        idle: (_) => FloatingActionButton(
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.neutral,
+          child: const Icon(Icons.add_rounded),
+          onPressed: () {
+            context.router.push(
+              CreateEventPageRoute(teamId: team.id, date: DateTime.now()),
+            );
+          },
+        ),
+        error: () => const SizedBox.shrink(),
+      ),
       body: state.map(
         idle: (state) => _Idle(
           cubit: cubit,
@@ -164,9 +178,16 @@ class _Idle extends HookWidget {
       },
       onCellTap: (calendarEvents, date) {
         if (calendarEvents.isEmpty) {
-          context.router.push(const CreateEventPageRoute());
+          context.router.push(
+            CreateEventPageRoute(teamId: team.id, date: date),
+          );
         } else {
-          context.router.push(EventsListPageRoute(events: calendarEvents));
+          context.router.push(
+            EventsListPageRoute(
+              teamId: team.id,
+              date: date,
+            ),
+          );
         }
       },
     );

@@ -17,52 +17,65 @@ class SportlyBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SalomonBottomBar(
-      selectedItemColor: AppColors.primary,
-      currentIndex: tabsRouter.activeIndex,
-      onTap: tabsRouter.setActiveIndex,
-      items: [
-        SalomonBottomBarItem(
-          icon: const Icon(
-            Icons.spoke_rounded,
-            size: AppDimens.bottomBarIconSize,
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.neutral,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.secondary.withAlpha(30),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, -4),
           ),
-          title: Text(
-            LocaleKeys.bottom_bar_teams.tr(),
-            style: AppTypo.bottomBar,
+        ],
+      ),
+      child: SalomonBottomBar(
+        selectedItemColor: AppColors.primary,
+        currentIndex: tabsRouter.activeIndex,
+        onTap: tabsRouter.setActiveIndex,
+        items: [
+          SalomonBottomBarItem(
+            icon: const Icon(
+              Icons.spoke_rounded,
+              size: AppDimens.bottomBarIconSize,
+            ),
+            title: Text(
+              LocaleKeys.bottom_bar_teams.tr(),
+              style: AppTypo.bottomBar,
+            ),
           ),
-        ),
-        SalomonBottomBarItem(
-          icon: const Icon(
-            Icons.chat,
-            size: AppDimens.bottomBarIconSize,
+          SalomonBottomBarItem(
+            icon: const Icon(
+              Icons.chat,
+              size: AppDimens.bottomBarIconSize,
+            ),
+            title: Text(
+              LocaleKeys.bottom_bar_chat.tr(),
+              style: AppTypo.bottomBar,
+            ),
           ),
-          title: Text(
-            LocaleKeys.bottom_bar_chat.tr(),
-            style: AppTypo.bottomBar,
+          SalomonBottomBarItem(
+            icon: const Icon(
+              Icons.calendar_month_rounded,
+              size: AppDimens.bottomBarIconSize,
+            ),
+            title: Text(
+              LocaleKeys.bottom_bar_schedule.tr(),
+              style: AppTypo.bottomBar,
+            ),
           ),
-        ),
-        SalomonBottomBarItem(
-          icon: const Icon(
-            Icons.calendar_month_rounded,
-            size: AppDimens.bottomBarIconSize,
+          SalomonBottomBarItem(
+            icon: const Icon(
+              Icons.account_circle,
+              size: AppDimens.bottomBarIconSize,
+            ),
+            title: Text(
+              LocaleKeys.bottom_bar_profile.tr(),
+              style: AppTypo.bottomBar,
+            ),
           ),
-          title: Text(
-            LocaleKeys.bottom_bar_schedule.tr(),
-            style: AppTypo.bottomBar,
-          ),
-        ),
-        SalomonBottomBarItem(
-          icon: const Icon(
-            Icons.account_circle,
-            size: AppDimens.bottomBarIconSize,
-          ),
-          title: Text(
-            LocaleKeys.bottom_bar_profile.tr(),
-            style: AppTypo.bottomBar,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

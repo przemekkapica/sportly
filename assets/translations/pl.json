@@ -85,5 +85,11 @@
         "message": "Czy na pewno chcesz opuścić zespół ",
         "confirm": "Opuść zespół",
         "cancel": "Wróć"
+    },
+    "create_event": {
+        "title": "Nazwa*",
+        "description": "Opis",
+        "button_label": "Dodaj wydarzenie",
+        "success": "Dodano wydarzenie"
     }
 }

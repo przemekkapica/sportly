@@ -7,6 +7,10 @@ extension DateTimeExtension on DateTime {
     return DateFormat('dd.MM', locale).format(this);
   }
 
+  String formatEEEEMMMdd({String? locale, bool convertToTimezone = true}) {
+    return DateFormat('EEEE, MMM dd', locale).format(this);
+  }
+
   String formatDMMMM({String? locale, bool convertToTimezone = true}) {
     return DateFormat('d MMMM', locale).format(this);
   }
