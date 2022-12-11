@@ -14,6 +14,7 @@ import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
 import 'package:sportly/presentation/widgets/form/sportly_text_input.dart';
 import 'package:sportly/presentation/widgets/scroll_or_fit_bottom.dart';
+import 'package:sportly/presentation/widgets/show_date_time_picker.dart';
 import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
@@ -102,14 +103,11 @@ class _Idle extends HookWidget {
             child: Column(
               children: [
                 InkWell(
-                  onTap: () {
-                    DatePicker.showDateTimePicker(
-                      context,
-                      showTitleActions: true,
-                      onConfirm: cubit.onDateChanged,
-                      currentTime: initialDate,
-                    );
-                  },
+                  onTap: () => showDateTimePicker(
+                    context,
+                    cubit.onDateChanged,
+                    state.selectedDate,
+                  ),
                   child: SportlyCard(
                     padding: const EdgeInsets.all(AppDimens.md),
                     borderColor: AppColors.secondary.withAlpha(80),
