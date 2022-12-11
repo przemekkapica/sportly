@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -6,10 +7,12 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_action.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_cubit.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_state.f.dart';
+import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
+import 'package:sportly/presentation/widgets/sportly_divider.dart';
 import 'package:sportly/presentation/widgets/sportly_error.dart';
 import 'package:sportly/presentation/widgets/sportly_loader.dart';
 import 'package:sportly/utils/extensions/date_time_extension.dart';
@@ -45,6 +48,20 @@ class EventsListPage extends HookWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
+      floatingActionButton: state.when(
+        loading: () => const SizedBox.shrink(),
+        idle: (_) => FloatingActionButton(
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.neutral,
+          child: const Icon(Icons.add_rounded),
+          onPressed: () {
+            context.router.push(
+              CreateEventPageRoute(teamId: teamId, date: date),
+            );
+          },
+        ),
+        error: () => const SizedBox.shrink(),
+      ),
       body: state.map(
         loading: (_) => const SportlyLoader(),
         idle: (state) => _Idle(
@@ -74,61 +91,80 @@ class _Idle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RichText(
-            text: TextSpan(
-              text: ' ' + state.events[0].date.formatEEEEMMMdd(),
-              style: AppTypo.bodySmall.copyWith(
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Montserrat',
-              ),
+          SportlyCard(
+            content: Column(
               children: [
-                TextSpan(
-                  text: ' events',
-                  style: AppTypo.bodySmall.copyWith(
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Gap(AppDimens.sm),
-          ListView.separated(
-            physics: const BouncingScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return SportlyCard(
-                content: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${state.events[index].date.formatHHMM()}: ${state.events[index].title}',
-                            style: AppTypo.bodySmall,
-                          ),
-                          if (state.events[index].description != null) ...[
-                            const Gap(AppDimens.xxsm),
-                            Text(
-                              state.events[index].description!,
-                              style: AppTypo.labelMedium,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ]
-                        ],
+                    const Icon(Icons.calendar_today_rounded),
+                    const Gap(AppDimens.xsm),
+                    Text(
+                      state.events[0].date.formatEEEEMMMdd(),
+                      style: AppTypo.bodyLarge.copyWith(
+                        fontFamily: 'Montserrat',
                       ),
                     ),
-                    _PopupMenuButton(index: index),
                   ],
                 ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const Gap(AppDimens.sm);
-            },
-            itemCount: state.events.length,
+                const Gap(AppDimens.xbig),
+                ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  text: state.events[index].date.formatHHMM(),
+                                  style: AppTypo.bodySmall.copyWith(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: ' ' + state.events[index].title,
+                                      style: AppTypo.bodyMedium.copyWith(
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              if (state.events[index].description != null) ...[
+                                const Gap(AppDimens.xxsm),
+                                Text(
+                                  state.events[index].description!,
+                                  style: AppTypo.labelLarge,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ]
+                            ],
+                          ),
+                        ),
+                        _PopupMenuButton(index: index),
+                      ],
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Column(
+                      children: const [
+                        Gap(AppDimens.md),
+                        SportlyDivider(),
+                        Gap(AppDimens.md),
+                      ],
+                    );
+                  },
+                  itemCount: state.events.length,
+                ),
+                const Gap(AppDimens.xsm),
+              ],
+            ),
           ),
         ],
       ),
