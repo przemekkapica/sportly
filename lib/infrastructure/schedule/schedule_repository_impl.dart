@@ -80,6 +80,22 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
         title: 'Match',
         description: 'Legia Stadium, vs Real Madrid',
       ),
+      Event(
+        date: DateTime(2022, 12, 10, 18, 30),
+        title: 'Meeting',
+        description: null,
+      ),
+      Event(
+        date: DateTime(2022, 12, 14, 20, 30),
+        title: 'Training',
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
+      ),
+      Event(
+        date: DateTime(2022, 12, 13, 22, 00),
+        title: 'Stretching',
+        description: null,
+      ),
     ];
   }
 }

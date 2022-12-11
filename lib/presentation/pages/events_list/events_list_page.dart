@@ -88,85 +88,86 @@ class _Idle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(AppDimens.pagePadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SportlyCard(
-            content: Column(
+      child: SportlyCard(
+        content: Column(
+          children: [
+            Row(
               children: [
-                Row(
-                  children: [
-                    const Icon(Icons.calendar_today_rounded),
-                    const Gap(AppDimens.xsm),
-                    Text(
-                      state.events[0].date.formatEEEEMMMdd(),
-                      style: AppTypo.bodyLarge.copyWith(
-                        fontFamily: 'Montserrat',
-                      ),
-                    ),
-                  ],
-                ),
-                const Gap(AppDimens.xbig),
-                ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              RichText(
-                                text: TextSpan(
-                                  text: state.events[index].date.formatHHMM(),
-                                  style: AppTypo.bodySmall.copyWith(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                      text: ' ' + state.events[index].title,
-                                      style: AppTypo.bodyMedium.copyWith(
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              if (state.events[index].description != null) ...[
-                                const Gap(AppDimens.xxsm),
-                                Text(
-                                  state.events[index].description!,
-                                  style: AppTypo.labelLarge,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ]
-                            ],
-                          ),
-                        ),
-                        _PopupMenuButton(index: index),
-                      ],
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return Column(
-                      children: const [
-                        Gap(AppDimens.md),
-                        SportlyDivider(),
-                        Gap(AppDimens.md),
-                      ],
-                    );
-                  },
-                  itemCount: state.events.length,
-                ),
+                const Icon(Icons.calendar_today_rounded),
                 const Gap(AppDimens.xsm),
+                Text(
+                  state.events[0].date.formatEEEEMMMdd(),
+                  style: AppTypo.bodyLarge.copyWith(
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
+            const Gap(AppDimens.xbig),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: state.events
+                      .map(
+                        (event) => Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      RichText(
+                                        text: TextSpan(
+                                          text: event.date.formatHHMM(),
+                                          style: AppTypo.bodySmall.copyWith(
+                                            fontFamily: 'Montserrat',
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          children: [
+                                            TextSpan(
+                                              text: ' ' + event.title,
+                                              style:
+                                                  AppTypo.bodyMedium.copyWith(
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      if (event.description != null) ...[
+                                        const Gap(AppDimens.xxsm),
+                                        Text(
+                                          event.description!,
+                                          style: AppTypo.labelLarge,
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ]
+                                    ],
+                                  ),
+                                ),
+                                const _PopupMenuButton(),
+                              ],
+                            ),
+                            if (state.events.indexOf(event) <
+                                state.events.length - 1) ...[
+                              const Gap(AppDimens.sm),
+                              const SportlyDivider(),
+                              const Gap(AppDimens.sm),
+                            ]
+                          ],
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -175,10 +176,7 @@ class _Idle extends StatelessWidget {
 class _PopupMenuButton extends StatelessWidget {
   const _PopupMenuButton({
     Key? key,
-    required this.index,
   }) : super(key: key);
-
-  final int index;
 
   @override
   Widget build(BuildContext context) {
