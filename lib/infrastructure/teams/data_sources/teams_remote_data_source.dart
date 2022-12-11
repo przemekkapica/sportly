@@ -37,4 +37,7 @@ abstract class TeamsRemoteDataSource {
 
   @DELETE(NetworkConfig.DELETE_TEAM)
   Future<void> deleteTeam(@Path() int teamId);
+
+  @POST(NetworkConfig.LEAVE_TEAM)
+  Future<void> leaveTeam(@Path() int teamId);
 }

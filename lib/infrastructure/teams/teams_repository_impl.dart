@@ -93,7 +93,7 @@ class TeamsRepositoryImpl implements TeamsRepository {
 
   @override
   Future<void> leaveTeam(int id) async {
-    return await _teamsDataSource.leaveTeam(id);
+    return await _teamsRemoteDataSource.leaveTeam(id);
   }
 
   @override
