@@ -192,7 +192,9 @@ class _PopupMenuButton extends StatelessWidget {
             'Edit event',
             style: AppTypo.bodySmall,
           ),
-          onTap: () {},
+          onTap: () => context.router.push(
+            EditEventPageRoute(date: DateTime.now(), teamId: 1),
+          ),
         ),
         PopupMenuItem(
           child: Text(

@@ -1,4 +1,5 @@
 import 'package:sportly/domain/features/schedule/models/create_event.f.dart';
+import 'package:sportly/domain/features/schedule/models/edit_event.f.dart';
 import 'package:sportly/domain/features/schedule/models/event.f.dart';
 
 abstract class ScheduleRepository {
@@ -7,4 +8,6 @@ abstract class ScheduleRepository {
   Future<List<Event>> getDayEvents(int teamId, DateTime date);
 
   Future<void> createEvent(int teamId, CreateEvent createEvent);
+
+  Future<void> editEvent(int teamId, EditEvent editEvent);
 }
