@@ -91,5 +91,11 @@
         "description": "Description",
         "button_label": "Create event",
         "success": "Event created"
+    },
+    "edit_event": {
+        "title": "Title*",
+        "description": "Description",
+        "button_label": "Update event",
+        "success": "Event updated"
     }
 }

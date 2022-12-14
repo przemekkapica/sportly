@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/schedule/models/create_event.f.dart';
+import 'package:sportly/domain/features/schedule/models/edit_event.f.dart';
 import 'package:sportly/domain/features/schedule/models/event.f.dart';
 import 'package:sportly/domain/features/schedule/schedule_repository.dart';
 import 'package:sportly/infrastructure/schedule/data_sources/schedule_data_source.dart';
@@ -97,5 +98,10 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
         description: null,
       ),
     ];
+  }
+
+  @override
+  Future<void> editEvent(int teamId, EditEvent editEvent) async {
+    return;
   }
 }
