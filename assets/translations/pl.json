@@ -91,5 +91,11 @@
         "description": "Opis",
         "button_label": "Dodaj wydarzenie",
         "success": "Dodano wydarzenie"
+    },
+    "edit_event": {
+        "title": "Nazwa*",
+        "description": "Opis",
+        "button_label": "Edytuj wydarzenie",
+        "success": "Zedytowano wydarzenie"
     }
 }

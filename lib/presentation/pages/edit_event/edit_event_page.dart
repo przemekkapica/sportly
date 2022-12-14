@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:sportly/domain/features/schedule/models/event.f.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/edit_event/edit_event_page_action.f.dart';
 import 'package:sportly/presentation/pages/edit_event/edit_event_page_cubit.dart';
@@ -27,11 +28,11 @@ class EditEventPage extends HookWidget {
   const EditEventPage({
     Key? key,
     required this.teamId,
-    required this.date,
+    required this.event,
   }) : super(key: key);
 
   final int teamId;
-  final DateTime date;
+  final Event event;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class EditEventPage extends HookWidget {
         success: () {
           showSnackBar(
             context,
-            LocaleKeys.create_event_success.tr(),
+            LocaleKeys.edit_event_success.tr(),
             SnackbarPurpose.success,
           );
           context.router.pop(true);
@@ -55,7 +56,7 @@ class EditEventPage extends HookWidget {
 
     useEffect(
       () {
-        cubit.init(teamId, date);
+        cubit.init(teamId, event);
       },
       [],
     );
@@ -68,7 +69,7 @@ class EditEventPage extends HookWidget {
         idle: (state) => _Idle(
           cubit: cubit,
           state: state,
-          initialDate: date,
+          initialDate: event.date,
         ),
       ),
     );
@@ -140,9 +141,10 @@ class _Idle extends HookWidget {
                 ),
                 const Gap(AppDimens.md),
                 SportlyTextInput(
-                  label: LocaleKeys.create_event_title.tr(),
+                  label: LocaleKeys.edit_event_title.tr(),
                   textInputAction: TextInputAction.next,
                   onChanged: cubit.onTitleChanged,
+                  initialValue: cubit.title,
                   validator: (value) {
                     if (value.nullOrEmpty) {
                       return LocaleKeys.create_team_team_name_error.tr();
@@ -152,7 +154,8 @@ class _Idle extends HookWidget {
                 ),
                 const Gap(AppDimens.md),
                 SportlyTextInput(
-                  label: LocaleKeys.create_event_description.tr(),
+                  label: LocaleKeys.edit_event_description.tr(),
+                  initialValue: cubit.description,
                   textInputAction: TextInputAction.done,
                   onChanged: cubit.onDescriptionChanged,
                   validator: (_) => null,
@@ -169,7 +172,7 @@ class _Idle extends HookWidget {
               cubit.submit();
             }
           },
-          label: LocaleKeys.create_event_button_label.tr(),
+          label: LocaleKeys.edit_event_button_label.tr(),
         ),
       ),
     );

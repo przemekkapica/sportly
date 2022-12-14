@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:sportly/domain/features/schedule/models/event.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_action.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_cubit.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_state.f.dart';
@@ -67,6 +68,7 @@ class EventsListPage extends HookWidget {
         idle: (state) => _Idle(
           cubit: cubit,
           state: state,
+          teamId: teamId,
         ),
         error: (_) => const SportlyError(),
       ),
@@ -79,10 +81,12 @@ class _Idle extends StatelessWidget {
     Key? key,
     required this.cubit,
     required this.state,
+    required this.teamId,
   }) : super(key: key);
 
   final EventsListPageCubit cubit;
   final EventsListPageStateIdle state;
+  final int teamId;
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +154,10 @@ class _Idle extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                const _PopupMenuButton(),
+                                _PopupMenuButton(
+                                  event: event,
+                                  teamId: teamId,
+                                ),
                               ],
                             ),
                             if (state.events.indexOf(event) <
@@ -176,7 +183,12 @@ class _Idle extends StatelessWidget {
 class _PopupMenuButton extends StatelessWidget {
   const _PopupMenuButton({
     Key? key,
+    required this.event,
+    required this.teamId,
   }) : super(key: key);
+
+  final Event event;
+  final int teamId;
 
   @override
   Widget build(BuildContext context) {
@@ -188,12 +200,12 @@ class _PopupMenuButton extends StatelessWidget {
       ),
       itemBuilder: (BuildContext context) => <PopupMenuEntry>[
         PopupMenuItem(
-          child: Text(
+          child: const Text(
             'Edit event',
             style: AppTypo.bodySmall,
           ),
           onTap: () => context.router.push(
-            EditEventPageRoute(date: DateTime.now(), teamId: 1),
+            EditEventPageRoute(event: event, teamId: teamId),
           ),
         ),
         PopupMenuItem(

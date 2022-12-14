@@ -1,6 +1,7 @@
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/schedule/models/edit_event.f.dart';
+import 'package:sportly/domain/features/schedule/models/event.f.dart';
 import 'package:sportly/domain/use_cases/edit_event_use_case.dart';
 import 'package:sportly/presentation/pages/edit_event/edit_event_page_action.f.dart';
 import 'package:sportly/presentation/pages/edit_event/edit_event_page_state.f.dart';
@@ -18,13 +19,15 @@ class EditEventPageCubit
   late final int _teamId;
   late DateTime _dateTime;
 
-  String? _title;
-  String? _description;
+  String? title;
+  String? description;
 
   bool _submitButtonEnabled = false;
 
-  Future<void> init(int teamId, DateTime date) async {
-    _dateTime = date;
+  Future<void> init(int teamId, Event event) async {
+    title = event.title;
+    description = event.description;
+    _dateTime = event.date;
     _teamId = teamId;
 
     _emitIdle();
@@ -40,12 +43,12 @@ class EditEventPageCubit
   }
 
   onTitleChanged(String? value) {
-    _title = value;
+    title = value;
     _checkIfButtonEnabledAndEmit();
   }
 
   onDescriptionChanged(String? value) {
-    _description = value;
+    description = value;
     _checkIfButtonEnabledAndEmit();
   }
 
@@ -55,7 +58,7 @@ class EditEventPageCubit
   }
 
   void _checkIfButtonEnabledAndEmit() {
-    if (_title.nullOrEmpty) {
+    if (title.nullOrEmpty) {
       _submitButtonEnabled = false;
     } else {
       _submitButtonEnabled = true;
@@ -64,15 +67,15 @@ class EditEventPageCubit
   }
 
   Future<void> submit() async {
-    if (!_title.nullOrEmpty) {
+    if (!title.nullOrEmpty) {
       dispatch(const EditEventPageAction.showLoader());
       try {
         await _editEventUseCase(
           _teamId,
           EditEvent(
             date: _dateTime,
-            title: _title!,
-            description: _description,
+            title: title!,
+            description: description,
           ),
         );
         dispatch(const EditEventPageAction.success());
