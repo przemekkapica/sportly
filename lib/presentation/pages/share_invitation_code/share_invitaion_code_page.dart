@@ -91,12 +91,20 @@ class _Idle extends StatelessWidget {
               ),
               const Gap(AppDimens.xxbig),
               Text(
-                state.code,
+                state.code.code,
                 style: AppTypo.titleLarge,
                 textAlign: TextAlign.center,
               ),
               Text(
-                LocaleKeys.share_invitation_code_description.tr(),
+                LocaleKeys.share_invitation_code_description.tr(
+                  args: [
+                    state.code.expiryDate
+                        .difference(DateTime.now())
+                        .inMinutes
+                        .abs()
+                        .toString()
+                  ],
+                ),
                 style: AppTypo.labelLarge,
                 textAlign: TextAlign.center,
               ),

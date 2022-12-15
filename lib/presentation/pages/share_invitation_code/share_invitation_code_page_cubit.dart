@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sportly/domain/features/teams/models/invitation_code.f.dart';
 import 'package:sportly/domain/use_cases/get_invitation_code_use_case.dart';
 import 'package:sportly/presentation/pages/share_invitation_code/share_invitation_code_page_state.f.dart';
 
@@ -12,13 +13,13 @@ class ShareInvitationPageCubit extends Cubit<ShareInvitationCodePageState> {
 
   final GetInvitationCodeUseCase _getInvitationCodeUseCase;
 
-  late final String _generatedCode;
+  late final InvitationCode _generatedCode;
 
   Future<void> init(int teamId) async {
     try {
       final code = await _getInvitationCodeUseCase(teamId);
 
-      _generatedCode = code.code;
+      _generatedCode = code;
 
       emit(
         ShareInvitationCodePageState.idle(
@@ -31,7 +32,7 @@ class ShareInvitationPageCubit extends Cubit<ShareInvitationCodePageState> {
   }
 
   Future<void> copyToClipboard() async {
-    ClipboardData data = ClipboardData(text: _generatedCode);
+    ClipboardData data = ClipboardData(text: _generatedCode.code);
 
     await Clipboard.setData(data);
   }

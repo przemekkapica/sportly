@@ -128,7 +128,6 @@ class TeamsRepositoryImpl implements TeamsRepository {
   @override
   Future<InvitationCode> getInvitationCode(int teamId) async {
     final dto = await _teamsRemoteDataSource.getInvitationCode(teamId);
-
     return _getInvitationCodeMapper(dto);
   }
 
