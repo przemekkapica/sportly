@@ -7,9 +7,9 @@ import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sportly/domain/features/schedule/models/event.f.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
-import 'package:sportly/presentation/pages/edit_event/edit_event_page_action.f.dart';
-import 'package:sportly/presentation/pages/edit_event/edit_event_page_cubit.dart';
-import 'package:sportly/presentation/pages/edit_event/edit_event_page_state.f.dart';
+import 'package:sportly/presentation/pages/edit_event/update_event_page_action.f.dart';
+import 'package:sportly/presentation/pages/edit_event/update_event_page_cubit.dart';
+import 'package:sportly/presentation/pages/edit_event/update_event_page_state.f.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
@@ -24,8 +24,8 @@ import 'package:sportly/presentation/widgets/sportly_loader.dart';
 import 'package:sportly/utils/extensions/date_time_extension.dart';
 import 'package:sportly/utils/extensions/string_extension.dart';
 
-class EditEventPage extends HookWidget {
-  const EditEventPage({
+class UpdateEventPage extends HookWidget {
+  const UpdateEventPage({
     Key? key,
     required this.teamId,
     required this.event,
@@ -36,10 +36,10 @@ class EditEventPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = useCubit<EditEventPageCubit>();
+    final cubit = useCubit<UpdateEventPageCubit>();
     final state = useCubitBuilder(cubit);
 
-    useActionListener<EditEventPageAction>(cubit, (action) {
+    useActionListener<UpdateEventPageAction>(cubit, (action) {
       action.whenOrNull(
         showLoader: context.loaderOverlay.show,
         hideLoader: context.loaderOverlay.hide,
@@ -84,8 +84,8 @@ class _Idle extends HookWidget {
     required this.initialDate,
   }) : super(key: key);
 
-  final EditEventPageCubit cubit;
-  final EditEventPageStateIdle state;
+  final UpdateEventPageCubit cubit;
+  final UpdateEventPageStateIdle state;
   final DateTime initialDate;
 
   @override

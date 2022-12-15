@@ -1,20 +1,20 @@
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:sportly/domain/features/schedule/models/edit_event.f.dart';
+import 'package:sportly/domain/features/schedule/models/update_event.f.dart';
 import 'package:sportly/domain/features/schedule/models/event.f.dart';
-import 'package:sportly/domain/use_cases/edit_event_use_case.dart';
-import 'package:sportly/presentation/pages/edit_event/edit_event_page_action.f.dart';
-import 'package:sportly/presentation/pages/edit_event/edit_event_page_state.f.dart';
+import 'package:sportly/domain/use_cases/update_event_use_case.dart';
+import 'package:sportly/presentation/pages/edit_event/update_event_page_action.f.dart';
+import 'package:sportly/presentation/pages/edit_event/update_event_page_state.f.dart';
 import 'package:sportly/utils/extensions/string_extension.dart';
 
 @injectable
-class EditEventPageCubit
-    extends ActionCubit<EditEventPageState, EditEventPageAction> {
-  EditEventPageCubit(
-    this._editEventUseCase,
-  ) : super(const EditEventPageState.loading());
+class UpdateEventPageCubit
+    extends ActionCubit<UpdateEventPageState, UpdateEventPageAction> {
+  UpdateEventPageCubit(
+    this._updateEventUseCase,
+  ) : super(const UpdateEventPageState.loading());
 
-  final EditEventUseCase _editEventUseCase;
+  final UpdateEventUseCase _updateEventUseCase;
 
   late final int _teamId;
   late DateTime _dateTime;
@@ -35,7 +35,7 @@ class EditEventPageCubit
 
   void _emitIdle() {
     emit(
-      EditEventPageState.idle(
+      UpdateEventPageState.idle(
         selectedDate: _dateTime,
         submitButtonEnabled: _submitButtonEnabled,
       ),
@@ -68,21 +68,21 @@ class EditEventPageCubit
 
   Future<void> submit() async {
     if (!title.nullOrEmpty) {
-      dispatch(const EditEventPageAction.showLoader());
+      dispatch(const UpdateEventPageAction.showLoader());
       try {
-        await _editEventUseCase(
+        await _updateEventUseCase(
           _teamId,
-          EditEvent(
+          UpdateEvent(
             date: _dateTime,
             title: title!,
             description: description,
           ),
         );
-        dispatch(const EditEventPageAction.success());
+        dispatch(const UpdateEventPageAction.success());
       } catch (e) {
-        emit(const EditEventPageState.error());
+        emit(const UpdateEventPageState.error());
       } finally {
-        dispatch(const EditEventPageAction.hideLoader());
+        dispatch(const UpdateEventPageAction.hideLoader());
       }
     }
   }

@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'edit_event.f.freezed.dart';
+part 'update_event.f.freezed.dart';
 
 @freezed
-class EditEvent with _$EditEvent {
-  const factory EditEvent({
+class UpdateEvent with _$UpdateEvent {
+  const factory UpdateEvent({
     required DateTime date,
     required String title,
     required String? description,
-  }) = _EditEvent;
+  }) = _UpdateEvent;
 }
