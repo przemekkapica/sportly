@@ -11,6 +11,7 @@ class EventBidirectionalMapper
   @override
   Event fromDto(EventDto dto) {
     return Event(
+      id: dto.id,
       date: DateTime.parse(dto.date),
       title: dto.title,
       description: dto.description,
@@ -20,6 +21,7 @@ class EventBidirectionalMapper
   @override
   EventDto toDto(Event data) {
     return EventDto(
+      id: data.id,
       date: data.date.toIso8601String(),
       title: data.title,
       description: data.description,

@@ -12,6 +12,7 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
+import 'package:sportly/presentation/widgets/show_delete_event_dialog.dart';
 import 'package:sportly/presentation/widgets/sportly_card.dart';
 import 'package:sportly/presentation/widgets/sportly_divider.dart';
 import 'package:sportly/presentation/widgets/sportly_error.dart';
@@ -157,6 +158,7 @@ class _Idle extends StatelessWidget {
                                 _PopupMenuButton(
                                   event: event,
                                   teamId: teamId,
+                                  cubit: cubit,
                                 ),
                               ],
                             ),
@@ -185,10 +187,12 @@ class _PopupMenuButton extends StatelessWidget {
     Key? key,
     required this.event,
     required this.teamId,
+    required this.cubit,
   }) : super(key: key);
 
   final Event event;
   final int teamId;
+  final EventsListPageCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -201,11 +205,11 @@ class _PopupMenuButton extends StatelessWidget {
       itemBuilder: (BuildContext context) => <PopupMenuEntry>[
         PopupMenuItem(
           child: const Text(
-            'Edit event',
+            'Update event',
             style: AppTypo.bodySmall,
           ),
           onTap: () => context.router.push(
-            EditEventPageRoute(event: event, teamId: teamId),
+            UpdateEventPageRoute(event: event, teamId: teamId),
           ),
         ),
         PopupMenuItem(
@@ -215,7 +219,11 @@ class _PopupMenuButton extends StatelessWidget {
               color: AppColors.danger,
             ),
           ),
-          onTap: () {},
+          onTap: () => showDeleteEventDialog(
+            context,
+            event.title,
+            () => cubit.deleteEvent(event.id),
+          ),
         ),
       ],
       child: const Icon(

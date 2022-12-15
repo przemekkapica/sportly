@@ -20,7 +20,9 @@ class SchedulePageCubit extends Cubit<SchedulePageState> {
     emit(
       SchedulePageState.idle(
         events: events
-            .map((event) => _eventBidirectionalMapper.toDto(event))
+            .map(
+              (event) => _eventBidirectionalMapper(event),
+            )
             .toList(),
       ),
     );

@@ -5,6 +5,7 @@ part 'event_dto.g.dart';
 @JsonSerializable()
 class EventDto {
   EventDto({
+    required this.id,
     required this.date,
     required this.title,
     required this.description,
@@ -15,6 +16,7 @@ class EventDto {
 
   Map<String, dynamic> toJson() => _$EventDtoToJson(this);
 
+  final int id;
   final String date;
   final String title;
   final String? description;
