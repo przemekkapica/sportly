@@ -8,7 +8,7 @@ class NetworkConfig {
   static const JOIN_TEAM = '/team/JoinTeam';
   static const DELETE_TEAM = '/team/DeleteTeam/{teamId}';
   static const LEAVE_TEAM = '/team/LeaveTeam/{teamId}';
-  static const UPDATE_TEAM = '/team/UpdateTeam';
+  static const UPDATE_TEAM = '/team/UpdateTeam/{teamId}';
   static const REMOVE_MEMBER = '/team/RemoveMember/{teamId}/{userId}';
   static const CHANGE_MEMBER_ROLE = '/team/ChangeMemberRole/{teamId}/{userId}';
 

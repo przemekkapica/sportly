@@ -8,5 +8,6 @@ class TeamManagementPageAction with _$TeamManagementPageAction {
 
   const factory TeamManagementPageAction.hideLoader() = _HideLoader;
 
-  const factory TeamManagementPageAction.success() = _Success;
+  const factory TeamManagementPageAction.success({required bool popPage}) =
+      _Success;
 }

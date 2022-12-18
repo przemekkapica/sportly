@@ -23,7 +23,7 @@ abstract class TeamsRepository {
 
   Future<void> removeTeamMember(int teamId, int userId);
 
-  Future<void> updateTeamMemberRole(int teamId, int userId, Role role);
+  Future<void> changeTeamMemberRole(int teamId, int userId, Role role);
 
   Future<List<SportDiscipline>> getDisciplines();
 

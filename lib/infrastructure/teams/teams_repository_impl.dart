@@ -99,14 +99,14 @@ class TeamsRepositoryImpl implements TeamsRepository {
 
   @override
   Future<void> updateTeam(int id, UpdateTeam updateTeam) async {
-    return await _teamsDataSource.updateTeam(
+    return await _teamsRemoteDataSource.updateTeam(
       id,
       _updateTeamMapper(updateTeam),
     );
   }
 
   @override
-  Future<void> updateTeamMemberRole(
+  Future<void> changeTeamMemberRole(
     int teamId,
     int userId,
     Role role,

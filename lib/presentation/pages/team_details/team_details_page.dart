@@ -43,7 +43,6 @@ class TeamDetailsPage extends HookWidget {
       () {
         cubit.init(teamId);
       },
-      [],
     );
 
     return Scaffold(

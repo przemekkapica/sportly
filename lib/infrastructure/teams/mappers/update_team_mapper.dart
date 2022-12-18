@@ -8,9 +8,9 @@ class UpdateTeamMapper extends DataMapper<UpdateTeam, UpdateTeamDto> {
   @override
   UpdateTeamDto call(UpdateTeam data) {
     return UpdateTeamDto(
-      name: data.name,
-      organizationName: data.organizationName,
-      location: data.location,
+      newTeamName: data.name,
+      newOrganizationName: data.organizationName,
+      newLocation: data.location,
     );
   }
 }
