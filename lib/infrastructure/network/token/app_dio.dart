@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:sportly/core/config/env_config.dart';
 import 'package:sportly/domain/use_cases/get_id_token_use_case.dart';
 
-const _timeout = Duration(seconds: 15);
+const _timeout = Duration(seconds: 30);
 
 class BaseDio extends DioMixin {
   BaseDio(

@@ -36,6 +36,8 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<String> getIdToken() async {
     // TODO: rethink
-    return await _authDataSource.getIdToken() ?? '';
+    final token = await _authDataSource.getIdToken();
+    print(token);
+    return token ?? '';
   }
 }

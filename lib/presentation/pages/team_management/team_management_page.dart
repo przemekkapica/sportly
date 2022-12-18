@@ -7,14 +7,16 @@ import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/team_member.f.dart';
+import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/team_management/team_management_page_action.f.dart';
 import 'package:sportly/presentation/pages/team_management/team_management_page_cubit.dart';
 import 'package:sportly/presentation/pages/team_management/team_management_page_state.f.dart';
+import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
-import 'package:sportly/presentation/widgets/admin_badge.dart';
+import 'package:sportly/presentation/widgets/role_badge.dart';
 import 'package:sportly/presentation/widgets/form/sportly_text_input.dart';
 import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
@@ -40,13 +42,16 @@ class TeamManagementPage extends HookWidget {
       action.whenOrNull(
         showLoader: context.loaderOverlay.show,
         hideLoader: context.loaderOverlay.hide,
-        success: () {
+        success: (popPage) {
           showSnackBar(
             context,
             'Team updated successfully',
             SnackbarPurpose.success,
           );
-          context.router.pop();
+          if (popPage) {
+            context.router.popUntilRouteWithName(TeamDetailsPageRoute.name);
+            context.router.replace(TeamDetailsPageRoute(teamId: teamId));
+          }
         },
       );
     });
@@ -85,6 +90,7 @@ class _Idle extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = useMemoized(() => GlobalKey<FormState>());
+    final isProTeam = state.teamDetails.type == TeamType.professional;
 
     return Padding(
       padding: const EdgeInsets.all(AppDimens.pagePadding),
@@ -163,40 +169,71 @@ class _Idle extends HookWidget {
                             member.fullName,
                             style: AppTypo.bodySmall,
                           ),
-                          if (member.role.isAdmin) ...[
+                          if (member.role.isAdminOrAssistant) ...[
                             const Gap(AppDimens.xxsm),
-                            const AdminBadge(),
+                            RoleBadge(role: member.role),
                           ],
                           const Spacer(),
-                          PopupMenuButton(
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(AppDimens.borderRadius),
-                              ),
-                            ),
-                            itemBuilder: (BuildContext context) =>
-                                <PopupMenuEntry>[
-                              PopupMenuItem(
-                                child: Text(
-                                  LocaleKeys.team_management_make_admin.tr(),
-                                  style: AppTypo.bodySmall,
+                          if (state.teamDetails.members.length > 1)
+                            PopupMenuButton(
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(AppDimens.borderRadius),
                                 ),
-                                onTap: () {},
                               ),
-                              PopupMenuItem(
-                                child: Text(
-                                  LocaleKeys.team_management_remove.tr(),
-                                  style: AppTypo.bodySmall.copyWith(
-                                    color: AppColors.danger,
+                              itemBuilder: (BuildContext context) =>
+                                  <PopupMenuEntry>[
+                                if (isProTeam && !member.role.isAssistant)
+                                  PopupMenuItem(
+                                    child: Text(
+                                      LocaleKeys.team_management_make_assistant
+                                          .tr(),
+                                      style: AppTypo.bodySmall,
+                                    ),
+                                    onTap: () => cubit.changeTeamMemberRole(
+                                      member.id,
+                                      Role.assistant,
+                                    ),
                                   ),
+                                if (!member.role.isAdmin)
+                                  PopupMenuItem(
+                                    child: Text(
+                                      LocaleKeys.team_management_make_admin
+                                          .tr(),
+                                      style: AppTypo.bodySmall,
+                                    ),
+                                    onTap: () => cubit.changeTeamMemberRole(
+                                      member.id,
+                                      isProTeam ? Role.proAdmin : Role.admin,
+                                    ),
+                                  ),
+                                if (member.role.isAdminOrAssistant)
+                                  PopupMenuItem(
+                                    child: Text(
+                                      LocaleKeys.team_management_make_member
+                                          .tr(),
+                                      style: AppTypo.bodySmall,
+                                    ),
+                                    onTap: () => cubit.changeTeamMemberRole(
+                                      member.id,
+                                      isProTeam ? Role.proPlayer : Role.player,
+                                    ),
+                                  ),
+                                PopupMenuItem(
+                                  child: Text(
+                                    LocaleKeys.team_management_remove.tr(),
+                                    style: AppTypo.bodySmall.copyWith(
+                                      color: AppColors.danger,
+                                    ),
+                                  ),
+                                  onTap: () =>
+                                      cubit.removeTeamMember(member.id),
                                 ),
-                                onTap: () {},
+                              ],
+                              child: const Icon(
+                                Icons.more_vert_rounded,
                               ),
-                            ],
-                            child: const Icon(
-                              Icons.more_vert_rounded,
-                            ),
-                          )
+                            )
                         ],
                       );
                     },

@@ -1,13 +1,13 @@
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/role.dart';
-import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team_details.f.dart';
 import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/domain/features/teams/models/update_team.f.dart';
+import 'package:sportly/domain/use_cases/fetch_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/get_team_details_use_case.dart';
 import 'package:sportly/domain/use_cases/remove_team_member_use_case.dart';
-import 'package:sportly/domain/use_cases/update_team_member_role_use_case.dart';
+import 'package:sportly/domain/use_cases/change_team_member_role_use_case.dart';
 import 'package:sportly/domain/use_cases/update_team_use_case.dart';
 import 'package:sportly/presentation/pages/team_management/team_management_page_action.f.dart';
 import 'package:sportly/presentation/pages/team_management/team_management_page_state.f.dart';
@@ -19,23 +19,23 @@ class TeamManagementPageCubit
   TeamManagementPageCubit(
     this._updateTeamUseCase,
     this._getTeamDetailsUseCase,
-    this._updateTeamMemberRoleUseCase,
+    this._changeTeamMemberRoleUseCase,
     this._removeTeamMemberUseCase,
+    this._fetchTeamsUseCase,
   ) : super(const TeamManagementPageState.loading());
 
   final UpdateTeamUseCase _updateTeamUseCase;
   final GetTeamDetailsUseCase _getTeamDetailsUseCase;
-  final UpdateTeamMemberRoleUseCase _updateTeamMemberRoleUseCase;
+  final ChangeTeamMemberRoleUseCase _changeTeamMemberRoleUseCase;
   final RemoveTeamMemberUseCase _removeTeamMemberUseCase;
+  final FetchTeamsUseCase _fetchTeamsUseCase;
 
   late final int _teamId;
-  late final TeamDetails _teamDetails;
+  late TeamDetails _teamDetails;
 
   String? _teamName;
-  SportDiscipline? _sportDiscipline;
   String? _location;
   String? _organizationName;
-  TeamType? _teamType = TeamType.professional;
   bool _submitButtonEnabled = false;
 
   Future<void> init(int teamId) async {
@@ -44,19 +44,22 @@ class TeamManagementPageCubit
       _teamDetails = await _getTeamDetailsUseCase(_teamId);
 
       _teamName = _teamDetails.name;
-      _sportDiscipline = _teamDetails.discipline;
       _location = _teamDetails.location;
       _organizationName = _teamDetails.organizationName;
 
-      emit(
-        TeamManagementPageState.idle(
-          teamDetails: _teamDetails,
-          submitButtonEnabled: false,
-        ),
-      );
+      _emitIdle();
     } catch (e) {
       emit(const TeamManagementPageState.error());
     }
+  }
+
+  void _emitIdle() {
+    emit(
+      TeamManagementPageState.idle(
+        teamDetails: _teamDetails,
+        submitButtonEnabled: _submitButtonEnabled,
+      ),
+    );
   }
 
   onTeamNameChanged(String? value) {
@@ -93,26 +96,53 @@ class TeamManagementPageCubit
   }
 
   Future<void> submit() async {
-    dispatch(const TeamManagementPageAction.showLoader());
-    if (_teamName != null &&
-        _teamType != null &&
-        _location != null &&
-        _sportDiscipline != null) {
+    if (!_teamName.nullOrEmpty) {
+      dispatch(const TeamManagementPageAction.showLoader());
       try {
         await _updateTeamUseCase(
           _teamId,
           UpdateTeam(
             name: _teamName!,
-            location: _location!,
+            location: _location,
             organizationName: _organizationName,
           ),
         );
-        dispatch(const TeamManagementPageAction.success());
+        _teamDetails = await _getTeamDetailsUseCase(_teamId);
+        dispatch(const TeamManagementPageAction.success(popPage: true));
+        _fetchTeamsUseCase();
       } catch (e) {
+        print(e);
         emit(const TeamManagementPageState.error());
-      } finally {
-        dispatch(const TeamManagementPageAction.hideLoader());
       }
+      dispatch(const TeamManagementPageAction.hideLoader());
     }
+  }
+
+  Future<void> removeTeamMember(int userId) async {
+    try {
+      dispatch(const TeamManagementPageAction.showLoader());
+      await this._removeTeamMemberUseCase(_teamId, userId);
+      _teamDetails = await _getTeamDetailsUseCase(_teamId);
+      _emitIdle();
+      dispatch(const TeamManagementPageAction.success(popPage: false));
+    } catch (e) {
+      print(e);
+      emit(const TeamManagementPageState.error());
+    }
+    dispatch(const TeamManagementPageAction.hideLoader());
+  }
+
+  Future<void> changeTeamMemberRole(int userId, Role role) async {
+    try {
+      dispatch(const TeamManagementPageAction.showLoader());
+      await this._changeTeamMemberRoleUseCase(_teamId, userId, role);
+      _teamDetails = await _getTeamDetailsUseCase(_teamId);
+      _emitIdle();
+      dispatch(const TeamManagementPageAction.success(popPage: false));
+    } catch (e) {
+      print(e);
+      emit(const TeamManagementPageState.error());
+    }
+    dispatch(const TeamManagementPageAction.hideLoader());
   }
 }

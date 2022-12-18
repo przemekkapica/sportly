@@ -55,4 +55,10 @@ class AppTypo {
     fontWeight: FontWeight.w400,
     // fontFamily: 'Montserrat-Light',
   );
+  static const banner = TextStyle(
+    fontSize: 9,
+    color: AppColors.neutral,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Montserrat',
+  );
 }

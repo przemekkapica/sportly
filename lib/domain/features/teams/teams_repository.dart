@@ -21,9 +21,9 @@ abstract class TeamsRepository {
 
   Future<void> updateTeam(int id, UpdateTeam updateTeam);
 
-  Future<void> removeTeamMember(int teamId, String userId);
+  Future<void> removeTeamMember(int teamId, int userId);
 
-  Future<void> updateTeamMemberRole(int teamId, String userId, Role role);
+  Future<void> changeTeamMemberRole(int teamId, int userId, Role role);
 
   Future<List<SportDiscipline>> getDisciplines();
 

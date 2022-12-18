@@ -12,6 +12,7 @@ import 'package:sportly/domain/features/teams/models/update_team.f.dart';
 import 'package:sportly/domain/features/teams/teams_repository.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_remote_data_source.dart';
+import 'package:sportly/infrastructure/teams/dtos/change_team_member_role_dto.dart';
 import 'package:sportly/infrastructure/teams/mappers/create_team_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/get_invitation_code_mapper.dart';
 import 'package:sportly/infrastructure/teams/mappers/invitation_code_mapper.dart';
@@ -98,22 +99,28 @@ class TeamsRepositoryImpl implements TeamsRepository {
 
   @override
   Future<void> updateTeam(int id, UpdateTeam updateTeam) async {
-    return await _teamsDataSource.updateTeam(
+    return await _teamsRemoteDataSource.updateTeam(
       id,
       _updateTeamMapper(updateTeam),
     );
   }
 
   @override
-  Future<void> updateTeamMemberRole(int teamId, String userId, Role role) {
-    // TODO: implement changeMemberRole
-    throw UnimplementedError();
+  Future<void> changeTeamMemberRole(
+    int teamId,
+    int userId,
+    Role role,
+  ) async {
+    return await this._teamsRemoteDataSource.changeMemberRole(
+          teamId,
+          userId,
+          ChangeTeamMemberRoleDto(newRole: role.value),
+        );
   }
 
   @override
-  Future<void> removeTeamMember(int teamId, String userId) {
-    // TODO: implement removeTeamMember
-    throw UnimplementedError();
+  Future<void> removeTeamMember(int teamId, int userId) async {
+    return await this._teamsRemoteDataSource.removeMember(teamId, userId);
   }
 
   @override

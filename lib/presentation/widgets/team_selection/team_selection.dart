@@ -10,7 +10,7 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
-import 'package:sportly/presentation/widgets/admin_badge.dart';
+import 'package:sportly/presentation/widgets/role_badge.dart';
 import 'package:sportly/presentation/widgets/show_leave_team_dialog.dart';
 import 'package:sportly/presentation/widgets/sport_discipline_icon.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
@@ -157,9 +157,9 @@ class _Idle extends StatelessWidget {
                               cubit: cubit,
                               index: index,
                             ),
-                            if (state.teams[index].role.isAdmin) ...[
+                            if (state.teams[index].role.isAdminOrAssistant) ...[
                               const Gap(AppDimens.xbig),
-                              const AdminBadge()
+                              RoleBadge(role: state.teams[index].role)
                             ]
                           ],
                         ),
