@@ -1,4 +1,5 @@
 class NetworkConfig {
+  // Teams
   static const GET_TEAMS = '/team/GetTeams';
   static const CREATE_TEAM = '/team/CreateTeam';
   static const GET_DISCIPLINES = '/team/GetDisciplines';
@@ -7,7 +8,11 @@ class NetworkConfig {
   static const JOIN_TEAM = '/team/JoinTeam';
   static const DELETE_TEAM = '/team/DeleteTeam/{teamId}';
   static const LEAVE_TEAM = '/team/LeaveTeam/{teamId}';
+  static const UPDATE_TEAM = '/team/UpdateTeam';
+  static const REMOVE_MEMBER = '/team/RemoveMember/{teamId}/{userId}';
+  static const CHANGE_MEMBER_ROLE = '/team/ChangeMemberRole/{teamId}/{userId}';
 
+  // Schedule
   static const GET_EVENTS = '';
-  static const CREATE_EVENT = '';
+  static const CREATE_EVENT = '/schedule/CreateEvent';
 }

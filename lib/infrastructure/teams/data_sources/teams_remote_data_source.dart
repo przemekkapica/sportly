@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 import 'package:sportly/core/config/network_config.dart';
+import 'package:sportly/infrastructure/teams/dtos/change_team_member_role_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/create_team_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/get_disciplines_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/get_teams_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/get_invitation_code_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/invitation_code_dto.dart';
 import 'package:sportly/infrastructure/teams/dtos/team_details_dto.dart';
+import 'package:sportly/infrastructure/teams/dtos/update_team_dto.dart';
 
 part 'teams_remote_data_source.g.dart';
 
@@ -40,4 +42,23 @@ abstract class TeamsRemoteDataSource {
 
   @POST(NetworkConfig.LEAVE_TEAM)
   Future<void> leaveTeam(@Path() int teamId);
+
+  @PUT(NetworkConfig.UPDATE_TEAM)
+  Future<void> updateTeam(
+    @Path() int teamId,
+    @Body() UpdateTeamDto updateTeamDto,
+  );
+
+  @PUT(NetworkConfig.CHANGE_MEMBER_ROLE)
+  Future<void> changeMemberRole(
+    @Path() int teamId,
+    @Path() int userId,
+    @Body() ChangeTeamMemberRoleDto changeTeamMemberRoleDto,
+  );
+
+  @DELETE(NetworkConfig.REMOVE_MEMBER)
+  Future<void> removeMember(
+    @Path() int teamId,
+    @Path() int userId,
+  );
 }

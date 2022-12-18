@@ -8,7 +8,7 @@ class UpdateTeamMemberRoleUseCase {
 
   final TeamsRepository _teamsRepository;
 
-  Future<void> call(int teamId, String userId, Role role) async {
+  Future<void> call(int teamId, int userId, Role role) async {
     return await _teamsRepository.updateTeamMemberRole(teamId, userId, role);
   }
 }

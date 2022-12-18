@@ -29,7 +29,7 @@ class TeamManagementPageCubit
   final RemoveTeamMemberUseCase _removeTeamMemberUseCase;
 
   late final int _teamId;
-  late final TeamDetails _teamDetails;
+  late TeamDetails _teamDetails;
 
   String? _teamName;
   SportDiscipline? _sportDiscipline;
@@ -48,15 +48,19 @@ class TeamManagementPageCubit
       _location = _teamDetails.location;
       _organizationName = _teamDetails.organizationName;
 
-      emit(
-        TeamManagementPageState.idle(
-          teamDetails: _teamDetails,
-          submitButtonEnabled: false,
-        ),
-      );
+      _emitIdle();
     } catch (e) {
       emit(const TeamManagementPageState.error());
     }
+  }
+
+  void _emitIdle() {
+    emit(
+      TeamManagementPageState.idle(
+        teamDetails: _teamDetails,
+        submitButtonEnabled: _submitButtonEnabled,
+      ),
+    );
   }
 
   onTeamNameChanged(String? value) {
@@ -114,5 +118,19 @@ class TeamManagementPageCubit
         dispatch(const TeamManagementPageAction.hideLoader());
       }
     }
+  }
+
+  Future<void> removeTeamMember(int userId) async {
+    try {
+      dispatch(const TeamManagementPageAction.showLoader());
+      await this._removeTeamMemberUseCase(_teamId, userId);
+      _teamDetails = await _getTeamDetailsUseCase(_teamId);
+      _emitIdle();
+      dispatch(const TeamManagementPageAction.success());
+    } catch (e) {
+      print(e);
+      emit(const TeamManagementPageState.error());
+    }
+    dispatch(const TeamManagementPageAction.hideLoader());
   }
 }

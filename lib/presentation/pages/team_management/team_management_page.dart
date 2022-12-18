@@ -46,7 +46,6 @@ class TeamManagementPage extends HookWidget {
             'Team updated successfully',
             SnackbarPurpose.success,
           );
-          context.router.pop();
         },
       );
     });
@@ -168,35 +167,37 @@ class _Idle extends HookWidget {
                             const AdminBadge(),
                           ],
                           const Spacer(),
-                          PopupMenuButton(
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(AppDimens.borderRadius),
-                              ),
-                            ),
-                            itemBuilder: (BuildContext context) =>
-                                <PopupMenuEntry>[
-                              PopupMenuItem(
-                                child: Text(
-                                  LocaleKeys.team_management_make_admin.tr(),
-                                  style: AppTypo.bodySmall,
+                          if (state.teamDetails.members.length > 1)
+                            PopupMenuButton(
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(AppDimens.borderRadius),
                                 ),
-                                onTap: () {},
                               ),
-                              PopupMenuItem(
-                                child: Text(
-                                  LocaleKeys.team_management_remove.tr(),
-                                  style: AppTypo.bodySmall.copyWith(
-                                    color: AppColors.danger,
+                              itemBuilder: (BuildContext context) =>
+                                  <PopupMenuEntry>[
+                                PopupMenuItem(
+                                  child: Text(
+                                    LocaleKeys.team_management_make_admin.tr(),
+                                    style: AppTypo.bodySmall,
                                   ),
+                                  onTap: () {},
                                 ),
-                                onTap: () {},
+                                PopupMenuItem(
+                                  child: Text(
+                                    LocaleKeys.team_management_remove.tr(),
+                                    style: AppTypo.bodySmall.copyWith(
+                                      color: AppColors.danger,
+                                    ),
+                                  ),
+                                  onTap: () =>
+                                      cubit.removeTeamMember(member.id),
+                                ),
+                              ],
+                              child: const Icon(
+                                Icons.more_vert_rounded,
                               ),
-                            ],
-                            child: const Icon(
-                              Icons.more_vert_rounded,
-                            ),
-                          )
+                            )
                         ],
                       );
                     },
