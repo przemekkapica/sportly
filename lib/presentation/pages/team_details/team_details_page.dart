@@ -8,6 +8,7 @@ import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/sport_discipline.f.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_member.f.dart';
+import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/team_details/team_details_page_cubit.dart';
 import 'package:sportly/presentation/pages/team_details/team_details_page_state.f.dart';
@@ -25,6 +26,7 @@ import 'package:sportly/presentation/widgets/sportly_error.dart';
 import 'package:sportly/presentation/widgets/sportly_icon_button.dart';
 import 'package:sportly/presentation/widgets/sportly_loader.dart';
 import 'package:sportly/utils/extensions/date_time_extension.dart';
+import 'package:sportly/utils/extensions/string_extension.dart';
 
 class TeamDetailsPage extends HookWidget {
   const TeamDetailsPage({
@@ -82,21 +84,18 @@ class _Idle extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  SportlyCard(
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _TeamDetailsHeader(idle: state),
-                        const Gap(AppDimens.big),
-                        _QuickActionsSection(
-                          team: Team.fromDetails(state.teamDetails),
-                        ),
-                        const Gap(AppDimens.xbig),
-                        _TeamMembersSection(idle: state),
-                      ],
-                    ),
-                  ),
+                  if (state.teamDetails.type == TeamType.professional)
+                    ClipRRect(
+                      child: Banner(
+                        message: 'PRO',
+                        textStyle: AppTypo.banner,
+                        location: BannerLocation.topEnd,
+                        color: AppColors.secondary,
+                        child: _TeamDetailsCard(state: state),
+                      ),
+                    )
+                  else
+                    _TeamDetailsCard(state: state),
                   const Gap(AppDimens.big),
                 ],
               ),
@@ -125,6 +124,84 @@ class _Idle extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _TeamDetailsCard extends StatelessWidget {
+  const _TeamDetailsCard({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final TeamDetailsPageStateIdle state;
+
+  @override
+  Widget build(BuildContext context) {
+    return SportlyCard(
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _TeamDetailsHeader(idle: state),
+          if (!state.teamDetails.location.nullOrEmpty ||
+              !state.teamDetails.organizationName.nullOrEmpty)
+            _AdditionalInfoSection(state: state),
+          const Gap(AppDimens.md),
+          _QuickActionsSection(
+            team: Team.fromDetails(state.teamDetails),
+          ),
+          const Gap(AppDimens.xbig),
+          _TeamMembersSection(idle: state),
+        ],
+      ),
+    );
+  }
+}
+
+class _AdditionalInfoSection extends StatelessWidget {
+  const _AdditionalInfoSection({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final TeamDetailsPageStateIdle state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Gap(AppDimens.sm),
+        if (!state.teamDetails.location.nullOrEmpty)
+          Row(
+            children: [
+              const Icon(Icons.location_on),
+              const Gap(AppDimens.xsm),
+              Text(
+                state.teamDetails.location!,
+                style: AppTypo.bodySmall,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+            ],
+          ),
+        if (!state.teamDetails.organizationName.nullOrEmpty) ...[
+          const Gap(AppDimens.xxsm),
+          Row(
+            children: [
+              const Icon(Icons.villa),
+              const Gap(AppDimens.xsm),
+              Text(
+                state.teamDetails.organizationName!,
+                style: AppTypo.bodySmall,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+            ],
+          ),
+        ],
+      ],
     );
   }
 }
