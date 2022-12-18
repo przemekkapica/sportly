@@ -16,7 +16,7 @@ import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
-import 'package:sportly/presentation/widgets/admin_badge.dart';
+import 'package:sportly/presentation/widgets/role_badge.dart';
 import 'package:sportly/presentation/widgets/form/sportly_text_input.dart';
 import 'package:sportly/presentation/widgets/show_snackbar.dart';
 import 'package:sportly/presentation/widgets/sportly_button.dart';
@@ -169,9 +169,9 @@ class _Idle extends HookWidget {
                             member.fullName,
                             style: AppTypo.bodySmall,
                           ),
-                          if (member.role.isAdmin) ...[
+                          if (member.role.isAdminOrAssistant) ...[
                             const Gap(AppDimens.xxsm),
-                            const AdminBadge(),
+                            RoleBadge(role: member.role),
                           ],
                           const Spacer(),
                           if (state.teamDetails.members.length > 1)
@@ -183,7 +183,7 @@ class _Idle extends HookWidget {
                               ),
                               itemBuilder: (BuildContext context) =>
                                   <PopupMenuEntry>[
-                                if (isProTeam)
+                                if (isProTeam && !member.role.isAssistant)
                                   PopupMenuItem(
                                     child: Text(
                                       LocaleKeys.team_management_make_assistant
@@ -195,16 +195,30 @@ class _Idle extends HookWidget {
                                       Role.assistant,
                                     ),
                                   ),
-                                PopupMenuItem(
-                                  child: Text(
-                                    LocaleKeys.team_management_make_admin.tr(),
-                                    style: AppTypo.bodySmall,
+                                if (!member.role.isAdmin)
+                                  PopupMenuItem(
+                                    child: Text(
+                                      LocaleKeys.team_management_make_admin
+                                          .tr(),
+                                      style: AppTypo.bodySmall,
+                                    ),
+                                    onTap: () => cubit.changeTeamMemberRole(
+                                      member.id,
+                                      isProTeam ? Role.proAdmin : Role.admin,
+                                    ),
                                   ),
-                                  onTap: () => cubit.changeTeamMemberRole(
-                                    member.id,
-                                    isProTeam ? Role.proAdmin : Role.admin,
+                                if (member.role.isAdminOrAssistant)
+                                  PopupMenuItem(
+                                    child: Text(
+                                      LocaleKeys.team_management_make_member
+                                          .tr(),
+                                      style: AppTypo.bodySmall,
+                                    ),
+                                    onTap: () => cubit.changeTeamMemberRole(
+                                      member.id,
+                                      isProTeam ? Role.proPlayer : Role.player,
+                                    ),
                                   ),
-                                ),
                                 PopupMenuItem(
                                   child: Text(
                                     LocaleKeys.team_management_remove.tr(),
