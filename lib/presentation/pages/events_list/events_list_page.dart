@@ -67,7 +67,7 @@ class EventsListPage extends HookWidget {
             context.router.push(
               CreateEventPageRoute(
                 team: team,
-                date: date,
+                date: date.withCurrentTime,
                 fromMonthView: false,
               ),
             );

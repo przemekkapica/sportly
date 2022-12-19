@@ -193,7 +193,7 @@ class _Idle extends HookWidget {
           context.router.push(
             CreateEventPageRoute(
               team: team,
-              date: date,
+              date: date.withCurrentTime,
               fromMonthView: true,
             ),
           );
