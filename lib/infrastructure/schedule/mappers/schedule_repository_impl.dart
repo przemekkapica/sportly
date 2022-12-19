@@ -4,20 +4,24 @@ import 'package:sportly/domain/features/schedule/models/update_event.f.dart';
 import 'package:sportly/domain/features/schedule/models/event.f.dart';
 import 'package:sportly/domain/features/schedule/schedule_repository.dart';
 import 'package:sportly/infrastructure/schedule/data_sources/schedule_data_source.dart';
-import 'package:sportly/infrastructure/schedule/mappers/event_bidirectional_mapper.dart';
+import 'package:sportly/infrastructure/schedule/mappers/create_event_mapper.dart';
 
 @LazySingleton(as: ScheduleRepository)
 class ScheduleRepositoryImpl implements ScheduleRepository {
   ScheduleRepositoryImpl(
     this._scheduleDataSource,
+    this._createEventMapper,
   );
 
   final ScheduleDataSource _scheduleDataSource;
+  final CreateEventMapper _createEventMapper;
 
   @override
   Future<void> createEvent(int teamId, CreateEvent createEvent) async {
-    return;
-    // _mockScheduleDataSource.createEvent(event)
+    return await _scheduleDataSource.createEvent(
+      teamId,
+      _createEventMapper(createEvent),
+    );
   }
 
   @override

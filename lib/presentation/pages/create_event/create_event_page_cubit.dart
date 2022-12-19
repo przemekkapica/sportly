@@ -77,6 +77,7 @@ class CreateEventPageCubit
         );
         dispatch(const CreateEventPageAction.success());
       } catch (e) {
+        print(e);
         emit(const CreateEventPageState.error());
       } finally {
         dispatch(const CreateEventPageAction.hideLoader());
