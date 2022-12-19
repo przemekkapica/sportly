@@ -31,10 +31,12 @@ class CreateEventPage extends HookWidget {
     Key? key,
     required this.team,
     required this.date,
+    required this.fromMonthView,
   }) : super(key: key);
 
   final Team team;
   final DateTime date;
+  final bool fromMonthView;
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +53,15 @@ class CreateEventPage extends HookWidget {
             LocaleKeys.create_event_success.tr(),
             SnackbarPurpose.success,
           );
-          context.router.popUntilRouteWithName(SchedulePageRoute.name);
-          context.router.push(SchedulePageRoute(team: team));
+          if (fromMonthView) {
+            context.router.popUntilRouteWithName(SchedulePageRoute.name);
+            context.router.popAndPush(SchedulePageRoute(team: team));
+          } else {
+            context.router.popUntilRouteWithName(EventsListPageRoute.name);
+            context.router.popAndPush(
+              EventsListPageRoute(team: team, date: date),
+            );
+          }
         },
       );
     });

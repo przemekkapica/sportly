@@ -9,7 +9,12 @@ class EventsListPageState with _$EventsListPageState {
 
   const factory EventsListPageState.idle({
     required List<DayEvent> events,
+    required DateTime date,
   }) = EventsListPageStateIdle;
+
+  const factory EventsListPageState.noEvents({
+    required DateTime date,
+  }) = EventsListPageStateNoEvents;
 
   const factory EventsListPageState.error() = EventsListPageStateError;
 }

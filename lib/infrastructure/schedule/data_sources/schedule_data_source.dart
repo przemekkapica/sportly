@@ -32,4 +32,10 @@ abstract class ScheduleDataSource {
     @Path() int teamId,
     @Query('date') String date,
   );
+
+  @DELETE(NetworkConfig.DELETE_EVENT)
+  Future<void> deleteEvent(
+    @Path() int teamId,
+    @Path() int eventId,
+  );
 }

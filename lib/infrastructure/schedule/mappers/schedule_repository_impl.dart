@@ -60,6 +60,6 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
 
   @override
   Future<void> deleteEvent(int teamId, int eventId) async {
-    return;
+    return await _scheduleDataSource.deleteEvent(teamId, eventId);
   }
 }
