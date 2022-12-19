@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
+import 'package:sportly/presentation/pages/schedule/schedule_page_action.f.dart';
 import 'package:sportly/presentation/pages/schedule/schedule_page_cubit.dart';
 import 'package:sportly/presentation/pages/schedule/schedule_page_state.f.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
@@ -35,11 +37,17 @@ class SchedulePage extends HookWidget {
     final cubit = useCubit<SchedulePageCubit>();
     final state = useCubitBuilder(cubit);
 
+    // useActionListener<SchedulePageAction>(cubit, (action) {
+    //   action.whenOrNull(
+    //     showLoader: context.loaderOverlay.show,
+    //     hideLoader: context.loaderOverlay.hide,
+    //   );
+    // });
+
     useEffect(
       () {
         cubit.init(team.id);
       },
-      [],
     );
 
     return Scaffold(
