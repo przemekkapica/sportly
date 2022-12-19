@@ -10,7 +10,7 @@ class CreateEventMapper extends DataMapper<CreateEvent, CreateEventDto> {
   @override
   CreateEventDto call(CreateEvent data) {
     return CreateEventDto(
-      date: data.date.toIso8601String(),
+      eventDate: data.date.toIso8601String(),
       title: data.title,
       description: data.description,
     );

@@ -26,6 +26,7 @@ class SportlyTextInput extends StatelessWidget {
       cursorColor: AppColors.secondary,
       initialValue: initialValue,
       onChanged: onChanged,
+      textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         fillColor: AppColors.neutral,
         filled: true,

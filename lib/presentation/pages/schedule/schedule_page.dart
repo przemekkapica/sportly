@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
+import 'package:sportly/presentation/pages/schedule/schedule_page_action.f.dart';
 import 'package:sportly/presentation/pages/schedule/schedule_page_cubit.dart';
 import 'package:sportly/presentation/pages/schedule/schedule_page_state.f.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
@@ -25,14 +27,27 @@ class SchedulePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      for (var event
+          in CalendarControllerProvider.of(context).controller.events) {
+        CalendarControllerProvider.of(context).controller.remove(event);
+      }
+    });
+
     final cubit = useCubit<SchedulePageCubit>();
     final state = useCubitBuilder(cubit);
+
+    // useActionListener<SchedulePageAction>(cubit, (action) {
+    //   action.whenOrNull(
+    //     showLoader: context.loaderOverlay.show,
+    //     hideLoader: context.loaderOverlay.hide,
+    //   );
+    // });
 
     useEffect(
       () {
         cubit.init(team.id);
       },
-      [],
     );
 
     return Scaffold(
@@ -44,7 +59,11 @@ class SchedulePage extends HookWidget {
           child: const Icon(Icons.add_rounded),
           onPressed: () {
             context.router.push(
-              CreateEventPageRoute(teamId: team.id, date: DateTime.now()),
+              CreateEventPageRoute(
+                team: team,
+                date: DateTime.now(),
+                fromMonthView: true,
+              ),
             );
           },
         ),
@@ -77,9 +96,9 @@ class _Idle extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    for (var event in state.events) {
-      CalendarControllerProvider.of(context).controller.add(event);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      CalendarControllerProvider.of(context).controller.addAll(state.events);
+    });
 
     return MonthView(
       headerBuilder: (date) {
@@ -176,15 +195,20 @@ class _Idle extends HookWidget {
           ),
         );
       },
+      onPageChange: (date, _) => cubit.refreshEvents(date),
       onCellTap: (calendarEvents, date) {
         if (calendarEvents.isEmpty) {
           context.router.push(
-            CreateEventPageRoute(teamId: team.id, date: date),
+            CreateEventPageRoute(
+              team: team,
+              date: date.withCurrentTime,
+              fromMonthView: true,
+            ),
           );
         } else {
           context.router.push(
             EventsListPageRoute(
-              teamId: team.id,
+              team: team,
               date: date,
             ),
           );

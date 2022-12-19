@@ -1,5 +1,6 @@
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
 import 'package:sportly/domain/use_cases/delete_event_use_case.dart';
 import 'package:sportly/domain/use_cases/get_day_events_use_case.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_action.f.dart';
@@ -17,14 +18,16 @@ class EventsListPageCubit
   final DeleteEventUseCase _deleteEventUseCase;
 
   late final int _teamId;
+  late final DateTime _date;
 
   Future<void> init(int teamId, DateTime date) async {
     _teamId = teamId;
+    _date = date;
 
     try {
       final events = await _getDayEventsUseCase(_teamId, date);
 
-      emit(EventsListPageState.idle(events: events));
+      _emitIdle(events);
     } catch (e) {
       emit(const EventsListPageState.error());
     }
@@ -32,9 +35,27 @@ class EventsListPageCubit
 
   Future<void> deleteEvent(int eventId) async {
     try {
+      dispatch(const EventsListPageAction.showLoader());
       await _deleteEventUseCase(_teamId, eventId);
+
+      final events = await _getDayEventsUseCase(_teamId, _date);
+      if (events.isEmpty) {
+        dispatch(const EventsListPageAction.deleteSuccess(popPage: true));
+      } else {
+        dispatch(const EventsListPageAction.deleteSuccess(popPage: false));
+        _emitIdle(events);
+      }
     } catch (e) {
       emit(const EventsListPageState.error());
+    }
+    dispatch(const EventsListPageAction.hideLoader());
+  }
+
+  void _emitIdle(List<DayEvent> events) {
+    if (events.isEmpty) {
+      emit(EventsListPageState.noEvents(date: _date));
+    } else {
+      emit(EventsListPageState.idle(events: events, date: _date));
     }
   }
 }

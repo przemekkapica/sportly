@@ -66,6 +66,20 @@ extension DateTimeExtension on DateTime {
 
     return _isSameDate(yesterday, this);
   }
+
+  DateTime get withCurrentTime {
+    final date = this;
+    final now = DateTime.now();
+
+    return DateTime(
+      date.year,
+      date.month,
+      date.day,
+      now.hour,
+      now.minute,
+      now.second,
+    );
+  }
 }
 
 bool _isSameDate(DateTime firstDate, DateTime secondDate) {

@@ -1,30 +1,41 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:retrofit/http.dart';
+import 'package:sportly/core/config/network_config.dart';
 import 'package:sportly/infrastructure/schedule/dtos/create_event_dto.dart';
-import 'package:sportly/infrastructure/schedule/dtos/get_events_dto.dart';
+import 'package:sportly/infrastructure/schedule/dtos/get_day_events_dto.dart';
+import 'package:sportly/infrastructure/schedule/dtos/get_month_events_dto.dart';
 
+part 'schedule_data_source.g.dart';
+
+@RestApi()
 @injectable
-class ScheduleDataSource {
-  @override
-  Future<void> createEvent(int teamId, CreateEventDto event) async {
-    // TODO: implement createEvent
-    throw UnimplementedError();
-  }
+abstract class ScheduleDataSource {
+  @factoryMethod
+  factory ScheduleDataSource(Dio dio) = _ScheduleDataSource;
 
-  @override
-  Future<GetEventsDto> getDayEvents(int teamId, DateTime date) async {
-    // TODO: implement getEvents
-    throw UnimplementedError();
-  }
+  @POST(NetworkConfig.CREATE_EVENT)
+  Future<void> createEvent(
+    @Path() int teamId,
+    @Body() CreateEventDto createEventDto,
+  );
 
-  @override
-  Future<GetEventsDto> getMonthEvents(int teamId, DateTime date) async {
-    // TODO: implement getEvents
-    throw UnimplementedError();
-  }
+  @GET(NetworkConfig.GET_MONTH_EVENTS)
+  Future<GetMonthEventsDto> getMonthEvents(
+    @Path() int teamId,
+    @Query('date') String date,
+  );
 
-  @override
-  Future<GetEventsDto> updateEvent(int teamId, DateTime date) async {
-    // TODO: implement getEvents
-    throw UnimplementedError();
-  }
+  @GET(NetworkConfig.GET_DAY_EVENTS)
+  Future<GetDayEventsDto> getDayEvents(
+    @Path() int teamId,
+    @Query('date') String date,
+  );
+
+  @DELETE(NetworkConfig.DELETE_EVENT)
+  Future<void> deleteEvent(
+    @Path() int teamId,
+    @Path() int eventId,
+  );
 }

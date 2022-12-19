@@ -4,7 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:sportly/domain/features/schedule/models/event.f.dart';
+import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
+import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_action.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_cubit.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_state.f.dart';
@@ -22,11 +23,11 @@ import 'package:sportly/utils/extensions/date_time_extension.dart';
 class EventsListPage extends HookWidget {
   const EventsListPage({
     Key? key,
-    required this.teamId,
+    required this.team,
     required this.date,
   }) : super(key: key);
 
-  final int teamId;
+  final Team team;
   final DateTime date;
 
   @override
@@ -38,12 +39,18 @@ class EventsListPage extends HookWidget {
       action.whenOrNull(
         showLoader: context.loaderOverlay.show,
         hideLoader: context.loaderOverlay.hide,
+        deleteSuccess: (popPage) {
+          if (popPage) {
+            context.router.popUntilRouteWithName(SchedulePageRoute.name);
+            context.router.popAndPush(SchedulePageRoute(team: team));
+          }
+        },
       );
     });
 
     useEffect(
       () {
-        cubit.init(teamId, date);
+        cubit.init(team.id, date);
       },
       [],
     );
@@ -52,16 +59,21 @@ class EventsListPage extends HookWidget {
       backgroundColor: AppColors.background,
       floatingActionButton: state.when(
         loading: () => const SizedBox.shrink(),
-        idle: (_) => FloatingActionButton(
+        idle: (_, __) => FloatingActionButton(
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.neutral,
           child: const Icon(Icons.add_rounded),
           onPressed: () {
             context.router.push(
-              CreateEventPageRoute(teamId: teamId, date: date),
+              CreateEventPageRoute(
+                team: team,
+                date: date.withCurrentTime,
+                fromMonthView: false,
+              ),
             );
           },
         ),
+        noEvents: (_) => const SizedBox.shrink(),
         error: () => const SizedBox.shrink(),
       ),
       body: state.map(
@@ -69,7 +81,10 @@ class EventsListPage extends HookWidget {
         idle: (state) => _Idle(
           cubit: cubit,
           state: state,
-          teamId: teamId,
+          teamId: team.id,
+        ),
+        noEvents: (state) => _NoEvents(
+          state: state,
         ),
         error: (_) => const SportlyError(),
       ),
@@ -101,7 +116,7 @@ class _Idle extends StatelessWidget {
                 const Icon(Icons.calendar_today_rounded),
                 const Gap(AppDimens.xsm),
                 Text(
-                  state.events[0].date.formatEEEEMMMdd(),
+                  state.date.formatEEEEMMMdd(),
                   style: AppTypo.bodyLarge.copyWith(
                     fontFamily: 'Montserrat',
                   ),
@@ -155,11 +170,12 @@ class _Idle extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                _PopupMenuButton(
-                                  event: event,
-                                  teamId: teamId,
-                                  cubit: cubit,
-                                ),
+                                if (event.editable)
+                                  _PopupMenuButton(
+                                    event: event,
+                                    teamId: teamId,
+                                    cubit: cubit,
+                                  ),
                               ],
                             ),
                             if (state.events.indexOf(event) <
@@ -182,6 +198,28 @@ class _Idle extends StatelessWidget {
   }
 }
 
+class _NoEvents extends StatelessWidget {
+  const _NoEvents({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final EventsListPageStateNoEvents state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(AppDimens.pagePadding),
+      child: Text(
+        'No events for ' + state.date.formatEEEEMMMdd(),
+        style: AppTypo.bodyMedium.copyWith(
+          fontFamily: 'Montserrat',
+        ),
+      ),
+    );
+  }
+}
+
 class _PopupMenuButton extends StatelessWidget {
   const _PopupMenuButton({
     Key? key,
@@ -190,7 +228,7 @@ class _PopupMenuButton extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final Event event;
+  final DayEvent event;
   final int teamId;
   final EventsListPageCubit cubit;
 

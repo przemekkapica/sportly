@@ -13,6 +13,8 @@ class NetworkConfig {
   static const CHANGE_MEMBER_ROLE = '/team/ChangeMemberRole/{teamId}/{userId}';
 
   // Schedule
-  static const GET_EVENTS = '';
-  static const CREATE_EVENT = '/schedule/CreateEvent';
+  static const GET_MONTH_EVENTS = '/schedule/GetMonthEvents/{teamId}';
+  static const GET_DAY_EVENTS = '/schedule/GetDayEvents/{teamId}';
+  static const CREATE_EVENT = '/schedule/CreateEvent/{teamId}';
+  static const DELETE_EVENT = '/schedule/RemoveEvent/{teamId}/{eventId}';
 }

@@ -1,7 +1,7 @@
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/schedule/models/update_event.f.dart';
-import 'package:sportly/domain/features/schedule/models/event.f.dart';
+import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
 import 'package:sportly/domain/use_cases/update_event_use_case.dart';
 import 'package:sportly/presentation/pages/edit_event/update_event_page_action.f.dart';
 import 'package:sportly/presentation/pages/edit_event/update_event_page_state.f.dart';
@@ -24,7 +24,7 @@ class UpdateEventPageCubit
 
   bool _submitButtonEnabled = false;
 
-  Future<void> init(int teamId, Event event) async {
+  Future<void> init(int teamId, DayEvent event) async {
     title = event.title;
     description = event.description;
     _dateTime = event.date;

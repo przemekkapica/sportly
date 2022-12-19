@@ -1,14 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'event.f.freezed.dart';
+part 'month_event.f.freezed.dart';
 
 @freezed
-class Event with _$Event {
-  const factory Event({
-    required int id,
+class MonthEvent with _$MonthEvent {
+  const factory MonthEvent({
     required DateTime date,
     required String title,
-    required String? description,
-  }) = _Event;
+  }) = _MonthEvent;
 }

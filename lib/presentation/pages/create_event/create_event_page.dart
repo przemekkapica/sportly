@@ -5,10 +5,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_action.f.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_cubit.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_state.f.dart';
+import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
@@ -27,12 +29,14 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 class CreateEventPage extends HookWidget {
   const CreateEventPage({
     Key? key,
-    required this.teamId,
+    required this.team,
     required this.date,
+    required this.fromMonthView,
   }) : super(key: key);
 
-  final int teamId;
+  final Team team;
   final DateTime date;
+  final bool fromMonthView;
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +53,22 @@ class CreateEventPage extends HookWidget {
             LocaleKeys.create_event_success.tr(),
             SnackbarPurpose.success,
           );
-          context.router.pop(true);
+          if (fromMonthView) {
+            context.router.popUntilRouteWithName(SchedulePageRoute.name);
+            context.router.popAndPush(SchedulePageRoute(team: team));
+          } else {
+            context.router.popUntilRouteWithName(EventsListPageRoute.name);
+            context.router.popAndPush(
+              EventsListPageRoute(team: team, date: date),
+            );
+          }
         },
       );
     });
 
     useEffect(
       () {
-        cubit.init(teamId, date);
+        cubit.init(team.id, date);
       },
       [],
     );
