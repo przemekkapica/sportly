@@ -27,7 +27,6 @@ class SchedulePageCubit extends Cubit<SchedulePageState> {
 
   void refreshEvents(DateTime date) async {
     final events = await _getMonthEventsUseCase(_teamId, DateTime.now());
-
     _emitIdle(events);
   }
 

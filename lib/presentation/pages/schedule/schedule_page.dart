@@ -25,6 +25,11 @@ class SchedulePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    for (var event
+        in CalendarControllerProvider.of(context).controller.events) {
+      CalendarControllerProvider.of(context).controller.remove(event);
+    }
+
     final cubit = useCubit<SchedulePageCubit>();
     final state = useCubitBuilder(cubit);
 
@@ -44,7 +49,7 @@ class SchedulePage extends HookWidget {
           child: const Icon(Icons.add_rounded),
           onPressed: () {
             context.router.push(
-              CreateEventPageRoute(teamId: team.id, date: DateTime.now()),
+              CreateEventPageRoute(team: team, date: DateTime.now()),
             );
           },
         ),
@@ -77,9 +82,9 @@ class _Idle extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    for (var event in state.events) {
-      CalendarControllerProvider.of(context).controller.add(event);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      CalendarControllerProvider.of(context).controller.addAll(state.events);
+    });
 
     return MonthView(
       headerBuilder: (date) {
@@ -180,12 +185,12 @@ class _Idle extends HookWidget {
       onCellTap: (calendarEvents, date) {
         if (calendarEvents.isEmpty) {
           context.router.push(
-            CreateEventPageRoute(teamId: team.id, date: date),
+            CreateEventPageRoute(team: team, date: date),
           );
         } else {
           context.router.push(
             EventsListPageRoute(
-              teamId: team.id,
+              team: team,
               date: date,
             ),
           );

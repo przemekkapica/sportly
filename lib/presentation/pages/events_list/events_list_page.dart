@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
+import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_action.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_cubit.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_state.f.dart';
@@ -22,11 +23,11 @@ import 'package:sportly/utils/extensions/date_time_extension.dart';
 class EventsListPage extends HookWidget {
   const EventsListPage({
     Key? key,
-    required this.teamId,
+    required this.team,
     required this.date,
   }) : super(key: key);
 
-  final int teamId;
+  final Team team;
   final DateTime date;
 
   @override
@@ -43,7 +44,7 @@ class EventsListPage extends HookWidget {
 
     useEffect(
       () {
-        cubit.init(teamId, date);
+        cubit.init(team.id, date);
       },
       [],
     );
@@ -58,7 +59,7 @@ class EventsListPage extends HookWidget {
           child: const Icon(Icons.add_rounded),
           onPressed: () {
             context.router.push(
-              CreateEventPageRoute(teamId: teamId, date: date),
+              CreateEventPageRoute(team: team, date: date),
             );
           },
         ),
@@ -69,7 +70,7 @@ class EventsListPage extends HookWidget {
         idle: (state) => _Idle(
           cubit: cubit,
           state: state,
-          teamId: teamId,
+          teamId: team.id,
         ),
         error: (_) => const SportlyError(),
       ),
