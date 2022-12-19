@@ -14,5 +14,6 @@ class NetworkConfig {
 
   // Schedule
   static const GET_MONTH_EVENTS = '/schedule/GetMonthEvents/{teamId}';
+  static const GET_DAY_EVENTS = '/schedule/GetDayEvents/{teamId}';
   static const CREATE_EVENT = '/schedule/CreateEvent/{teamId}';
 }

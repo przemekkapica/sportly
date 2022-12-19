@@ -44,7 +44,13 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
 
   @override
   Future<List<DayEvent>> getDayEvents(int teamId, DateTime date) async {
-    return [];
+    final dto = await _scheduleDataSource.getDayEvents(
+      teamId,
+      date.toIso8601String(),
+    );
+    final result = dto.events.map((event) => _dayEventMapper(event)).toList();
+
+    return result;
   }
 
   @override

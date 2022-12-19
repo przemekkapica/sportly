@@ -10,7 +10,7 @@ class DayEventMapper extends DataMapper<DayEventDto, DayEvent> {
   @override
   DayEvent call(DayEventDto data) {
     return DayEvent(
-      id: data.id,
+      id: data.eventId,
       date: DateTime.parse(data.date),
       title: data.title,
       description: data.description,
