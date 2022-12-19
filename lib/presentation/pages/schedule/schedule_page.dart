@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
-import 'package:loader_overlay/loader_overlay.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
-import 'package:sportly/presentation/pages/schedule/schedule_page_action.f.dart';
 import 'package:sportly/presentation/pages/schedule/schedule_page_cubit.dart';
 import 'package:sportly/presentation/pages/schedule/schedule_page_state.f.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';
@@ -53,20 +52,22 @@ class SchedulePage extends HookWidget {
     return Scaffold(
       floatingActionButton: state.when(
         loading: () => const SizedBox.shrink(),
-        idle: (_) => FloatingActionButton(
-          backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.neutral,
-          child: const Icon(Icons.add_rounded),
-          onPressed: () {
-            context.router.push(
-              CreateEventPageRoute(
-                team: team,
-                date: DateTime.now(),
-                fromMonthView: true,
-              ),
-            );
-          },
-        ),
+        idle: (_) => team.role.isAdminOrAssistant
+            ? FloatingActionButton(
+                backgroundColor: AppColors.primary,
+                foregroundColor: AppColors.neutral,
+                child: const Icon(Icons.add_rounded),
+                onPressed: () {
+                  context.router.push(
+                    CreateEventPageRoute(
+                      team: team,
+                      date: DateTime.now(),
+                      fromMonthView: true,
+                    ),
+                  );
+                },
+              )
+            : const SizedBox.shrink(),
         error: () => const SizedBox.shrink(),
       ),
       body: state.map(
@@ -197,7 +198,7 @@ class _Idle extends HookWidget {
       },
       onPageChange: (date, _) => cubit.refreshEvents(date),
       onCellTap: (calendarEvents, date) {
-        if (calendarEvents.isEmpty) {
+        if (calendarEvents.isEmpty && team.role.isAdminOrAssistant) {
           context.router.push(
             CreateEventPageRoute(
               team: team,
@@ -205,7 +206,7 @@ class _Idle extends HookWidget {
               fromMonthView: true,
             ),
           );
-        } else {
+        } else if (calendarEvents.isNotEmpty) {
           context.router.push(
             EventsListPageRoute(
               team: team,

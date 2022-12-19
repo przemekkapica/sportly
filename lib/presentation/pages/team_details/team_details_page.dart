@@ -289,9 +289,16 @@ class _QuickActionsSection extends StatelessWidget {
             const Gap(AppDimens.sm),
             SportlyIconButton(
               icon: Icons.calendar_month_rounded,
-              onTap: () => context.router.navigate(
-                ScheduleRouter(children: [SchedulePageRoute(team: team)]),
-              ),
+              onTap: () {
+                context.router.navigate(
+                  ScheduleRouter(
+                    children: [
+                      const ScheduleEntryPageRoute(),
+                      SchedulePageRoute(team: team),
+                    ],
+                  ),
+                );
+              },
             ),
             const Spacer(),
             SportlyIconButton(

@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
+import 'package:sportly/domain/features/teams/models/role.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_action.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_cubit.dart';
@@ -59,20 +60,22 @@ class EventsListPage extends HookWidget {
       backgroundColor: AppColors.background,
       floatingActionButton: state.when(
         loading: () => const SizedBox.shrink(),
-        idle: (_, __) => FloatingActionButton(
-          backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.neutral,
-          child: const Icon(Icons.add_rounded),
-          onPressed: () {
-            context.router.push(
-              CreateEventPageRoute(
-                team: team,
-                date: date.withCurrentTime,
-                fromMonthView: false,
-              ),
-            );
-          },
-        ),
+        idle: (_, __) => team.role.isAdminOrAssistant
+            ? FloatingActionButton(
+                backgroundColor: AppColors.primary,
+                foregroundColor: AppColors.neutral,
+                child: const Icon(Icons.add_rounded),
+                onPressed: () {
+                  context.router.push(
+                    CreateEventPageRoute(
+                      team: team,
+                      date: date.withCurrentTime,
+                      fromMonthView: false,
+                    ),
+                  );
+                },
+              )
+            : const SizedBox.shrink(),
         noEvents: (_) => const SizedBox.shrink(),
         error: () => const SizedBox.shrink(),
       ),
