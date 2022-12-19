@@ -176,6 +176,7 @@ class _Idle extends HookWidget {
           ),
         );
       },
+      onPageChange: (date, _) => cubit.refreshEvents(date),
       onCellTap: (calendarEvents, date) {
         if (calendarEvents.isEmpty) {
           context.router.push(

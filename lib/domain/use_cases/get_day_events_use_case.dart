@@ -8,6 +8,6 @@ class GetDayEventsUseCase {
 
   final ScheduleRepository _scheduleRepository;
 
-  Future<List<DayEvent>> call(int teamId, DateTime date) =>
+  Future<List<DayEvent>> call(int teamId, DateTime date) async =>
       _scheduleRepository.getDayEvents(teamId, date);
 }

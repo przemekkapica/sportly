@@ -8,6 +8,6 @@ class GetMonthEventsUseCase {
 
   final ScheduleRepository _scheduleRepository;
 
-  Future<List<MonthEvent>> call(int teamId, DateTime date) =>
+  Future<List<MonthEvent>> call(int teamId, DateTime date) async =>
       _scheduleRepository.getMonthEvents(teamId, date);
 }

@@ -4,8 +4,8 @@ import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
 import 'package:sportly/infrastructure/schedule/dtos/day_event_dto.dart';
 
 @injectable
-class DayEventBidirectionalMapper extends DataMapper<DayEventDto, DayEvent> {
-  DayEventBidirectionalMapper();
+class DayEventMapper extends DataMapper<DayEventDto, DayEvent> {
+  DayEventMapper();
 
   @override
   DayEvent call(DayEventDto data) {

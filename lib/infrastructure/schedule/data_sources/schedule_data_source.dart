@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 import 'package:sportly/core/config/network_config.dart';
 import 'package:sportly/infrastructure/schedule/dtos/create_event_dto.dart';
+import 'package:sportly/infrastructure/schedule/dtos/get_month_events_dto.dart';
 
 part 'schedule_data_source.g.dart';
 
@@ -20,8 +21,8 @@ abstract class ScheduleDataSource {
   );
 
   @GET(NetworkConfig.GET_MONTH_EVENTS)
-  Future<void> getMonthEvents(
+  Future<GetMonthEventsDto> getMonthEvents(
     @Path() int teamId,
-    @Body() CreateEventDto createEventDto,
+    @Query('date') String date,
   );
 }
