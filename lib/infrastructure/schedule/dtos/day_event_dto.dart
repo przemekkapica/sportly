@@ -1,23 +1,25 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'event_dto.g.dart';
+part 'day_event_dto.g.dart';
 
 @JsonSerializable()
-class EventDto {
-  EventDto({
+class DayEventDto {
+  DayEventDto({
     required this.id,
     required this.date,
     required this.title,
     required this.description,
+    required this.editable,
   });
 
-  factory EventDto.fromJson(Map<String, dynamic> json) =>
-      _$EventDtoFromJson(json);
+  factory DayEventDto.fromJson(Map<String, dynamic> json) =>
+      _$DayEventDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$EventDtoToJson(this);
+  Map<String, dynamic> toJson() => _$DayEventDtoToJson(this);
 
   final int id;
   final String date;
   final String title;
   final String? description;
+  final bool editable;
 }

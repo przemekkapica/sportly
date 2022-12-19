@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:sportly/domain/features/schedule/models/event.f.dart';
+import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
 import 'package:sportly/domain/features/schedule/schedule_repository.dart';
 
 @injectable
@@ -8,6 +8,6 @@ class GetDayEventsUseCase {
 
   final ScheduleRepository _scheduleRepository;
 
-  Future<List<Event>> call(int teamId, DateTime date) =>
+  Future<List<DayEvent>> call(int teamId, DateTime date) =>
       _scheduleRepository.getDayEvents(teamId, date);
 }

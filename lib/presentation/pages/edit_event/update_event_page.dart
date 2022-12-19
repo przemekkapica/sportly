@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:sportly/domain/features/schedule/models/event.f.dart';
+import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/edit_event/update_event_page_action.f.dart';
 import 'package:sportly/presentation/pages/edit_event/update_event_page_cubit.dart';
@@ -32,7 +32,7 @@ class UpdateEventPage extends HookWidget {
   }) : super(key: key);
 
   final int teamId;
-  final Event event;
+  final DayEvent event;
 
   @override
   Widget build(BuildContext context) {

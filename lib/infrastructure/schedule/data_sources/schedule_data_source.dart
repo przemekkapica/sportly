@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
@@ -14,6 +15,12 @@ abstract class ScheduleDataSource {
 
   @POST(NetworkConfig.CREATE_EVENT)
   Future<void> createEvent(
+    @Path() int teamId,
+    @Body() CreateEventDto createEventDto,
+  );
+
+  @GET(NetworkConfig.GET_MONTH_EVENTS)
+  Future<void> getMonthEvents(
     @Path() int teamId,
     @Body() CreateEventDto createEventDto,
   );

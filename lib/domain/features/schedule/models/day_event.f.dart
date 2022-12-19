@@ -1,14 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'event.f.freezed.dart';
+part 'day_event.f.freezed.dart';
 
 @freezed
-class Event with _$Event {
-  const factory Event({
+class DayEvent with _$DayEvent {
+  const factory DayEvent({
     required int id,
     required DateTime date,
     required String title,
     required String? description,
-  }) = _Event;
+    required bool editable,
+  }) = _DayEvent;
 }

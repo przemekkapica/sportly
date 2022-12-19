@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:sportly/domain/features/schedule/models/event.f.dart';
+import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_action.f.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_cubit.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page_state.f.dart';
@@ -190,7 +190,7 @@ class _PopupMenuButton extends StatelessWidget {
     required this.cubit,
   }) : super(key: key);
 
-  final Event event;
+  final DayEvent event;
   final int teamId;
   final EventsListPageCubit cubit;
 
