@@ -8,6 +8,7 @@ import 'package:sportly/infrastructure/schedule/data_sources/schedule_data_sourc
 import 'package:sportly/infrastructure/schedule/mappers/create_event_mapper.dart';
 import 'package:sportly/infrastructure/schedule/mappers/day_event_mapper.dart';
 import 'package:sportly/infrastructure/schedule/mappers/month_event_mapper.dart';
+import 'package:sportly/infrastructure/schedule/mappers/update_event_mapper.dart';
 
 @LazySingleton(as: ScheduleRepository)
 class ScheduleRepositoryImpl implements ScheduleRepository {
@@ -16,12 +17,14 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
     this._createEventMapper,
     this._dayEventMapper,
     this._monthEventMapper,
+    this._updateEventMapper,
   );
 
   final ScheduleDataSource _scheduleDataSource;
   final CreateEventMapper _createEventMapper;
   final DayEventMapper _dayEventMapper;
   final MonthEventMapper _monthEventMapper;
+  final UpdateEventMapper _updateEventMapper;
 
   @override
   Future<void> createEvent(int teamId, CreateEvent createEvent) async {
@@ -54,8 +57,11 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   }
 
   @override
-  Future<void> updateEvent(int teamId, UpdateEvent editEvent) async {
-    return;
+  Future<void> updateEvent(int teamId, UpdateEvent updateEvent) async {
+    return await _scheduleDataSource.updateEvent(
+      teamId,
+      _updateEventMapper(updateEvent),
+    );
   }
 
   @override

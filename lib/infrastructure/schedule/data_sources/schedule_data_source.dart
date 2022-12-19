@@ -6,6 +6,7 @@ import 'package:sportly/core/config/network_config.dart';
 import 'package:sportly/infrastructure/schedule/dtos/create_event_dto.dart';
 import 'package:sportly/infrastructure/schedule/dtos/get_day_events_dto.dart';
 import 'package:sportly/infrastructure/schedule/dtos/get_month_events_dto.dart';
+import 'package:sportly/infrastructure/schedule/dtos/update_event_dto.dart';
 
 part 'schedule_data_source.g.dart';
 
@@ -37,5 +38,11 @@ abstract class ScheduleDataSource {
   Future<void> deleteEvent(
     @Path() int teamId,
     @Path() int eventId,
+  );
+
+  @PUT(NetworkConfig.UPDATE_EVENT)
+  Future<void> updateEvent(
+    @Path() int teamId,
+    @Body() UpdateEventDto updateEventDto,
   );
 }
