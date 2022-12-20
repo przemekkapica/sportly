@@ -24,7 +24,6 @@ import 'package:sportly/presentation/widgets/sportly_error.dart';
 import 'package:sportly/presentation/widgets/sportly_loader.dart';
 import 'package:sportly/utils/extensions/date_time_extension.dart';
 import 'package:sportly/utils/extensions/string_extension.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CreateEventPage extends HookWidget {
   const CreateEventPage({

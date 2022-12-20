@@ -125,17 +125,3 @@ class _Avatar extends StatelessWidget {
     );
   }
 }
-
-class _Error extends StatelessWidget {
-  const _Error({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        LocaleKeys.sign_out_error.tr(),
-        style: AppTypo.bodyMedium,
-      ),
-    );
-  }
-}

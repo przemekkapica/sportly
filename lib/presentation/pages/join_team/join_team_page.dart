@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -42,7 +41,7 @@ class JoinTeamPage extends HookWidget {
           addedToTeam: () {
             showSnackBar(
               context,
-              'You have been added to the new team',
+              LocaleKeys.join_team_success.tr(),
               SnackbarPurpose.success,
             );
             Navigator.of(context).pop();
@@ -51,19 +50,19 @@ class JoinTeamPage extends HookWidget {
             showSportlyDialog(
               context,
               Text(
-                'Invalid code',
+                LocaleKeys.join_team_error_title.tr(),
                 style: AppTypo.bodyLarge,
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'The code you entered is either wrong or expired',
+                    LocaleKeys.join_team_error_message.tr(),
                     style: AppTypo.bodySmall,
                   ),
                   const Gap(AppDimens.xbig),
                   SportlyButton.solid(
-                    label: 'OK',
+                    label: LocaleKeys.join_team_confirm.tr(),
                     onTap: Navigator.of(context, rootNavigator: true).pop,
                   ),
                 ],

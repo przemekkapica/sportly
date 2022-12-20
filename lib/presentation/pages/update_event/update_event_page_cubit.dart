@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/schedule/models/update_event.f.dart';
 import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
 import 'package:sportly/domain/use_cases/update_event_use_case.dart';
-import 'package:sportly/presentation/pages/edit_event/update_event_page_action.f.dart';
-import 'package:sportly/presentation/pages/edit_event/update_event_page_state.f.dart';
+import 'package:sportly/presentation/pages/update_event/update_event_page_action.f.dart';
+import 'package:sportly/presentation/pages/update_event/update_event_page_state.f.dart';
 import 'package:sportly/utils/extensions/string_extension.dart';
 
 @injectable

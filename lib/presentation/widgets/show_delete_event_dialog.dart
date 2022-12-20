@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -18,7 +17,7 @@ Future<void> showDeleteEventDialog(
     context,
     RichText(
       text: TextSpan(
-        text: 'Are you sure you want to delete ',
+        text: LocaleKeys.delete_event_dialog_question.tr(),
         style: AppTypo.bodyMedium.copyWith(
           fontFamily: 'Montserrat',
         ),
@@ -36,29 +35,28 @@ Future<void> showDeleteEventDialog(
       children: [
         const Gap(AppDimens.big),
         SportlyButton.solid(
-          label: 'Cancel',
+          label: LocaleKeys.delete_event_dialog_cancel.tr(),
           onTap: Navigator.of(context, rootNavigator: true).pop,
         ),
         const Gap(AppDimens.xsm),
         SportlyButton.danger(
-          label: 'Delete',
+          label: LocaleKeys.delete_event_dialog_confirm.tr(),
           onTap: () {
             try {
               deleteEvent();
               showSnackBar(
                 context,
-                '$eventName deleted',
+                LocaleKeys.delete_event_dialog_success.tr(args: [eventName]),
                 SnackbarPurpose.info,
               );
             } catch (e) {
               showSnackBar(
                 context,
-                'Could not delete $eventName',
+                LocaleKeys.delete_event_dialog_error.tr(args: [eventName]),
                 SnackbarPurpose.error,
               );
             } finally {
               Navigator.of(context, rootNavigator: true).pop();
-              // context.router.navigate(const TeamsRouter());
             }
           },
         ),

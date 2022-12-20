@@ -45,7 +45,7 @@ class TeamManagementPage extends HookWidget {
         success: (popPage) {
           showSnackBar(
             context,
-            'Team updated successfully',
+            LocaleKeys.team_management_success.tr(),
             SnackbarPurpose.success,
           );
           if (popPage) {

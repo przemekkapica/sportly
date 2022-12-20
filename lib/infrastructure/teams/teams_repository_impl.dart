@@ -10,7 +10,6 @@ import 'package:sportly/domain/features/teams/models/create_team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_details.f.dart';
 import 'package:sportly/domain/features/teams/models/update_team.f.dart';
 import 'package:sportly/domain/features/teams/teams_repository.dart';
-import 'package:sportly/infrastructure/teams/data_sources/teams_data_source.dart';
 import 'package:sportly/infrastructure/teams/data_sources/teams_remote_data_source.dart';
 import 'package:sportly/infrastructure/teams/dtos/change_team_member_role_dto.dart';
 import 'package:sportly/infrastructure/teams/mappers/create_team_mapper.dart';
@@ -25,7 +24,6 @@ import 'package:sportly/infrastructure/teams/mappers/update_team_mapper.dart';
 class TeamsRepositoryImpl implements TeamsRepository {
   TeamsRepositoryImpl(
     this._teamsRemoteDataSource,
-    this._teamsDataSource,
     this._createTeamMapper,
     this._teamFromDtoMapper,
     this._teamDetailsFromDtoMapper,
@@ -36,7 +34,6 @@ class TeamsRepositoryImpl implements TeamsRepository {
   );
 
   final TeamsRemoteDataSource _teamsRemoteDataSource;
-  final TeamsDataSource _teamsDataSource;
   final CreateTeamMapper _createTeamMapper;
   final TeamFromDtoMapper _teamFromDtoMapper;
   final TeamDetailsFromDtoMapper _teamDetailsFromDtoMapper;

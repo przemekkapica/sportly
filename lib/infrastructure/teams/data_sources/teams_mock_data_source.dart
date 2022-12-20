@@ -11,8 +11,7 @@ import 'package:sportly/infrastructure/teams/dtos/update_team_dto.dart';
 class TeamsMockDataSource implements TeamsDataSource {
   @override
   Future<void> createTeam(CreateTeamDto createTeamDto) async {
-    // TODO: implement createTeam
-    return await Future.delayed(Duration(seconds: 1));
+    return await Future.delayed(const Duration(seconds: 1));
   }
 
   @override
@@ -50,13 +49,11 @@ class TeamsMockDataSource implements TeamsDataSource {
 
   @override
   Future<void> leaveTeam(int id) async {
-    // TODO: implement leaveTeam
-    return await Future.delayed(Duration(seconds: 1));
+    return await Future.delayed(const Duration(seconds: 1));
   }
 
   @override
   Future<void> updateTeam(int id, UpdateTeamDto updateTeamDto) async {
-    // TODO: implement updateTeam
-    return await Future.delayed(Duration(seconds: 1));
+    return await Future.delayed(const Duration(seconds: 1));
   }
 }

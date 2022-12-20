@@ -52,7 +52,8 @@
         "organization_name": "Nazwa organizacji",
         "discipline": "Dyscyplina*",
         "discipline_error": "Dyscyplina jest wymagana",
-        "button_label": "Utwórz zespół"
+        "button_label": "Utwórz zespół",
+        "success_message": "Stworzono nowy zespół"
     },
     "team_management": {
         "team_name": "Nazwa zespołu*",
@@ -65,7 +66,8 @@
         "make_admin": "Nadaj uprawnienia\nadmina",
         "make_assistant": "Nadaj uprawnienia\nasystenta",
         "make_member": "Nadaj uprawnienia\nczłonka",
-        "remove": "Usuń z zespołu"
+        "remove": "Usuń z zespołu",
+        "success": "Zapisano zmiany"
     },
     "share_invitation_code": {
         "title": "Twój kod do zaproszenia dla",
@@ -75,7 +77,11 @@
     },
     "join_team": {
         "title": "Dołącz do zespołu\nza pomocą kodu",
-        "button_label": "Dołącz"
+        "button_label": "Dołącz",
+        "success": "Dołączono do zespołu",
+        "error_title": "Nieprawidłowy kod",
+        "error_message": "Podany kod jest albo niepoprawny albo stracił waznosc",
+        "confirm": "OK"
     },
     "sign_out": {
         "button_label": "Wyloguj się",
@@ -84,7 +90,9 @@
     "leave_team": {
         "message": "Czy na pewno chcesz opuścić zespół ",
         "confirm": "Opuść zespół",
-        "cancel": "Wróć"
+        "cancel": "Wróć",
+        "success": "Opuszczono {}",
+        "error": "Nie udało się opuścić {}"
     },
     "create_event": {
         "title": "Nazwa*",
@@ -97,5 +105,21 @@
         "description": "Opis",
         "button_label": "Edytuj wydarzenie",
         "success": "Zedytowano wydarzenie"
+    },
+    "events_list": {
+        "no_events": "Brak wydarzeń na {}",
+        "update_event": "Edytuj wydarzenie",
+        "delete_event": "Usuń wydarzenie"
+    },
+    "role_badge": {
+        "admin": "ADMIN",
+        "assistant": "ASYSTENT"
+    },
+    "delete_event_dialog": {
+        "question": "Czy na pewno chcesz usunąć ",
+        "confirm": "Usuń",
+        "cancel": "Anuluj",
+        "success": "Usunięto {}",
+        "error": "Nie udało się usunąć {}"
     }
 }

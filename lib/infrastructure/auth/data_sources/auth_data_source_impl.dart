@@ -17,8 +17,7 @@ class AuthDataSourceImpl implements AuthDataSource {
 
   @override
   Future<void> signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser =
-        await _googleSignIn.signIn().catchError((onError) => print(onError));
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
     if (googleUser == null) {
       throw (Exception('Sign in error'));

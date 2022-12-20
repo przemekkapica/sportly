@@ -39,7 +39,7 @@ class CreateTeamPage extends HookWidget {
         success: () {
           showSnackBar(
             context,
-            'Team created successfully',
+            LocaleKeys.create_team_success_message.tr(),
             SnackbarPurpose.success,
           );
           context.router.pop();

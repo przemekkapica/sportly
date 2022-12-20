@@ -12,7 +12,7 @@ class DateTimePicker extends CommonPickerModel {
   }
 
   String digits(int value, int length) {
-    return '$value'.padLeft(length, "0");
+    return '$value'.padLeft(length, '0');
   }
 
   @override
@@ -44,12 +44,12 @@ class DateTimePicker extends CommonPickerModel {
 
   @override
   String leftDivider() {
-    return "|";
+    return '|';
   }
 
   @override
   String rightDivider() {
-    return "|";
+    return '|';
   }
 
   @override

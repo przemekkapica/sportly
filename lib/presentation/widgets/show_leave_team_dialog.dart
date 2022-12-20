@@ -48,13 +48,13 @@ Future<void> showLeaveTeamDialog(
               leaveTeam();
               showSnackBar(
                 context,
-                'You left $teamName',
+                LocaleKeys.leave_team_success.tr(args: [teamName]),
                 SnackbarPurpose.info,
               );
             } catch (e) {
               showSnackBar(
                 context,
-                'Could not leave $teamName',
+                LocaleKeys.leave_team_error.tr(args: [teamName]),
                 SnackbarPurpose.error,
               );
             } finally {

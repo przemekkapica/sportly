@@ -52,7 +52,8 @@
         "organization_name": "Organization name",
         "discipline": "Sport discipline*",
         "discipline_error": "Sport discipline is required",
-        "button_label": "Create a team"
+        "button_label": "Create a team",
+        "success_message": "Team created successfully"
     },
     "team_management": {
         "team_name": "Team name*",
@@ -65,7 +66,8 @@
         "make_admin": "Make admin",
         "make_assistant": "Make assistant",
         "make_member": "Make member",
-        "remove": "Remove"
+        "remove": "Remove",
+        "success": "Team updated successfully"
     },
     "share_invitation_code": {
         "title": "Your invitation code for",
@@ -75,7 +77,11 @@
     },
     "join_team": {
         "title": "Join your team via\ninvitation code",
-        "button_label": "Join a team"
+        "button_label": "Join a team",
+        "success": "You have been added to the new team",
+        "error_title": "Invalid code",
+        "error_message": "The code you entered is either wrong or expired",
+        "confirm": "OK"
     },
     "sign_out": {
         "button_label": "Sign out",
@@ -84,7 +90,9 @@
     "leave_team": {
         "message": "Are you sure you want to leave ",
         "confirm": "Leave team",
-        "cancel": "Stay"
+        "cancel": "Stay",
+        "success": "You left {}",
+        "error": "Could not leave {}"
     },
     "create_event": {
         "title": "Title*",
@@ -97,5 +105,21 @@
         "description": "Description",
         "button_label": "Update event",
         "success": "Event updated"
+    },
+    "events_list": {
+        "no_events": "No events on {}",
+        "update_event": "Edit event",
+        "delete_event": "Delete event"
+    },
+    "role_badge": {
+        "admin": "ADMIN",
+        "assistant": "ASSISTANT"
+    },
+    "delete_event_dialog": {
+        "question": "Are you sure you want to delete ",
+        "confirm": "Delete",
+        "cancel": "Cancel",
+        "success": "{} deleted",
+        "error": "Could not delete {}"
     }
 }

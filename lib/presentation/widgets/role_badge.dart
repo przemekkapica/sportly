@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sportly/domain/features/teams/models/role.dart';
+import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';
@@ -29,9 +31,9 @@ class RoleBadge extends StatelessWidget {
             const EdgeInsets.symmetric(vertical: AppDimens.xxsm, horizontal: 6),
         child: Text(
           isAdmin
-              ? 'ADMIN'
+              ? LocaleKeys.role_badge_admin.tr()
               : isAssistant
-                  ? 'ASSISTANT'
+                  ? LocaleKeys.role_badge_assistant.tr()
                   : '',
           style: AppTypo.badge,
         ),

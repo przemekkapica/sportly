@@ -6,12 +6,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:mime/mime.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sportly/presentation/theme/app_colors.dart';
-import 'package:sportly/presentation/theme/app_dimens.dart';
-import 'package:sportly/presentation/theme/app_typo.dart';
 import 'package:sportly/presentation/theme/chat_theme.dart';
 import 'package:uuid/uuid.dart';
 

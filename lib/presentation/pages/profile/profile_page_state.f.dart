@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sportly/domain/auth/models/user.f.dart';
 
 part 'profile_page_state.f.freezed.dart';

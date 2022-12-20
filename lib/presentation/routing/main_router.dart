@@ -4,7 +4,7 @@ import 'package:sportly/presentation/pages/chat/chat_page.dart';
 import 'package:sportly/presentation/pages/chat_entry/chat_entry_page.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page.dart';
 import 'package:sportly/presentation/pages/create_team/create_team_page.dart';
-import 'package:sportly/presentation/pages/edit_event/update_event_page.dart';
+import 'package:sportly/presentation/pages/update_event/update_event_page.dart';
 import 'package:sportly/presentation/pages/events_list/events_list_page.dart';
 import 'package:sportly/presentation/pages/home/home_page.dart';
 import 'package:sportly/presentation/pages/auth_error/auth_error_page.dart';
