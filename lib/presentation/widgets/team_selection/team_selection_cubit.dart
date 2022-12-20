@@ -71,6 +71,7 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
       _fetchTeamsUseCase();
     } catch (e) {
       print(e);
+      emit(const TeamSelectionState.error());
     }
   }
 
