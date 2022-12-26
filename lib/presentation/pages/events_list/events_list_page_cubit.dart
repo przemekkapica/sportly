@@ -25,7 +25,17 @@ class EventsListPageCubit
     _date = date;
 
     try {
-      final events = await _getDayEventsUseCase(_teamId, date);
+      final events = await _getDayEventsUseCase(_teamId, _date);
+
+      _emitIdle(events);
+    } catch (e) {
+      emit(const EventsListPageState.error());
+    }
+  }
+
+  Future<void> refreshEvents() async {
+    try {
+      final events = await _getDayEventsUseCase(_teamId, _date);
 
       _emitIdle(events);
     } catch (e) {

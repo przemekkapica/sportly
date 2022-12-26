@@ -57,14 +57,15 @@ class SchedulePage extends HookWidget {
                 backgroundColor: AppColors.primary,
                 foregroundColor: AppColors.neutral,
                 child: const Icon(Icons.add_rounded),
-                onPressed: () {
-                  context.router.push(
+                onPressed: () async {
+                  await context.router.push(
                     CreateEventPageRoute(
                       team: team,
                       date: DateTime.now(),
                       fromMonthView: true,
                     ),
                   );
+                  cubit.refreshEvents();
                 },
               )
             : const SizedBox.shrink(),
@@ -196,23 +197,25 @@ class _Idle extends HookWidget {
           ),
         );
       },
-      onPageChange: (date, _) => cubit.refreshEvents(date),
-      onCellTap: (calendarEvents, date) {
+      onPageChange: (date, _) => cubit.refreshEvents(),
+      onCellTap: (calendarEvents, date) async {
         if (calendarEvents.isEmpty && team.role.isAdminOrAssistant) {
-          context.router.push(
+          await context.router.push(
             CreateEventPageRoute(
               team: team,
               date: date.withCurrentTime,
               fromMonthView: true,
             ),
           );
+          cubit.refreshEvents();
         } else if (calendarEvents.isNotEmpty) {
-          context.router.push(
+          await context.router.push(
             EventsListPageRoute(
               team: team,
               date: date,
             ),
           );
+          cubit.refreshEvents();
         }
       },
     );

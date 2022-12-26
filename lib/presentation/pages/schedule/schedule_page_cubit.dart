@@ -35,7 +35,7 @@ class SchedulePageCubit
     }
   }
 
-  void refreshEvents(DateTime date) async {
+  void refreshEvents() async {
     try {
       dispatch(const SchedulePageAction.showLoader());
       final events = await _getMonthEventsUseCase(_teamId, DateTime.now());

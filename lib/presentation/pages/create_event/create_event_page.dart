@@ -52,15 +52,18 @@ class CreateEventPage extends HookWidget {
             LocaleKeys.create_event_success.tr(),
             SnackbarPurpose.success,
           );
-          if (fromMonthView) {
-            context.router.popUntilRouteWithName(SchedulePageRoute.name);
-            context.router.popAndPush(SchedulePageRoute(team: team));
-          } else {
-            context.router.popUntilRouteWithName(EventsListPageRoute.name);
-            context.router.popAndPush(
-              EventsListPageRoute(team: team, date: date),
-            );
-          }
+          context.router.pop();
+          // if (fromMonthView) {
+          //   // context.router.popUntilRouteWithName(SchedulePageRoute.name);
+          //   // context.router.popAndPush(SchedulePageRoute(team: team));
+
+          //   context.router.pop();
+          // } else {
+          //   context.router.popUntilRouteWithName(EventsListPageRoute.name);
+          //   context.router.popAndPush(
+          //     EventsListPageRoute(team: team, date: date),
+          //   );
+          // }
         },
       );
     });

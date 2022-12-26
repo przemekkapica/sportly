@@ -44,8 +44,9 @@ class EventsListPage extends HookWidget {
         hideLoader: context.loaderOverlay.hide,
         deleteSuccess: (popPage) {
           if (popPage) {
-            context.router.popUntilRouteWithName(SchedulePageRoute.name);
-            context.router.popAndPush(SchedulePageRoute(team: team));
+            context.router.pop();
+            // context.router.popUntilRouteWithName(SchedulePageRoute.name);
+            // context.router.popAndPush(SchedulePageRoute(team: team));
           }
         },
       );
@@ -67,14 +68,15 @@ class EventsListPage extends HookWidget {
                 backgroundColor: AppColors.primary,
                 foregroundColor: AppColors.neutral,
                 child: const Icon(Icons.add_rounded),
-                onPressed: () {
-                  context.router.push(
+                onPressed: () async {
+                  await context.router.push(
                     CreateEventPageRoute(
                       team: team,
                       date: date.withCurrentTime,
                       fromMonthView: false,
                     ),
                   );
+                  cubit.refreshEvents();
                 },
               )
             : const SizedBox.shrink(),
