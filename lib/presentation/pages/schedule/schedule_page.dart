@@ -36,36 +36,30 @@ class SchedulePage extends HookWidget {
     final cubit = useCubit<SchedulePageCubit>();
     final state = useCubitBuilder(cubit);
 
-    // useActionListener<SchedulePageAction>(cubit, (action) {
-    //   action.whenOrNull(
-    //     showLoader: context.loaderOverlay.show,
-    //     hideLoader: context.loaderOverlay.hide,
-    //   );
-    // });
-
     useEffect(
       () {
         cubit.init(team.id);
       },
+      [],
     );
 
     return Scaffold(
       floatingActionButton: state.when(
         loading: () => const SizedBox.shrink(),
-        idle: (_) => team.role.isAdminOrAssistant
+        idle: (_, __) => team.role.isAdminOrAssistant
             ? FloatingActionButton(
                 backgroundColor: AppColors.primary,
                 foregroundColor: AppColors.neutral,
                 child: const Icon(Icons.add_rounded),
                 onPressed: () async {
-                  await context.router.push(
+                  final result = await context.router.push(
                     CreateEventPageRoute(
                       team: team,
                       date: DateTime.now(),
                       fromMonthView: true,
                     ),
                   );
-                  cubit.refreshEvents();
+                  cubit.refreshEvents(result as DateTime? ?? DateTime.now());
                 },
               )
             : const SizedBox.shrink(),
@@ -103,6 +97,7 @@ class _Idle extends HookWidget {
     });
 
     return MonthView(
+      initialMonth: state.initialMonth,
       headerBuilder: (date) {
         return Container(
           color: AppColors.background,
@@ -197,25 +192,25 @@ class _Idle extends HookWidget {
           ),
         );
       },
-      onPageChange: (date, _) => cubit.refreshEvents(),
+      onPageChange: (date, _) => cubit.refreshEvents(date),
       onCellTap: (calendarEvents, date) async {
         if (calendarEvents.isEmpty && team.role.isAdminOrAssistant) {
-          await context.router.push(
+          final result = await context.router.push(
             CreateEventPageRoute(
               team: team,
               date: date.withCurrentTime,
               fromMonthView: true,
             ),
           );
-          cubit.refreshEvents();
+          cubit.refreshEvents(result as DateTime? ?? DateTime.now());
         } else if (calendarEvents.isNotEmpty) {
-          await context.router.push(
+          final result = await context.router.push(
             EventsListPageRoute(
               team: team,
               date: date,
             ),
           );
-          cubit.refreshEvents();
+          cubit.refreshEvents(result as DateTime? ?? DateTime.now());
         }
       },
     );

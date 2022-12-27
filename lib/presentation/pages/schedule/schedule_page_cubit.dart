@@ -27,7 +27,7 @@ class SchedulePageCubit
       final events = await _getMonthEventsUseCase(_teamId, DateTime.now());
       dispatch(const SchedulePageAction.hideLoader());
 
-      _emitIdle(events);
+      _emitIdle(events, DateTime.now());
     } catch (e) {
       print(e);
       dispatch(const SchedulePageAction.hideLoader());
@@ -35,13 +35,13 @@ class SchedulePageCubit
     }
   }
 
-  void refreshEvents() async {
+  void refreshEvents(DateTime date) async {
     try {
       dispatch(const SchedulePageAction.showLoader());
-      final events = await _getMonthEventsUseCase(_teamId, DateTime.now());
+      final events = await _getMonthEventsUseCase(_teamId, date);
       dispatch(const SchedulePageAction.hideLoader());
 
-      _emitIdle(events);
+      _emitIdle(events, date);
     } catch (e) {
       print(e);
       dispatch(const SchedulePageAction.hideLoader());
@@ -49,7 +49,7 @@ class SchedulePageCubit
     }
   }
 
-  void _emitIdle(List<MonthEvent> events) {
+  void _emitIdle(List<MonthEvent> events, DateTime initialMonth) {
     emit(
       SchedulePageState.idle(
         events: events
@@ -57,6 +57,7 @@ class SchedulePageCubit
               (event) => _eventMapper(event),
             )
             .toList(),
+        initialMonth: initialMonth,
       ),
     );
   }

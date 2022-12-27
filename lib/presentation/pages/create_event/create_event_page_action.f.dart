@@ -8,5 +8,7 @@ class CreateEventPageAction with _$CreateEventPageAction {
 
   const factory CreateEventPageAction.hideLoader() = _HideLoader;
 
-  const factory CreateEventPageAction.success() = _Success;
+  const factory CreateEventPageAction.success({
+    required DateTime date,
+  }) = _Success;
 }

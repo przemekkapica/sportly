@@ -75,7 +75,7 @@ class CreateEventPageCubit
             description: _description,
           ),
         );
-        dispatch(const CreateEventPageAction.success());
+        dispatch(CreateEventPageAction.success(date: _dateTime));
       } catch (e) {
         print(e);
         emit(const CreateEventPageState.error());

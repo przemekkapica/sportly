@@ -9,6 +9,7 @@ class SchedulePageState with _$SchedulePageState {
 
   const factory SchedulePageState.idle({
     required List<CalendarEventData> events,
+    required DateTime initialMonth,
   }) = SchedulePageStateIdle;
 
   const factory SchedulePageState.error() = SchedulePageStateError;
