@@ -16,6 +16,8 @@ class SportDisciplineIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // height: size + AppDimens.xsm,
+      // width: size + ,
       decoration: BoxDecoration(
         color: getColor(discipline),
         borderRadius: const BorderRadius.all(
@@ -24,48 +26,33 @@ class SportDisciplineIcon extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(AppDimens.xsm),
-        child: getIcon(discipline, size),
+        child: Center(
+          child: Icon(
+            getIcon(discipline),
+            size: size,
+            color: AppColors.primary,
+          ),
+        ),
       ),
     );
   }
 }
 
-Icon getIcon(SportDiscipline discipline, double size) {
+IconData getIcon(SportDiscipline discipline) {
   if (discipline.name == 'Football') {
-    return Icon(
-      Icons.sports_soccer_rounded,
-      size: size,
-    );
+    return Icons.sports_soccer_rounded;
   } else if (discipline.name == 'Basketball') {
-    return Icon(
-      Icons.sports_basketball_rounded,
-      size: size,
-    );
+    return Icons.sports_basketball_rounded;
   } else if (discipline.name == 'Handball') {
-    return Icon(
-      Icons.sports_handball_rounded,
-      size: size,
-    );
+    return Icons.sports_handball_rounded;
   } else if (discipline.name == 'Volleyball') {
-    return Icon(
-      Icons.sports_volleyball_rounded,
-      size: size,
-    );
+    return Icons.sports_volleyball_rounded;
   } else if (discipline.name == 'Tennis') {
-    return Icon(
-      Icons.sports_tennis_rounded,
-      size: size,
-    );
+    return Icons.sports_tennis_rounded;
   } else if (discipline.name == 'Jogging') {
-    return Icon(
-      Icons.directions_run_outlined,
-      size: size,
-    );
+    return Icons.directions_run_outlined;
   } else {
-    return Icon(
-      Icons.sports_bar_rounded,
-      size: size,
-    );
+    return Icons.sports_bar_rounded;
   }
 }
 
