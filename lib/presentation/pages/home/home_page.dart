@@ -24,6 +24,8 @@ const _teamIndicatorPaths = [
   '/chat',
   '/schedule',
   '/profile',
+  'create-team',
+  'join-team'
 ];
 
 class HomePage extends HookWidget {
