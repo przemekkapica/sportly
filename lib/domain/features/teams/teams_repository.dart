@@ -7,6 +7,7 @@ import 'package:sportly/domain/features/teams/models/team_details.f.dart';
 import 'package:sportly/domain/features/teams/models/update_team.f.dart';
 
 abstract class TeamsRepository {
+  // API CRUD
   Future<void> createTeam(CreateTeam createTeam);
 
   Future<List<Team>> getTeams();
@@ -29,7 +30,7 @@ abstract class TeamsRepository {
 
   Future<void> deleteTeam(int teamId);
 
-  // Stream methods
+  // Fetching teams
   Stream<List<Team>> get teamsStream;
 
   Future<void> fetchTeams();
@@ -39,4 +40,11 @@ abstract class TeamsRepository {
   void stopCheckingTeams();
 
   List<Team> get currentTeams;
+
+  // Team indicator
+  Stream<Team> get teamIndicatorStream;
+
+  void updateTeamIndicator(Team team);
+
+  Team get teamIndicator;
 }
