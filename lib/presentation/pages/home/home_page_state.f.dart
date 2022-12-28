@@ -6,6 +6,7 @@ part 'home_page_state.f.freezed.dart';
 @freezed
 class HomePageState with _$HomePageState {
   const factory HomePageState.idle({
-    required Team? selectedTeam,
+    required Team? selectedChatTeam,
+    required Team? selectedScheduleTeam,
   }) = HomePageStateIdle;
 }

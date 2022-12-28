@@ -3,10 +3,10 @@ import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/teams_repository.dart';
 
 @injectable
-class GetSelectedTeamStreamUseCase {
-  GetSelectedTeamStreamUseCase(this._teamsRepository);
+class UpdateSelectedScheduleTeamUseCase {
+  UpdateSelectedScheduleTeamUseCase(this._teamsRepository);
 
   final TeamsRepository _teamsRepository;
 
-  Stream<Team> call() => _teamsRepository.teamIndicatorStream;
+  void call(Team team) => _teamsRepository.updateScheduleTeamIndicator(team);
 }

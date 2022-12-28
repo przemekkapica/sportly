@@ -292,7 +292,7 @@ class _QuickActionsSection extends StatelessWidget {
             SportlyIconButton(
               icon: Icons.chat,
               onTap: () async {
-                cubit.updateSelectedTeam(team);
+                cubit.updateSelectedChatTeam(team);
                 await context.router.navigate(
                   const ChatRouter(children: [ChatPageRoute()]),
                 );
@@ -302,7 +302,7 @@ class _QuickActionsSection extends StatelessWidget {
             SportlyIconButton(
               icon: Icons.calendar_month_rounded,
               onTap: () {
-                cubit.updateSelectedTeam(team);
+                cubit.updateSelectedScheduleTeam(team);
                 context.router.navigate(
                   ScheduleRouter(
                     children: [

@@ -10,7 +10,7 @@ import 'package:sportly/domain/use_cases/get_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/leave_team_use_case.dart';
 import 'package:sportly/domain/use_cases/start_checking_get_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/stop_checking_get_teams_use_case.dart';
-import 'package:sportly/domain/use_cases/update_selected_team_use_case.dart';
+import 'package:sportly/domain/use_cases/update_selected_schedule_team_use_case.dart';
 import 'package:sportly/presentation/widgets/team_selection/team_selection_cubit.dart';
 import 'package:sportly/presentation/widgets/team_selection/team_selection_state.f.dart';
 

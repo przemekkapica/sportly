@@ -52,7 +52,9 @@ class HomePage extends HookWidget {
             showTeamIndicator: !_teamIndicatorPaths.contains(
               context.router.currentPath,
             ),
-            selectedTeam: state.selectedTeam,
+            selectedTeam: context.router.currentPath.contains('schedule')
+                ? state.selectedScheduleTeam
+                : state.selectedChatTeam,
           ),
           body: child,
           bottomNavigationBar: SportlyBottomBar(tabsRouter: tabsRouter),

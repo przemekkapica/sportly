@@ -39,12 +39,12 @@ abstract class TeamsRepository {
 
   void stopCheckingTeams();
 
-  List<Team> get currentTeams;
-
   // Team indicator
-  Stream<Team> get teamIndicatorStream;
+  Stream<Team> get chatTeamIndicatorStream;
 
-  void updateTeamIndicator(Team team);
+  Stream<Team> get scheduleTeamIndicatorStream;
 
-  Team get teamIndicator;
+  void updateChatTeamIndicator(Team team);
+
+  void updateScheduleTeamIndicator(Team team);
 }

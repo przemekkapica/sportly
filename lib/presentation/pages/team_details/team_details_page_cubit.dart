@@ -6,7 +6,8 @@ import 'package:sportly/domain/features/teams/models/team_member.f.dart';
 import 'package:sportly/domain/use_cases/fetch_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/get_team_details_use_case.dart';
 import 'package:sportly/domain/use_cases/leave_team_use_case.dart';
-import 'package:sportly/domain/use_cases/update_selected_team_use_case.dart';
+import 'package:sportly/domain/use_cases/update_selected_chat_team_use_case.dart';
+import 'package:sportly/domain/use_cases/update_selected_schedule_team_use_case.dart';
 import 'package:sportly/presentation/pages/team_details/team_details_page_state.f.dart';
 
 @injectable
@@ -15,13 +16,15 @@ class TeamDetailsPageCubit extends Cubit<TeamDetailsPageState> {
     this._getTeamDetailsUseCase,
     this._leaveTeamUseCase,
     this._fetchTeamsUseCase,
-    this._updateSelectedTeamUseCase,
+    this._updateSelectedChatTeamUseCase,
+    this._updateSelectedScheduleTeamUseCase,
   ) : super(const TeamDetailsPageState.loading());
 
   final GetTeamDetailsUseCase _getTeamDetailsUseCase;
   final LeaveTeamUseCase _leaveTeamUseCase;
   final FetchTeamsUseCase _fetchTeamsUseCase;
-  final UpdateSelectedTeamUseCase _updateSelectedTeamUseCase;
+  final UpdateSelectedChatTeamUseCase _updateSelectedChatTeamUseCase;
+  final UpdateSelectedScheduleTeamUseCase _updateSelectedScheduleTeamUseCase;
 
   Future<void> init(int teamId) async {
     try {
@@ -45,7 +48,11 @@ class TeamDetailsPageCubit extends Cubit<TeamDetailsPageState> {
     _fetchTeamsUseCase();
   }
 
-  void updateSelectedTeam(Team team) {
-    _updateSelectedTeamUseCase(team);
+  void updateSelectedChatTeam(Team team) {
+    _updateSelectedChatTeamUseCase(team);
+  }
+
+  void updateSelectedScheduleTeam(Team team) {
+    _updateSelectedScheduleTeamUseCase(team);
   }
 }
