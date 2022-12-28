@@ -10,6 +10,7 @@ import 'package:sportly/domain/use_cases/get_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/leave_team_use_case.dart';
 import 'package:sportly/domain/use_cases/start_checking_get_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/stop_checking_get_teams_use_case.dart';
+import 'package:sportly/domain/use_cases/update_selected_schedule_team_use_case.dart';
 import 'package:sportly/presentation/widgets/team_selection/team_selection_cubit.dart';
 import 'package:sportly/presentation/widgets/team_selection/team_selection_state.f.dart';
 
@@ -31,6 +32,9 @@ class MockFetchTeamsUseCase extends Mock implements FetchTeamsUseCase {}
 
 class MockTeam extends Mock implements Team {}
 
+class MockUpdateSelectedTeamUseCase extends Mock
+    implements UpdateSelectedTeamUseCase {}
+
 void main() {
   group('TeamSelectionCubit', () {
     late MockGetTeamsUseCase getTeamsUseCase;
@@ -40,6 +44,7 @@ void main() {
     late MockGetTeamsStreamUseCase getTeamsStreamUseCase;
     late MockDeleteTeamUseCase deleteTeamUseCase;
     late MockFetchTeamsUseCase fetchTeamsUseCase;
+    late MockUpdateSelectedTeamUseCase updateSelectedTeamUseCase;
 
     late TeamSelectionCubit cubit;
 
@@ -55,6 +60,7 @@ void main() {
       getTeamsStreamUseCase = MockGetTeamsStreamUseCase();
       deleteTeamUseCase = MockDeleteTeamUseCase();
       fetchTeamsUseCase = MockFetchTeamsUseCase();
+      updateSelectedTeamUseCase = MockUpdateSelectedTeamUseCase();
 
       teamsSubject = BehaviorSubject();
 
@@ -70,6 +76,7 @@ void main() {
         stopCheckingGetTeamsUseCase,
         deleteTeamUseCase,
         fetchTeamsUseCase,
+        updateSelectedTeamUseCase,
       );
     });
 
@@ -80,14 +87,14 @@ void main() {
 
     TeamSelectionCubit buildCubit() {
       return TeamSelectionCubit(
-        getTeamsUseCase,
-        leaveTeamUseCase,
-        getTeamsStreamUseCase,
-        startCheckingGetTeamsUseCase,
-        stopCheckingGetTeamsUseCase,
-        deleteTeamUseCase,
-        fetchTeamsUseCase,
-      );
+          getTeamsUseCase,
+          leaveTeamUseCase,
+          getTeamsStreamUseCase,
+          startCheckingGetTeamsUseCase,
+          stopCheckingGetTeamsUseCase,
+          deleteTeamUseCase,
+          fetchTeamsUseCase,
+          updateSelectedTeamUseCase);
     }
 
     test('initial state is loading', () {

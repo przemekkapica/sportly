@@ -103,22 +103,11 @@ class _Idle extends HookWidget {
           color: AppColors.background,
           child: Padding(
             padding: const EdgeInsets.all(AppDimens.sm),
-            child: RichText(
-              text: TextSpan(
-                text: team.name,
-                style: AppTypo.bodySmall.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Montserrat',
-                ),
-                children: [
-                  TextSpan(
-                    text: ' - ' + date.formatMMMMYY(),
-                    style: AppTypo.bodySmall.copyWith(
-                      fontWeight: FontWeight.w400,
-                    ),
+            child: Text(
+              date.formatMMMMYY(),
+              style: AppTypo.bodyMedium.copyWith(
+                  // fontWeight: FontWeight.w400,
                   ),
-                ],
-              ),
             ),
           ),
         );

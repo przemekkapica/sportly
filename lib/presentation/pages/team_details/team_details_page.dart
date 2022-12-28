@@ -91,11 +91,17 @@ class _Idle extends StatelessWidget {
                         textStyle: AppTypo.banner,
                         location: BannerLocation.topEnd,
                         color: AppColors.secondary,
-                        child: _TeamDetailsCard(state: state),
+                        child: _TeamDetailsCard(
+                          state: state,
+                          cubit: cubit,
+                        ),
                       ),
                     )
                   else
-                    _TeamDetailsCard(state: state),
+                    _TeamDetailsCard(
+                      state: state,
+                      cubit: cubit,
+                    ),
                   const Gap(AppDimens.big),
                 ],
               ),
@@ -132,9 +138,11 @@ class _TeamDetailsCard extends StatelessWidget {
   const _TeamDetailsCard({
     Key? key,
     required this.state,
+    required this.cubit,
   }) : super(key: key);
 
   final TeamDetailsPageStateIdle state;
+  final TeamDetailsPageCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -150,6 +158,7 @@ class _TeamDetailsCard extends StatelessWidget {
           const Gap(AppDimens.md),
           _QuickActionsSection(
             team: Team.fromDetails(state.teamDetails),
+            cubit: cubit,
           ),
           const Gap(AppDimens.xbig),
           _TeamMembersSection(idle: state),
@@ -260,9 +269,11 @@ class _QuickActionsSection extends StatelessWidget {
   const _QuickActionsSection({
     Key? key,
     required this.team,
+    required this.cubit,
   }) : super(key: key);
 
   final Team team;
+  final TeamDetailsPageCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -281,6 +292,7 @@ class _QuickActionsSection extends StatelessWidget {
             SportlyIconButton(
               icon: Icons.chat,
               onTap: () async {
+                cubit.updateSelectedChatTeam(team);
                 await context.router.navigate(
                   const ChatRouter(children: [ChatPageRoute()]),
                 );
@@ -290,6 +302,7 @@ class _QuickActionsSection extends StatelessWidget {
             SportlyIconButton(
               icon: Icons.calendar_month_rounded,
               onTap: () {
+                cubit.updateSelectedScheduleTeam(team);
                 context.router.navigate(
                   ScheduleRouter(
                     children: [

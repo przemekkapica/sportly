@@ -46,6 +46,10 @@ class TeamsRepositoryImpl implements TeamsRepository {
   Timer? _timer;
   bool alreadyStartedCheckingTeams = false;
 
+  final BehaviorSubject<Team> _chatTeamIndicatorBroadcaster = BehaviorSubject();
+  final BehaviorSubject<Team> _scheduleTeamIndicatorBroadcaster =
+      BehaviorSubject();
+
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
     try {
@@ -173,5 +177,20 @@ class TeamsRepositoryImpl implements TeamsRepository {
   Stream<List<Team>> get teamsStream => _teamsBroadcaster.stream;
 
   @override
-  List<Team> get currentTeams => _teamsBroadcaster.value;
+  Stream<Team> get scheduleTeamIndicatorStream =>
+      _scheduleTeamIndicatorBroadcaster.stream;
+
+  @override
+  Stream<Team> get chatTeamIndicatorStream =>
+      _chatTeamIndicatorBroadcaster.stream;
+
+  @override
+  void updateChatTeamIndicator(Team team) {
+    _chatTeamIndicatorBroadcaster.add(team);
+  }
+
+  @override
+  void updateScheduleTeamIndicator(Team team) {
+    _scheduleTeamIndicatorBroadcaster.add(team);
+  }
 }

@@ -10,6 +10,8 @@ import 'package:sportly/domain/use_cases/get_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/leave_team_use_case.dart';
 import 'package:sportly/domain/use_cases/start_checking_get_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/stop_checking_get_teams_use_case.dart';
+import 'package:sportly/domain/use_cases/update_selected_chat_team_use_case.dart';
+import 'package:sportly/domain/use_cases/update_selected_schedule_team_use_case.dart';
 import 'package:sportly/presentation/widgets/team_selection/team_selection_state.f.dart';
 
 @injectable
@@ -22,6 +24,8 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
     this._stopCheckingGetTeamsUseCase,
     this._deleteTeamUseCase,
     this._fetchTeamsUseCase,
+    this._updateSelectedChatTeamUseCase,
+    this._updateSelectedScheduleTeamUseCase,
   ) : super(const TeamSelectionState.loading()) {
     _getTeamsSubscription = _getTeamsStreamUseCase().listen(_onGetTeamsChanged);
   }
@@ -33,6 +37,8 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
   final GetTeamsStreamUseCase _getTeamsStreamUseCase;
   final DeleteTeamUseCase _deleteTeamUseCase;
   final FetchTeamsUseCase _fetchTeamsUseCase;
+  final UpdateSelectedChatTeamUseCase _updateSelectedChatTeamUseCase;
+  final UpdateSelectedScheduleTeamUseCase _updateSelectedScheduleTeamUseCase;
 
   late final StreamSubscription _getTeamsSubscription;
 
@@ -81,6 +87,14 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
     } else {
       emit(TeamSelectionState.idle(teams: teams));
     }
+  }
+
+  void updateSelectedChatTeam(Team team) {
+    this._updateSelectedChatTeamUseCase(team);
+  }
+
+  void updateSelectedScheduleTeam(Team team) {
+    this._updateSelectedScheduleTeamUseCase(team);
   }
 
   @override

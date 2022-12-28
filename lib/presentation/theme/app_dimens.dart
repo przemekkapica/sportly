@@ -57,4 +57,6 @@ class AppDimens {
   static const disciplineBiggerIconSize = 70.0;
 
   static const userRoleIndicatorSize = 18.0;
+
+  static const teamIndicatorSize = 24.0;
 }
