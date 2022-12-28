@@ -95,27 +95,31 @@ class _Idle extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
+                final team = state.teams[index];
+
                 return GestureDetector(
                   onDoubleTap: () {
                     if (entryPage == EntryPage.teams) {
-                      cubit.deleteTeam(state.teams[index].id);
+                      cubit.deleteTeam(team.id);
                     }
                   },
                   onTap: () {
                     switch (entryPage) {
                       case EntryPage.teams:
                         context.router.push(
-                          TeamDetailsPageRoute(teamId: state.teams[index].id),
+                          TeamDetailsPageRoute(teamId: team.id),
                         );
                         break;
                       case EntryPage.chat:
+                        cubit.updateSelectedTeam(team);
                         context.router.push(
                           const ChatPageRoute(),
                         );
                         break;
                       case EntryPage.schedule:
+                        cubit.updateSelectedTeam(team);
                         context.router.push(
-                          SchedulePageRoute(team: state.teams[index]),
+                          SchedulePageRoute(team: team),
                         );
                         break;
                     }
@@ -125,7 +129,7 @@ class _Idle extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SportDisciplineIcon(
-                          discipline: state.teams[index].discipline,
+                          discipline: team.discipline,
                           size: AppDimens.disciplineIconSize,
                         ),
                         const Gap(AppDimens.md),
@@ -134,14 +138,14 @@ class _Idle extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                state.teams[index].name,
+                                team.name,
                                 style: AppTypo.bodyMedium,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
                               const Gap(AppDimens.xxsm),
                               Text(
-                                state.teams[index].membersCount.toString() +
+                                team.membersCount.toString() +
                                     LocaleKeys.team_selection_members.tr(),
                                 style: AppTypo.labelLarge,
                               ),
@@ -157,9 +161,9 @@ class _Idle extends StatelessWidget {
                               cubit: cubit,
                               index: index,
                             ),
-                            if (state.teams[index].role.isAdminOrAssistant) ...[
+                            if (team.role.isAdminOrAssistant) ...[
                               const Gap(AppDimens.xbig),
-                              RoleBadge(role: state.teams[index].role)
+                              RoleBadge(role: team.role)
                             ]
                           ],
                         ),
@@ -216,6 +220,8 @@ class _PopupMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final team = state.teams[index];
+
     return PopupMenuButton(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
@@ -223,7 +229,7 @@ class _PopupMenuButton extends StatelessWidget {
         ),
       ),
       itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-        if (state.teams[index].role.isAdmin)
+        if (team.role.isAdmin)
           PopupMenuItem(
             child: Text(
               LocaleKeys.team_selection_menu_manage.tr(),
@@ -232,13 +238,13 @@ class _PopupMenuButton extends StatelessWidget {
             onTap: () {
               if (entryPage == EntryPage.teams) {
                 context.router.push(
-                  TeamManagementPageRoute(teamId: state.teams[index].id),
+                  TeamManagementPageRoute(teamId: team.id),
                 );
               } else {
                 context.router.navigate(
                   TeamsRouter(
                     children: [
-                      TeamManagementPageRoute(teamId: state.teams[index].id),
+                      TeamManagementPageRoute(teamId: team.id),
                     ],
                   ),
                 );
@@ -254,7 +260,7 @@ class _PopupMenuButton extends StatelessWidget {
             if (entryPage == EntryPage.teams) {
               context.router.push(
                 ShareInvitationCodePageRoute(
-                  team: state.teams[index],
+                  team: team,
                 ),
               );
             } else {
@@ -262,7 +268,7 @@ class _PopupMenuButton extends StatelessWidget {
                 TeamsRouter(
                   children: [
                     ShareInvitationCodePageRoute(
-                      team: state.teams[index],
+                      team: team,
                     ),
                   ],
                 ),
@@ -279,8 +285,8 @@ class _PopupMenuButton extends StatelessWidget {
           ),
           onTap: () => showLeaveTeamDialog(
             context,
-            state.teams[index].name,
-            () => cubit.leaveTeam(state.teams[index].id),
+            team.name,
+            () => cubit.leaveTeam(team.id),
           ),
         ),
       ],

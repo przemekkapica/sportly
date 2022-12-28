@@ -52,6 +52,7 @@ class HomePage extends HookWidget {
             showTeamIndicator: !_teamIndicatorPaths.contains(
               context.router.currentPath,
             ),
+            selectedTeam: state.selectedTeam,
           ),
           body: child,
           bottomNavigationBar: SportlyBottomBar(tabsRouter: tabsRouter),
