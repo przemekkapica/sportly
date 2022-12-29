@@ -14,19 +14,27 @@
       },
       "oauth_client": [
         {
-          "client_id": "974596240161-3sfct30199es8a3g5ri37hmamjofs5kk.apps.googleusercontent.com",
+          "client_id": "974596240161-74oupc0i1r89cjr1qcrnhseao895v95s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.sportly",
-            "certificate_hash": "b71644bb1989ff916b0c7c508e10e435e72398b4"
+            "certificate_hash": "cdcdea599af5081f47b7a0150938d8c4d4d65c5c"
           }
         },
         {
-          "client_id": "974596240161-kedf31accpo9g079oisubce9mg815k69.apps.googleusercontent.com",
+          "client_id": "974596240161-cla56dffsqg0du4bd50fj9rsbkur5ald.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.sportly",
-            "certificate_hash": "f327641d0461cc1cc00b40ba7d7dbc3f07ce58f3"
+            "certificate_hash": "e97aeb712b0148a5d44d20a107ed7f1ce6d2677e"
+          }
+        },
+        {
+          "client_id": "974596240161-qfe841kopbopukbash34ju6u8trkg88s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sportly",
+            "certificate_hash": "a95b2048e5da02a6ae60894b6070522c7a82f8db"
           }
         },
         {

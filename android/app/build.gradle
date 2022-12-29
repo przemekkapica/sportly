@@ -44,7 +44,7 @@ for (fileNameEntry in propertyFileNameMap.entrySet()) {
 }
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -99,10 +99,11 @@ android {
         }
 
         release {
-            def keystoreProperties = propertyMap['prod']
-            if (keystoreProperties != null) {
-                signingConfig signingConfigs.prod
-            }
+            // TODO
+            signingConfig signingConfigs.debug
+            // def keystoreProperties = propertyMap['prod']
+            // if (keystoreProperties != null) {
+            // }
 
         }
     }
