@@ -72,7 +72,10 @@ class _Idle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Spacer(),
-          _Avatar(state: state),
+          GestureDetector(
+            onDoubleTap: cubit.copyIdTokenToClipboard,
+            child: _Avatar(state: state),
+          ),
           const Gap(AppDimens.big),
           Text(
             state.user.displayName,

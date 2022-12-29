@@ -10,7 +10,6 @@ import 'package:sportly/presentation/gen/local_keys.g.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_action.f.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_cubit.dart';
 import 'package:sportly/presentation/pages/create_event/create_event_page_state.f.dart';
-import 'package:sportly/presentation/routing/main_router.gr.dart';
 import 'package:sportly/presentation/theme/app_colors.dart';
 import 'package:sportly/presentation/theme/app_dimens.dart';
 import 'package:sportly/presentation/theme/app_typo.dart';

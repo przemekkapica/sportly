@@ -40,7 +40,6 @@ class SchedulePage extends HookWidget {
       () {
         cubit.init(team.id);
       },
-      [],
     );
 
     return Scaffold(
@@ -105,9 +104,7 @@ class _Idle extends HookWidget {
             padding: const EdgeInsets.all(AppDimens.sm),
             child: Text(
               date.formatMMMMYY(),
-              style: AppTypo.bodyMedium.copyWith(
-                  // fontWeight: FontWeight.w400,
-                  ),
+              style: AppTypo.bodyMedium,
             ),
           ),
         );
