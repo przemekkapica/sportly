@@ -42,6 +42,7 @@ abstract class ScheduleDataSource {
   @PUT(NetworkConfig.UPDATE_EVENT)
   Future<void> updateEvent(
     @Path() int teamId,
+    @Path() int eventId,
     @Body() UpdateEventDto updateEventDto,
   );
 }

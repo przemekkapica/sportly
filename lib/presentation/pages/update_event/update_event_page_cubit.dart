@@ -17,6 +17,7 @@ class UpdateEventPageCubit
   final UpdateEventUseCase _updateEventUseCase;
 
   late final int _teamId;
+  late final int _eventId;
   late DateTime _dateTime;
 
   String? title;
@@ -28,6 +29,7 @@ class UpdateEventPageCubit
     title = event.title;
     description = event.description;
     _dateTime = event.date;
+    _eventId = event.id;
     _teamId = teamId;
 
     _emitIdle();
@@ -54,7 +56,7 @@ class UpdateEventPageCubit
 
   onDateChanged(DateTime dateTime) {
     _dateTime = dateTime;
-    _emitIdle();
+    _checkIfButtonEnabledAndEmit();
   }
 
   void _checkIfButtonEnabledAndEmit() {
@@ -72,6 +74,7 @@ class UpdateEventPageCubit
       try {
         await _updateEventUseCase(
           _teamId,
+          _eventId,
           UpdateEvent(
             date: _dateTime,
             title: title!,

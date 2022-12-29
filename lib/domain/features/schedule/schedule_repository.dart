@@ -10,7 +10,7 @@ abstract class ScheduleRepository {
 
   Future<void> createEvent(int teamId, CreateEvent createEvent);
 
-  Future<void> updateEvent(int teamId, UpdateEvent editEvent);
+  Future<void> updateEvent(int teamId, int eventId, UpdateEvent editEvent);
 
   Future<void> deleteEvent(int teamId, int eventId);
 }

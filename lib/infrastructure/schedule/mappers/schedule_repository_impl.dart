@@ -57,9 +57,14 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   }
 
   @override
-  Future<void> updateEvent(int teamId, UpdateEvent updateEvent) async {
+  Future<void> updateEvent(
+    int teamId,
+    int eventId,
+    UpdateEvent updateEvent,
+  ) async {
     return await _scheduleDataSource.updateEvent(
       teamId,
+      eventId,
       _updateEventMapper(updateEvent),
     );
   }

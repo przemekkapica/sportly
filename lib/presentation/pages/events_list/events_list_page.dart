@@ -217,11 +217,13 @@ class _NoEvents extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(AppDimens.pagePadding),
-      child: Text(
-        LocaleKeys.events_list_no_events
-            .tr(args: [state.date.formatEEEEMMMdd()]),
-        style: AppTypo.bodyMedium.copyWith(
-          fontFamily: 'Montserrat',
+      child: Center(
+        child: Text(
+          LocaleKeys.events_list_no_events
+              .tr(args: [state.date.formatEEEEMMMdd()]),
+          style: AppTypo.bodyMedium.copyWith(
+            fontFamily: 'Montserrat',
+          ),
         ),
       ),
     );
@@ -254,9 +256,12 @@ class _PopupMenuButton extends StatelessWidget {
             LocaleKeys.events_list_update_event.tr(),
             style: AppTypo.bodySmall,
           ),
-          onTap: () => context.router.push(
-            UpdateEventPageRoute(event: event, teamId: teamId),
-          ),
+          onTap: () async {
+            await context.router.push(
+              UpdateEventPageRoute(event: event, teamId: teamId),
+            );
+            cubit.refreshEvents();
+          },
         ),
         PopupMenuItem(
           child: Text(
