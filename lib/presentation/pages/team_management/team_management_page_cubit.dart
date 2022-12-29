@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/role.dart';
@@ -110,7 +112,7 @@ class TeamManagementPageCubit
         dispatch(const TeamManagementPageAction.success(popPage: true));
         _fetchTeamsUseCase();
       } catch (e) {
-        print(e);
+        log(e.toString());
         emit(const TeamManagementPageState.error());
       }
       dispatch(const TeamManagementPageAction.hideLoader());
@@ -125,7 +127,7 @@ class TeamManagementPageCubit
       _emitIdle();
       dispatch(const TeamManagementPageAction.success(popPage: false));
     } catch (e) {
-      print(e);
+      log(e.toString());
       emit(const TeamManagementPageState.error());
     }
     dispatch(const TeamManagementPageAction.hideLoader());
@@ -139,7 +141,7 @@ class TeamManagementPageCubit
       _emitIdle();
       dispatch(const TeamManagementPageAction.success(popPage: false));
     } catch (e) {
-      print(e);
+      log(e.toString());
       emit(const TeamManagementPageState.error());
     }
     dispatch(const TeamManagementPageAction.hideLoader());

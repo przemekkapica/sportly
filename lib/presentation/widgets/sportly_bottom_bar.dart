@@ -32,10 +32,7 @@ class SportlyBottomBar extends StatelessWidget {
       child: SalomonBottomBar(
         selectedItemColor: AppColors.primary,
         currentIndex: tabsRouter.activeIndex,
-        onTap: (index) {
-          tabsRouter.setActiveIndex(index);
-          print(context.router.currentPath);
-        },
+        onTap: tabsRouter.setActiveIndex,
         items: [
           SalomonBottomBarItem(
             icon: const Icon(

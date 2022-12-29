@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/schedule/mappers/month_event_mapper.dart';
@@ -29,7 +31,7 @@ class SchedulePageCubit
 
       _emitIdle(events, DateTime.now());
     } catch (e) {
-      print(e);
+      log(e.toString());
       dispatch(const SchedulePageAction.hideLoader());
       emit(const SchedulePageState.error());
     }
@@ -43,7 +45,7 @@ class SchedulePageCubit
 
       _emitIdle(events, date);
     } catch (e) {
-      print(e);
+      log(e.toString());
       dispatch(const SchedulePageAction.hideLoader());
       emit(const SchedulePageState.error());
     }

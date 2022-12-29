@@ -40,6 +40,7 @@ class SchedulePage extends HookWidget {
       () {
         cubit.init(team.id);
       },
+      [],
     );
 
     return Scaffold(

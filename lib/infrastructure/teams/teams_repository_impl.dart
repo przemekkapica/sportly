@@ -52,40 +52,22 @@ class TeamsRepositoryImpl implements TeamsRepository {
 
   @override
   Future<void> createTeam(CreateTeam createTeam) async {
-    try {
-      await _teamsRemoteDataSource.createTeam(_createTeamMapper(createTeam));
-    } catch (e) {
-      print(e);
-      // TODO: add error handling
-      throw (Exception('create team error'));
-    }
+    await _teamsRemoteDataSource.createTeam(_createTeamMapper(createTeam));
   }
 
   @override
   Future<List<Team>> getTeams() async {
-    try {
-      final teamsDto = await _teamsRemoteDataSource.getTeams();
-      return teamsDto.teams
-          .map((teamDto) => _teamFromDtoMapper(teamDto))
-          .toList();
-    } catch (e) {
-      // TODO: add error handling
-      print(e);
-      throw (Exception('get teams error'));
-    }
+    final teamsDto = await _teamsRemoteDataSource.getTeams();
+    return teamsDto.teams
+        .map((teamDto) => _teamFromDtoMapper(teamDto))
+        .toList();
   }
 
   @override
   Future<TeamDetails> getTeamDetails(int id) async {
-    try {
-      final teamDetailsDto = await _teamsRemoteDataSource.getTeamDetails(id);
+    final teamDetailsDto = await _teamsRemoteDataSource.getTeamDetails(id);
 
-      return _teamDetailsFromDtoMapper(teamDetailsDto);
-    } catch (e) {
-      // TODO: add error handling
-      print(e);
-      throw (Exception('get team details error'));
-    }
+    return _teamDetailsFromDtoMapper(teamDetailsDto);
   }
 
   @override
@@ -164,13 +146,9 @@ class TeamsRepositoryImpl implements TeamsRepository {
 
   @override
   Future<void> fetchTeams() async {
-    try {
-      final teams = await this.getTeams();
+    final teams = await this.getTeams();
 
-      _teamsBroadcaster.add(teams);
-    } catch (e) {
-      print(e);
-    }
+    _teamsBroadcaster.add(teams);
   }
 
   @override

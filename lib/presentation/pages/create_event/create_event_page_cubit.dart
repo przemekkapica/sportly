@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/schedule/models/create_event.f.dart';
@@ -77,7 +79,7 @@ class CreateEventPageCubit
         );
         dispatch(CreateEventPageAction.success(date: _dateTime));
       } catch (e) {
-        print(e);
+        log(e.toString());
         emit(const CreateEventPageState.error());
       } finally {
         dispatch(const CreateEventPageAction.hideLoader());

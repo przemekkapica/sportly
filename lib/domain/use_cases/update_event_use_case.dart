@@ -9,6 +9,10 @@ class UpdateEventUseCase {
   final ScheduleRepository _scheduleRepository;
 
   Future<void> call(int teamId, int eventId, UpdateEvent editEvent) async {
-    return await _scheduleRepository.updateEvent(teamId, eventId, editEvent);
+    return await _scheduleRepository.updateEvent(
+      teamId,
+      eventId,
+      editEvent,
+    );
   }
 }

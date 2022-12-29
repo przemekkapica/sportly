@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/auth/auth_repository.dart';
 import 'package:sportly/domain/auth/models/user.f.dart';
@@ -37,7 +38,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<String> getIdToken() async {
     // TODO: rethink
     final token = await _authDataSource.getIdToken();
-    print(token);
+    log(token ?? 'token is null');
     return token ?? '';
   }
 }

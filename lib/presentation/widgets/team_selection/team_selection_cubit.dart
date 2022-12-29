@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -76,7 +77,7 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
       await _deleteTeamUseCase(teamId);
       _fetchTeamsUseCase();
     } catch (e) {
-      print(e);
+      log(e.toString());
       emit(const TeamSelectionState.error());
     }
   }
