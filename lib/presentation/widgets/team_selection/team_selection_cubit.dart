@@ -28,7 +28,8 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
     this._updateSelectedChatTeamUseCase,
     this._updateSelectedScheduleTeamUseCase,
   ) : super(const TeamSelectionState.loading()) {
-    _getTeamsSubscription = _getTeamsStreamUseCase().listen(_onGetTeamsChanged);
+    _getTeamsSubscription =
+        _getTeamsStreamUseCase().distinct().listen(_onGetTeamsChanged);
   }
 
   final GetTeamsUseCase _getTeamsUseCase;

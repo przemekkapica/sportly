@@ -7,4 +7,10 @@ abstract class ChatRepository {
   Future<void> sendMessage(int teamId, String message);
 
   Future<InternalUser> getUserData();
+
+  Future<void> startCheckingMessages(int teamId, Duration checkingPeriod);
+
+  void stopCheckingMessages();
+
+  Stream<List<Message>> get messagesStream;
 }

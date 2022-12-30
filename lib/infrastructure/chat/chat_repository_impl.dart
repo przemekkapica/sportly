@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:injectable/injectable.dart';
+import 'package:rxdart/subjects.dart';
 import 'package:sportly/domain/auth/models/internal_user.f.dart';
 import 'package:sportly/domain/features/chat/chat_repository.dart';
 import 'package:sportly/domain/features/chat/models/message.f.dart';
@@ -22,13 +23,19 @@ class ChatRepositoryImpl implements ChatRepository {
   final UserDataSource _userDataSource;
   final InternalUserFromDtoMapper _internalUserFromDtoMapper;
 
+  final BehaviorSubject<List<Message>> _messageBroadcaster = BehaviorSubject();
+  late Timer? _timer;
+
   @override
   Future<List<Message>> getMessages(int teamId) async {
     final dto = await this._chatDataSource.getMessages(teamId);
 
-    return dto.messages
-        .map((message) => _messageFromDtoMapper(message))
-        .toList();
+    final messages =
+        dto.messages.map((message) => _messageFromDtoMapper(message)).toList();
+
+    _messageBroadcaster.add(messages.reversed.toList());
+
+    return messages;
   }
 
   @override
@@ -41,5 +48,24 @@ class ChatRepositoryImpl implements ChatRepository {
     final dto = await _userDataSource.getUserData();
 
     return _internalUserFromDtoMapper(dto);
+  }
+
+  @override
+  Stream<List<Message>> get messagesStream => _messageBroadcaster.stream;
+
+  @override
+  Future<void> startCheckingMessages(
+    int teamId,
+    Duration checkingPeriod,
+  ) async {
+    _timer = Timer.periodic(
+      checkingPeriod,
+      (_) => getMessages(teamId),
+    );
+  }
+
+  @override
+  void stopCheckingMessages() {
+    _timer?.cancel();
   }
 }
