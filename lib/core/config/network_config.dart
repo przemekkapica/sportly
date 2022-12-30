@@ -22,4 +22,7 @@ class NetworkConfig {
   // Chat
   static const GET_MESSAGES = '/chat/GetMessages/{teamId}';
   static const SEND_MESSAGE = '/chat/SendMessage/{teamId}';
+
+  // Other
+  static const GET_USER_DATA = '/user/GetUserData';
 }

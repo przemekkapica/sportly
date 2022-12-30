@@ -10,11 +10,11 @@ class MessageMapper extends DataMapper<Message, types.TextMessage> {
   @override
   types.TextMessage call(Message data) {
     return types.TextMessage(
-      createdAt: data.createdAt.millisecond,
+      createdAt: data.createdAt.millisecondsSinceEpoch,
       id: data.id,
       text: data.text,
       author: types.User(
-        id: '1',
+        id: data.userId,
         firstName: data.firstName,
         lastName: data.lastName,
       ),

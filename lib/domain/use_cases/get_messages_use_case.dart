@@ -16,6 +16,6 @@ class GetMessagesUseCase {
   Future<List<TextMessage>> call(int teamId) async {
     final messages = await _chatRepository.getMessages(teamId);
 
-    return messages.map((message) => _messageMapper(message)).toList();
+    return messages.reversed.map((message) => _messageMapper(message)).toList();
   }
 }

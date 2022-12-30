@@ -9,6 +9,7 @@ class ChatPageState with _$ChatPageState {
 
   const factory ChatPageState.idle({
     required List<TextMessage> messages,
+    required String userId,
   }) = ChatPageStateIdle;
 
   const factory ChatPageState.error() = ChatPageStateError;

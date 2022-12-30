@@ -10,9 +10,10 @@ class MessageFromDtoMapper extends DataMapper<MessageDto, Message> {
   @override
   Message call(MessageDto data) {
     return Message(
+      id: data.messageId.toString(),
+      userId: data.userId.toString(),
       createdAt: DateTime.parse(data.messageTime),
       firstName: data.firstName,
-      id: data.messageId.toString(),
       lastName: data.lastName,
       text: data.message,
     );
