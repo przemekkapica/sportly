@@ -294,7 +294,7 @@ class _QuickActionsSection extends StatelessWidget {
               onTap: () async {
                 cubit.updateSelectedChatTeam(team);
                 await context.router.navigate(
-                  const ChatRouter(children: [ChatPageRoute()]),
+                  ChatRouter(children: [ChatPageRoute(teamId: team.id)]),
                 );
               },
             ),

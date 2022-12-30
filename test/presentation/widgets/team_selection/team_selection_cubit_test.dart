@@ -10,6 +10,7 @@ import 'package:sportly/domain/use_cases/get_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/leave_team_use_case.dart';
 import 'package:sportly/domain/use_cases/start_checking_get_teams_use_case.dart';
 import 'package:sportly/domain/use_cases/stop_checking_get_teams_use_case.dart';
+import 'package:sportly/domain/use_cases/update_selected_chat_team_use_case.dart';
 import 'package:sportly/domain/use_cases/update_selected_schedule_team_use_case.dart';
 import 'package:sportly/presentation/widgets/team_selection/team_selection_cubit.dart';
 import 'package:sportly/presentation/widgets/team_selection/team_selection_state.f.dart';
@@ -32,8 +33,11 @@ class MockFetchTeamsUseCase extends Mock implements FetchTeamsUseCase {}
 
 class MockTeam extends Mock implements Team {}
 
-class MockUpdateSelectedTeamUseCase extends Mock
-    implements UpdateSelectedTeamUseCase {}
+class MockUpdateSelectedScheduleTeamUseCase extends Mock
+    implements UpdateSelectedScheduleTeamUseCase {}
+
+class MockUpdateSelectedChatTeamUseCase extends Mock
+    implements UpdateSelectedChatTeamUseCase {}
 
 void main() {
   group('TeamSelectionCubit', () {
@@ -44,7 +48,9 @@ void main() {
     late MockGetTeamsStreamUseCase getTeamsStreamUseCase;
     late MockDeleteTeamUseCase deleteTeamUseCase;
     late MockFetchTeamsUseCase fetchTeamsUseCase;
-    late MockUpdateSelectedTeamUseCase updateSelectedTeamUseCase;
+    late MockUpdateSelectedScheduleTeamUseCase
+        updateSelectedScheduleTeamUseCase;
+    late MockUpdateSelectedChatTeamUseCase updateSelectedChatTeamUseCase;
 
     late TeamSelectionCubit cubit;
 
@@ -60,7 +66,9 @@ void main() {
       getTeamsStreamUseCase = MockGetTeamsStreamUseCase();
       deleteTeamUseCase = MockDeleteTeamUseCase();
       fetchTeamsUseCase = MockFetchTeamsUseCase();
-      updateSelectedTeamUseCase = MockUpdateSelectedTeamUseCase();
+      updateSelectedScheduleTeamUseCase =
+          MockUpdateSelectedScheduleTeamUseCase();
+      updateSelectedChatTeamUseCase = MockUpdateSelectedChatTeamUseCase();
 
       teamsSubject = BehaviorSubject();
 
@@ -76,7 +84,8 @@ void main() {
         stopCheckingGetTeamsUseCase,
         deleteTeamUseCase,
         fetchTeamsUseCase,
-        updateSelectedTeamUseCase,
+        updateSelectedChatTeamUseCase,
+        updateSelectedScheduleTeamUseCase,
       );
     });
 
@@ -87,14 +96,16 @@ void main() {
 
     TeamSelectionCubit buildCubit() {
       return TeamSelectionCubit(
-          getTeamsUseCase,
-          leaveTeamUseCase,
-          getTeamsStreamUseCase,
-          startCheckingGetTeamsUseCase,
-          stopCheckingGetTeamsUseCase,
-          deleteTeamUseCase,
-          fetchTeamsUseCase,
-          updateSelectedTeamUseCase);
+        getTeamsUseCase,
+        leaveTeamUseCase,
+        getTeamsStreamUseCase,
+        startCheckingGetTeamsUseCase,
+        stopCheckingGetTeamsUseCase,
+        deleteTeamUseCase,
+        fetchTeamsUseCase,
+        updateSelectedChatTeamUseCase,
+        updateSelectedScheduleTeamUseCase,
+      );
     }
 
     test('initial state is loading', () {

@@ -18,4 +18,11 @@ class NetworkConfig {
   static const CREATE_EVENT = '/schedule/CreateEvent/{teamId}';
   static const DELETE_EVENT = '/schedule/RemoveEvent/{teamId}/{eventId}';
   static const UPDATE_EVENT = '/schedule/UpdateEvent/{teamId}/{eventId}';
+
+  // Chat
+  static const GET_MESSAGES = '/chat/GetMessages/{teamId}';
+  static const SEND_MESSAGE = '/chat/SendMessage/{teamId}';
+
+  // Other
+  static const GET_USER_DATA = '/user/GetUserData';
 }
