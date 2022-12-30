@@ -154,14 +154,18 @@ class _Idle extends StatelessWidget {
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
+                          // mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
-                            _PopupMenuButton(
-                              state: state,
-                              entryPage: entryPage,
-                              cubit: cubit,
-                              index: index,
-                            ),
-                            if (team.role.isAdminOrAssistant) ...[
+                            if (entryPage == EntryPage.teams)
+                              _PopupMenuButton(
+                                state: state,
+                                entryPage: entryPage,
+                                cubit: cubit,
+                                index: index,
+                              ),
+                            if (entryPage == EntryPage.teams &&
+                                team.role.isAdminOrAssistant) ...[
                               const Gap(AppDimens.xbig),
                               RoleBadge(role: team.role)
                             ]
