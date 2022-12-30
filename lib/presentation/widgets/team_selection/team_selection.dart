@@ -113,7 +113,7 @@ class _Idle extends StatelessWidget {
                       case EntryPage.chat:
                         cubit.updateSelectedChatTeam(team);
                         context.router.push(
-                          const ChatPageRoute(),
+                          ChatPageRoute(teamId: team.id),
                         );
                         break;
                       case EntryPage.schedule:
