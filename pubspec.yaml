@@ -75,4 +75,3 @@ flutter:
     - assets/images/logo/
     - assets/images/icons/
     - assets/mocks/teams/
-    - messages.json

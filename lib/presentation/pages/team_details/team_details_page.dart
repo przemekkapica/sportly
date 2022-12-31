@@ -10,7 +10,6 @@ import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/features/teams/models/team_member.f.dart';
 import 'package:sportly/domain/features/teams/models/team_type.dart';
 import 'package:sportly/presentation/gen/local_keys.g.dart';
-import 'package:sportly/presentation/pages/chat_entry/chat_entry_page.dart';
 import 'package:sportly/presentation/pages/team_details/team_details_page_cubit.dart';
 import 'package:sportly/presentation/pages/team_details/team_details_page_state.f.dart';
 import 'package:sportly/presentation/routing/main_router.gr.dart';

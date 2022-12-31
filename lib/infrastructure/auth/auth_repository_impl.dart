@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/auth/auth_repository.dart';
-import 'package:sportly/domain/auth/models/internal_user.f.dart';
 import 'package:sportly/domain/auth/models/user.f.dart';
 import 'package:sportly/infrastructure/auth/data_sources/auth_data_source.dart';
 import 'package:sportly/infrastructure/auth/mappers/user_from_google_account_mapper.dart';

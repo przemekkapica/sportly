@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
 import 'package:sportly/domain/use_cases/delete_team_use_case.dart';
