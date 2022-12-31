@@ -7,7 +7,7 @@ class GetIdTokenUseCase {
 
   final AuthRepository _authRepository;
 
-  Future<String> call() async {
+  Future<String?> call() async {
     return await _authRepository.getIdToken();
   }
 }

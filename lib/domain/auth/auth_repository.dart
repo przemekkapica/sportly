@@ -7,5 +7,5 @@ abstract class AuthRepository {
 
   User? getCurrentUser();
 
-  Future<String> getIdToken();
+  Future<String?> getIdToken();
 }

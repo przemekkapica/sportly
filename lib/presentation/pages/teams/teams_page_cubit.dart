@@ -22,7 +22,19 @@ class TeamsPageCubit extends Cubit<TeamsPageState> {
         emit(TeamsPageState.idle(teams: teams));
       }
     } catch (e) {
-      emit(const TeamsPageState.error());
+      try {
+        var teams = await _getTeamsUseCase();
+
+        teams = []; // TODO: temp
+        if (teams.isEmpty) {
+          emit(const TeamsPageState.noTeams());
+        } else {
+          emit(TeamsPageState.idle(teams: teams));
+        }
+      } catch (e) {
+        emit(const TeamsPageState.error());
+      }
+      // emit(const TeamsPageState.error());
     }
   }
 }
