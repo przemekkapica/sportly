@@ -47,6 +47,7 @@ class SignInPage extends HookWidget {
                 const AppLogo(),
                 const Spacer(),
                 SportlyButton.solid(
+                  key: const Key('sign-in-button'),
                   label: LocaleKeys.sign_in_page_button_label.tr(),
                   assetPath: AppAssets.googleIcon,
                   onTap: cubit.signInWithGoogle,

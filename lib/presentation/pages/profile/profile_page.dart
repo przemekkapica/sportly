@@ -90,6 +90,7 @@ class _Idle extends StatelessWidget {
           ),
           const Spacer(),
           SportlyButton.solid(
+            key: const Key('sign-out-button'),
             label: LocaleKeys.sign_out_button_label.tr(),
             onTap: cubit.signOut,
           ),
