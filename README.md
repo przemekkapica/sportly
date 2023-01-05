@@ -24,9 +24,15 @@ also for iOS
 
 ```flutter run```
 
-## Unit testing
+## Testing
+
+### Unit testing
 
 ```flutter test```
+
+### Integration testing
+
+```flutter test integration_test```
 
 ## Additional
 

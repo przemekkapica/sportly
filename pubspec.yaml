@@ -52,6 +52,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   injectable_generator: ^1.5.4
+  integration_test:
+    sdk: flutter
   retrofit_generator: ^4.2.0
 
 dependency_overrides:
