@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/role.dart';
@@ -38,7 +39,8 @@ class TeamDetailsPageCubit extends Cubit<TeamDetailsPageState> {
           teamDetails: teamDetails.copyWith(members: members),
         ),
       );
-    } catch (e) {
+    } catch (e, st) {
+      FirebaseCrashlytics.instance.recordError(e, st);
       emit(const TeamDetailsPageState.error());
     }
   }
