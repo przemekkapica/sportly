@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/team.f.dart';
@@ -45,13 +46,14 @@ class TeamSelectionCubit extends Cubit<TeamSelectionState> {
   late final StreamSubscription _getTeamsSubscription;
 
   Future<void> init() async {
-    _startCheckingGetTeams();
-
     try {
+      _startCheckingGetTeams();
+
       var teams = await _getTeamsUseCase();
 
       _emitIdle(teams);
-    } catch (e) {
+    } catch (e, st) {
+      FirebaseCrashlytics.instance.recordError(e, st);
       emit(const TeamSelectionState.error());
     }
   }
