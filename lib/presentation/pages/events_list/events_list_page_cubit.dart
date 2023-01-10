@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/schedule/models/day_event.f.dart';
@@ -28,7 +29,8 @@ class EventsListPageCubit
       final events = await _getDayEventsUseCase(_teamId, _date);
 
       _emitIdle(events);
-    } catch (e) {
+    } catch (e, st) {
+      FirebaseCrashlytics.instance.recordError(e, st);
       emit(const EventsListPageState.error());
     }
   }
@@ -38,7 +40,8 @@ class EventsListPageCubit
       final events = await _getDayEventsUseCase(_teamId, _date);
 
       _emitIdle(events);
-    } catch (e) {
+    } catch (e, st) {
+      FirebaseCrashlytics.instance.recordError(e, st);
       emit(const EventsListPageState.error());
     }
   }
@@ -55,7 +58,8 @@ class EventsListPageCubit
         dispatch(const EventsListPageAction.deleteSuccess(popPage: false));
         _emitIdle(events);
       }
-    } catch (e) {
+    } catch (e, st) {
+      FirebaseCrashlytics.instance.recordError(e, st);
       emit(const EventsListPageState.error());
     }
     dispatch(const EventsListPageAction.hideLoader());

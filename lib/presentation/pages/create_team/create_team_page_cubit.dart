@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sportly/domain/features/teams/models/create_team.f.dart';
@@ -43,7 +44,8 @@ class CreateTeamPageCubit
           submitButtonEnabled: false,
         ),
       );
-    } catch (e) {
+    } catch (e, st) {
+      FirebaseCrashlytics.instance.recordError(e, st);
       emit(const CreateTeamPageState.error());
     }
   }
@@ -99,7 +101,8 @@ class CreateTeamPageCubit
         );
         dispatch(const CreateTeamPageAction.success());
         _fetchTeamsUseCase();
-      } catch (e) {
+      } catch (e, st) {
+        FirebaseCrashlytics.instance.recordError(e, st);
         emit(const CreateTeamPageState.error());
       } finally {
         dispatch(const CreateTeamPageAction.hideLoader());
